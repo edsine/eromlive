@@ -152,7 +152,7 @@
                                                                 <label class="custom-control-label" for="new_employer1">
                                                                     <span class="d-flex flex-column text-center px-sm-3">
                                                                         <em
-                                                                            class="icon icon-circle icon-circle-lg bg-orange ni ni-briefcase"></em>
+                                                                            class="icon icon-circle icon-circle-lg bg-blue ni ni-briefcase"></em>
                                                                         {{-- <span class="lead-text mb-1 mt-3">Old Employer</span> --}}
                                                                         <h4 class="">Community</h4>
                                                                         <span class="sub-text">Class C</span>
@@ -169,7 +169,7 @@
                                                                 <label class="custom-control-label" for="new_employer2">
                                                                     <span class="d-flex flex-column text-center px-sm-3">
                                                                         <em
-                                                                            class="icon icon-circle icon-circle-lg bg-orange ni ni-briefcase"></em>
+                                                                            class="icon icon-circle icon-circle-lg bg-purple ni ni-briefcase"></em>
                                                                         {{-- <span class="lead-text mb-1 mt-3">Old Employer</span> --}}
                                                                         <h4 class="">Commercial</h4>
                                                                         <span class="sub-text">Class D</span>

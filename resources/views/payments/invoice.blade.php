@@ -14,7 +14,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Fav Icon  -->
-    <link rel="shortcut icon" href="{{ asset('assets/images/NSITF-logo.png') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/logo.png') }}">
     <!-- Page Title  -->
     <title>Invoice | {{ env('APP_NAME') }}</title>
     <!-- StyleSheets  -->
@@ -46,13 +46,13 @@
             <div class="invoice-brand text-center">
                 @if ($pid ?? '')
                     <img style="width: 125px !important;height: 125px !important;max-height: 125px !important;"
-                        src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('assets/images/NSITF-logo.png'))) }}"
-                        srcset="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('assets/images/NSITF-logo.png'))) }} 2x"
+                        src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('assets/images/logo.png'))) }}"
+                        srcset="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('assets/images/logo.png'))) }} 2x"
                         alt="">
                 @else
                     <img style="width: 125px !important;height: 125px !important;max-height: 125px !important;"
-                        src="{{ asset('assets/images/NSITF-logo.png') }}"
-                        srcset="{{ asset('assets/images/NSITF-logo.png 2x') }}" alt="">
+                        src="{{ asset('assets/images/logo.png') }}"
+                        srcset="{{ asset('assets/images/logo.png 2x') }}" alt="">
                 @endif
             </div>
             <div class="nk-block-head mb-3">

@@ -174,7 +174,7 @@
                                 <div class="data">
                                     <div class="data-group">
                                         <div class="form-group">
-                                            <label for="">You have not added any employees!</label>
+                                            <label for="">You have not added any services!</label>
                                             <div class="form-group">
                                                 <div class="toggle-wrap nk-block-tools-toggle">
                                                     <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1"
@@ -186,14 +186,14 @@
                                                                     <a href="#" class="btn btn-primary"
                                                                         data-bs-toggle="dropdown"><em
                                                                             class="icon ni ni-user-add"></em> <span>Add New
-                                                                            Employee(s)</span></a>
+                                                                            Service(s)</span></a>
                                                                     <div class="dropdown-menu dropdown-menu-end">
                                                                         <ul class="link-list-opt no-bdr">
                                                                             <li><a href="/employee/create"><em
                                                                                         class="icon ni ni-file-plus"></em><span>Add
                                                                                         New
-                                                                                        Employee</span></a></li>
-                                                                            <li><a
+                                                                                        Service</span></a></li>
+                                                                            {{-- <li><a
                                                                                     href="{{ route('employee.createbulk') }}"><em
                                                                                         class="icon ni ni-upload-cloud"></em><span>Upload
                                                                                         Bulk
@@ -202,7 +202,7 @@
                                                                                     href="{{ Storage::url('employees.xlsx') }}"><em
                                                                                         class="icon ni ni-download-cloud"></em><span>Bulk
                                                                                         Employee
-                                                                                        Template</span></a></li>
+                                                                                        Template</span></a></li> --}}
                                                                         </ul>
                                                                     </div>
                                                                 </div>
