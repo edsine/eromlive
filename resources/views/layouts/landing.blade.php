@@ -77,7 +77,7 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="footer-about mt-50 wow fadeIn" data-wow-duration="1.3s" data-wow-delay="0.2s">
                             <a class="navbar-brand" href="index.html" style="text-decoration: none;">
-                                <img style="height: 6vh;" src="{{ asset('assets/assets/images/NSITF-logo.png') }}" alt="">
+                                <img style="height: 6vh;" src="{{ asset('assets/images/logo.png') }}" alt="">
                                 <!-- <b style="font-size: 30px; color: #02a14d; font-family:verdana;">Employer Self Service Portal</b> -->
                             </a>
                             <p class="text">Experience the transformational power of ESSP. We are committed to
