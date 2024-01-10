@@ -122,10 +122,10 @@
                                         </div>
                                     @else
                                         <div class="form-group">
-                                            <label for="" class="">You have not made any ECS
+                                            <label for="" class="">You have not made any Application
                                                 Payments.</label>
                                                 <br/>
-                                                <a class="btn btn-primary me-n1" href="{{route('payment.index')}}">Make ECS Payments</a>
+                                                <a class="btn btn-primary me-n1" href="{{route('payment.index')}}">Make Application Payments</a>
                                         </div>
                                     @endif
                                 @endif

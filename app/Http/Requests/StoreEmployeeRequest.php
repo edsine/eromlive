@@ -23,9 +23,9 @@ class StoreEmployeeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'last_name' => 'required|string',
+            /* 'last_name' => 'required|string', */
             'first_name' => 'required|string',
-            'middle_name' => 'required|string',
+           /*  'middle_name' => 'required|string',
             'date_of_birth' => 'required|date',
             'gender' => 'required|string',
             'marital_status' => 'required|string',
@@ -45,7 +45,7 @@ class StoreEmployeeRequest extends FormRequest
             'dependants_number' => 'required|numeric',
             'job_title' => 'required|string',
             'staff_id' => 'required|string',
-            'alternate_phone' => 'required|string',
+            'alternate_phone' => 'required|string', */
         ];
     }
 }

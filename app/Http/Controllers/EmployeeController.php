@@ -45,13 +45,13 @@ class EmployeeController extends Controller
         $validated = $request->validated();
         $validated['status'] = 1;
         $employee = auth()->user()->employees()->create($validated);
-        return redirect()->route('employee.index')->with('success', 'Employee added successfully!');
+        return redirect()->route('employee.index')->with('success', 'Service added successfully!');
     }
 
     public function storebulk(Request $request)
     {
 
-        return redirect()->route('employee.index')->with('success', 'Bulk Employees added successfully!');
+        return redirect()->route('employee.index')->with('success', 'Bulk Service added successfully!');
     }
 
     /**
@@ -78,7 +78,7 @@ class EmployeeController extends Controller
     {
         $validated = $request->validated();
         $employee->update($validated);
-        return redirect()->route('employee.index')->with('success', 'Employee udpated successfully!');
+        return redirect()->route('employee.index')->with('success', 'Service udpated successfully!');
     }
 
     /**
@@ -87,8 +87,8 @@ class EmployeeController extends Controller
     public function destroy(Employee $employee)
     {
         if ($employee->delete())
-            return redirect()->back()->with('success', 'Employee deleted successfully!');
-        return redirect()->back()->with('error', 'Employee could not be deleted!');
+            return redirect()->back()->with('success', 'Service deleted successfully!');
+        return redirect()->back()->with('error', 'Service could not be deleted!');
     }
 
     public function uploadbulk(Request $request)
@@ -107,6 +107,6 @@ class EmployeeController extends Controller
 
         Excel::import(new EmployeesImport, request()->file('excel'));
 
-        return redirect()->route('employee.index')->with('success', 'Bulk Employees uploaded successfully!');
+        return redirect()->route('employee.index')->with('success', 'Bulk Service uploaded successfully!');
     }
 }

@@ -60,6 +60,7 @@
                                         <div class="form-group">
                                             <form method="POST" action="{{ route('payment.remita') }}">
                                                 @csrf
+                                                
                                                 <input type="hidden" name="payment_type" id="payment_type"
                                                     value="1">
                                                 <input type="hidden" name="amount" id="amount" value="5000">

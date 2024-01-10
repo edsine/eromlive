@@ -108,7 +108,7 @@
                                                 <div class="nk-stepper-step">
                                                     <!-- <h5 class="title mb-3">Employer Status</h5> -->
                                                     {{-- <p>Registered Employers can use their ECS Number </p> --}}
-                                                    <ul class="row g-3">
+                                                    <ul class="row g-3" style="display: none;">
                                                         <li class="col-6">
                                                             <div
                                                                 class="custom-control custom-control-sm custom-radio pro-control custom-control-full">
@@ -427,9 +427,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="nk-stepper-step">
-                                                    <h5 class="title mb-3">Upload Documents</h5>
-                                                    <p>Upload related documents and set account access.</p>
-                                                    <div class="row g-3">
+                                                    <h5 class="title mb-3">Passwords</h5>
+                                                    <p>Set account access.</p>
+                                                    {{-- <div class="row g-3">
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <label class="form-label"
@@ -462,7 +462,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
                                                     <hr>
                                                     <div class="row g-3">
                                                         <div class="col-sm-6">

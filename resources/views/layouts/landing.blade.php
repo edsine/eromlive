@@ -80,7 +80,7 @@
                                 <img style="height: 6vh;" src="{{ asset('assets/images/logo.png') }}" alt="">
                                 <!-- <b style="font-size: 30px; color: #02a14d; font-family:verdana;">Employer Self Service Portal</b> -->
                             </a>
-                            <p class="text">Experience the transformational power of ESSP. We are committed to
+                            <p class="text">Experience the transformational power of NIWA. We are committed to
                                 continuously enhancing your journey</p>
                             <ul class="social">
                                 <li><a href="#"><i class="lni lni-facebook"></i></a></li>

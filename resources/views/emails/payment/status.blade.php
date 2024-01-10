@@ -93,11 +93,11 @@
                                 <td style="text-align: center; padding-bottom:25px">
                                     <a href="#"><img
                                             style="width: 125px !important;height: 125px !important;max-height: 125px !important;"
-                                            src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('assets/images/NSITF-logo.png'))) }}"
+                                            src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('assets/images/logo.png'))) }}"
                                             alt="logo"></a>
                                     <p
                                         style="font-size: 1.5rem; font-family: Nunito, sans-serif; font-weight: 700; line-height: 1.2; color: #364a63; padding-top: 12px;">
-                                        Nigeria Social Insurance Trust Fund<br />Employer Self
+                                        National Inland Waterways Authority<br />Self
                                         Service Portal</p>
                                 </td>
                             </tr>
@@ -114,9 +114,9 @@
                                     <p style="margin-bottom: 10px;">You can download attached invoice for details.</p>
                                     <br/>
                                     <p style="margin-bottom: 15px;">For further information, kindly contact us at <a style="color: #0fac81; text-decoration:none;"
-                                            href="mailto:info@nsitf.gov.ng">info@nsitf.gov.ng</a>, or visit our website
+                                            href="mailto:info@niwa.gov.ng">info@niwa.gov.ng</a>, or visit our website
                                         at <a style="color: #0fac81; text-decoration:none;" target="_blank"
-                                            href="https://nsitf.gov.ng">www.nsitf.gov.ng</a> anytime. </p>
+                                            href="https://niwa.gov.ng">www.niwa.gov.ng</a> anytime. </p>
                                     <p></p><br/>
 
                                     <p>

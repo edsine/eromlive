@@ -1,5 +1,5 @@
 <div class="preview-block">
-    <span class="preview-title-lg overline-title">Personal Details</span>
+    <span class="preview-title-lg overline-title">Service Details</span>
     <div class="row gy-4">
         <div class="col-lg-4 col-sm-6">
             <div class="form-group">
@@ -8,73 +8,13 @@
                         <em class="icon ni ni-user"></em>
                     </div>
                     <input type="text" class="form-control form-control-xl form-control-outlined"
-                        id="last_name" name="last_name" value="{{old('last_name', $employee->last_name ?? '')}}">
-                    <label class="form-label-outlined" for="last_name">Last Name</label>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-            <div class="form-group">
-                <div class="form-control-wrap">
-                    <div class="form-icon form-icon-right">
-                        <em class="icon ni ni-user"></em>
-                    </div>
-                    <input type="text" class="form-control form-control-xl form-control-outlined"
-                        id="middle_name" name="middle_name" value="{{old('middle_name', $employee->middle_name ?? '')}}">
-                    <label class="form-label-outlined" for="middle_name">Middle Name</label>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-            <div class="form-group">
-                <div class="form-control-wrap">
-                    <div class="form-icon form-icon-right">
-                        <em class="icon ni ni-user"></em>
-                    </div>
-                    <input type="text" class="form-control form-control-xl form-control-outlined"
                         id="first_name" name="first_name" value="{{old('first_name', $employee->first_name ?? '')}}">
-                    <label class="form-label-outlined" for="first_name">First Name</label>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-4 col-sm-6">
-            <div class="form-group">
-                <div class="form-control-wrap">
-                    <select class="form-select js-select2" data-ui="xl" id="gender" name="gender">
-                        <option value="Male" @selected(old('gender', $employee->gender ?? '') == "Male")>Male</option>
-                        <option value="Female" @selected(old('gender', $employee->gender ?? '') == "Female")>Female</option>
-                    </select>
-                    <label class="form-label-outlined" for="gender">Gender</label>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-            <div class="form-group">
-                <div class="form-control-wrap">
-                    <div class="form-icon form-icon-right">
-                        <em class="icon ni ni-calendar-alt"></em>
-                    </div>
-                    <input type="text"
-                        class="form-control form-control-xl form-control-outlined date-picker"  data-date-format="yyyy-mm-dd"
-                        id="date_of_birth" name="date_of_birth" value="{{old('date_of_birth', $employee->date_of_birth ?? '')}}">
-                    <label class="form-label-outlined" for="date_of_birth">Date of Birth</label>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-            <div class="form-group">
-                <div class="form-control-wrap">
-                    <select class="form-select js-select2" data-ui="xl" id="marital_status" name="marital_status">
-                        <option value="Married" @selected(old('marital_status', $employee->marital_status ?? '') == "Married")>Married</option>
-                        <option value="Single" @selected(old('marital_status', $employee->marital_status ?? '') == "Single")>Single</option>
-                    </select>
-                    <label class="form-label-outlined" for="marital_status">Marital Status</label>
+                    <label class="form-label-outlined" for="first_name">Name of Service</label>
                 </div>
             </div>
         </div>
     </div>
-
+{{-- 
     <hr class="preview-hr">
     <span class="preview-title-lg overline-title">Contact Details</span>
     <div class="row gy-4">
@@ -289,14 +229,13 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <hr class="preview-hr">
     <div class="row g-4">
-        <div class="col-12">
+        <div class="col-2">
             <div class="form-group">
                 <button type="submit" class="btn btn-lg btn-primary btn-block"><em
-                        class="icon ni ni-save me-2"></em> Save
-                    Employee Details</button>
+                        class="icon ni ni-save me-2"></em> SUBMIT</button>
             </div>
         </div>
     </div>

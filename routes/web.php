@@ -57,6 +57,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('employee/uploadbulk', [App\Http\Controllers\EmployeeController::class, 'uploadbulk'])->name('employee.uploadbulk');
     Route::post('employee/storebulk', [App\Http\Controllers\EmployeeController::class, 'storebulk'])->name('employee.storebulk');
     Route::resource('employee', App\Http\Controllers\EmployeeController::class);
+    //Route::put('/sub-services/{subService}', 'SubServiceController@update')->name('sub-services.update');
+    Route::resource('sub-services', App\Http\Controllers\SubServiceController::class);
+    
+    Route::get('/documents/index', 'App\Http\Controllers\EmployerDocumentController@index')->name('documents.index');
+    Route::post('/documents/store', 'App\Http\Controllers\EmployerDocumentController@store')->name('documents.store');
+    Route::get('/documents/create', 'App\Http\Controllers\EmployerDocumentController@create')->name('documents.create');
 
 
     /**

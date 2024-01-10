@@ -95,7 +95,7 @@
             <div class="col-lg-7">
                 <div class="section-title text-center pb-25">
                     <h3 class="title">Unparalleled Convenience</h3>
-                    <p class="text">Experience a new level of convenience with ESSP's array of benefits</p>
+                    <p class="text">Experience a new level of convenience with NIWA's array of benefits</p>
                 </div> <!-- section title -->
             </div>
         </div> <!-- row -->
@@ -166,7 +166,7 @@
                 <div class="about-content mt-50 wow fadeInRightBig" data-wow-duration="1.3s" data-wow-delay="0.5s">
                     <div class="section-title">
                         <h3 class="title">Instant Certificate Access</h3>
-                        <p class="text">Gone are the days of waiting weeks for your certificates. ESSP empowers you
+                        <p class="text">Gone are the days of waiting weeks for your certificates. NIWA empowers you
                             to access your certificates swiftly. Whether it's insurance certificates or
                             compensation-related documents, our portal provides secure and immediate access to your
                             important paperwork.
@@ -201,7 +201,7 @@
             <div class="col-lg-6">
                 <div class="download-content mt-45 wow fadeInLeftBig" data-wow-duration="1.3s" data-wow-delay="0.5s">
                     <h3 class="download-title">Dedicated 24/7 Support from Servicom</h3>
-                    <p class="text">Experience the transformational power of ESSP, backed by the unwavering support of Servicom, our specialized department within NSITF. We understand that your needs don't adhere to a 9-to-5 schedule, which is why we offer round-the-clock assistance to ensure your journey is always smooth, your feedback continues to play a vital role in the evolution of our platform.
+                    <p class="text">Experience the transformational power of NIWA, backed by the unwavering support of Servicom, our specialized department within NSITF. We understand that your needs don't adhere to a 9-to-5 schedule, which is why we offer round-the-clock assistance to ensure your journey is always smooth, your feedback continues to play a vital role in the evolution of our platform.
                     </p>
                     <ul>
                         <a href="http://servicomnsitf.gov.ng" rel="nofollow" class="main-btn">Explore 24/7 Support</a>

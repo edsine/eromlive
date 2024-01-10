@@ -29,8 +29,8 @@ class EmployerRegisteredMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('info@nsitf.gov.ng', 'NSITF ESSP'),
-            subject: 'NSITF ESSP: Welcome',
+            from: new Address('info@niwa.gov.ng', 'NIWA'),
+            subject: 'NIWA: Welcome',
         );
     }
 

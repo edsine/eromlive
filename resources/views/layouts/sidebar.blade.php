@@ -22,6 +22,9 @@
                             <span class="nk-menu-text">Dashboard</span>
                         </a>
                     </li><!-- .nk-menu-item -->
+                    <?php
+                        if(auth()->user()->id === 1){
+                    ?>
                     <li class="nk-menu-item has-sub">
                         <a href="#" class="nk-menu-link nk-menu-toggle">
                             <span class="nk-menu-icon"><em class="icon ni ni-users-fill"></em></span>
@@ -45,6 +48,57 @@
                             </li> --}}
                         </ul><!-- .nk-menu-sub -->
                     </li><!-- .nk-menu-item -->
+                    <li class="nk-menu-item has-sub">
+                        <a href="#" class="nk-menu-link nk-menu-toggle">
+                            <span class="nk-menu-icon"><em class="icon ni ni-users-fill"></em></span>
+                            <span class="nk-menu-text">Sub-Services</span>
+                        </a>
+                        <ul class="nk-menu-sub">
+                            <li class="nk-menu-item">
+                                <a href="{{ route('sub-services.index') }}" class="nk-menu-link"><span
+                                        class="nk-menu-text">Sub-Service
+                                        List</span></a>
+                            </li>
+                            <li class="nk-menu-item">
+                                <a href="{{ route('sub-services.create') }}" class="nk-menu-link"><span
+                                        class="nk-menu-text">Add
+                                        Sub-Service</span></a>
+                            </li>
+                            {{-- <li class="nk-menu-item">
+                                <a href="{{ route('employee.createbulk') }}" class="nk-menu-link"><span
+                                        class="nk-menu-text">Add Bulk
+                                        Employees</span></a>
+                            </li> --}}
+                        </ul><!-- .nk-menu-sub -->
+                    </li><!-- .nk-menu-item -->
+                    <?php
+                       }
+                   ?>
+                   
+                   <li class="nk-menu-item has-sub">
+                    <a href="#" class="nk-menu-link nk-menu-toggle">
+                        <span class="nk-menu-icon"><em class="icon ni ni-users-fill"></em></span>
+                        <span class="nk-menu-text">My Documents</span>
+                    </a>
+                    <ul class="nk-menu-sub">
+                        <li class="nk-menu-item">
+                            <a href="{{ route('documents.index') }}" class="nk-menu-link"><span
+                                    class="nk-menu-text">Documents
+                                    List</span></a>
+                        </li>
+                        <li class="nk-menu-item">
+                            <a href="{{ route('documents.create') }}" class="nk-menu-link"><span
+                                    class="nk-menu-text">Add
+                                    Documents</span></a>
+                        </li>
+                        {{-- <li class="nk-menu-item">
+                            <a href="{{ route('employee.createbulk') }}" class="nk-menu-link"><span
+                                    class="nk-menu-text">Add Bulk
+                                    Employees</span></a>
+                        </li> --}}
+                    </ul><!-- .nk-menu-sub -->
+                </li>
+                
                     <li class="nk-menu-item">
                         <a href="{{ route('payment.index') }}" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-money"></em></span>

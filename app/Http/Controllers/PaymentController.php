@@ -11,6 +11,7 @@ use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
+//use PDF;
 use Illuminate\Support\Facades\Storage;
 
 class PaymentController extends Controller
@@ -21,7 +22,7 @@ class PaymentController extends Controller
     public function index()
     {
         //year to start ECS payment count: 2023- system deployment OR year employer registered
-        $cac = date('Y', strtotime(auth()->user()->cac_reg_year));
+        $cac = date('Y');//date('Y', strtotime(auth()->user()->cac_reg_year));
         $initial_year = date('Y') - $cac > 2 ? date('Y') - 2 : $cac;
         $start_year = date('Y', strtotime(auth()->user()->created_at)) > $initial_year ? date('Y', strtotime(auth()->user()->created_at)) : $initial_year;
 
@@ -37,7 +38,7 @@ class PaymentController extends Controller
         //calculate current payment due
         $payment_due = auth()->user()->employees()->sum('monthly_remuneration');
         $payment_due = (1 / 100) * $payment_due * 12; //for a year
-        $employer_minimum_payment = auth()->user()->business_area == "Public / Private Limited Company" ? 100000 : 50000;
+        $employer_minimum_payment = auth()->user()->business_area == "Public / Private Limited Company" ? 100000 : 25000;
         $payment_due = $payment_due > $employer_minimum_payment ? $payment_due : $employer_minimum_payment;
 
         $paid_months = 0;
@@ -133,6 +134,7 @@ class PaymentController extends Controller
             'amount' => 'required|numeric',
             'payment_type' => 'required|numeric',
             'employees' => 'required_with:year,contribution_period',
+            //'letter_of_intent' => 'file|mimes:png|max:10240',
         ]);
 
         //generate invoice number
@@ -214,6 +216,19 @@ class PaymentController extends Controller
 // exit();
         if ($data['statuscode'] == "025" && $data['RRR']) {
             //add record to transactions table
+           
+            if ($request->hasFile('letter_of_intent')) {
+                        $letter_of_intent = $request->file('letter_of_intent');
+                        $path = 'documents/';
+                        $name = \Auth::user()->id . '_documents.' . $letter_of_intent->getClientOriginalExtension();
+                    
+                        // Move the uploaded file to the desired location
+                        $letter_of_intent->move(public_path('storage/'.$path), $name);
+                    
+                        // Build the full path to the saved file
+                        $path1 = $path . $name;
+            }
+                        
             $payment = auth()->user()->payments()->create([
                 'payment_type' => $request->payment_type,
                 'payment_employee' => $request->employees,
@@ -223,6 +238,8 @@ class PaymentController extends Controller
                 'invoice_duration' => date('Y-m-d', strtotime('+1 year')),
                 'payment_status' => 0,
                 'amount' => $amount,
+                'service_id' => $request->service_id ?? null,
+                'letter_of_intent' => $path1 ?? null,
                 //below for ECS payments
                 'contribution_year' => $request->year ?? null,
                 'contribution_period' => $request->contribution_period ?? null,
@@ -317,7 +334,7 @@ class PaymentController extends Controller
 
             Storage::delete('public/invoices/invoice_' . $payment->id . '.pdf');
 
-            return redirect()->route('payment.index')->with('success', $payment->payment_type == 1 ? 'Registration Payment successful!' : 'ECS Payment successful!');
+            return redirect()->route('payment.index')->with('success', $payment->payment_type == 1 ? 'Registration Payment successful!' : 'Payment successful!');
         } else { //if payment was not successful
             //get and update transaction
             $payment = Payment::where('rrr', $request->ref)->first();

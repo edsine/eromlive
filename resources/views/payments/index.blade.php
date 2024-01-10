@@ -42,18 +42,19 @@
                 <div class="card h-100">
                     <div class="nk-ecwg nk-ecwg6">
                         <div class="card-inner">
-                            @if (auth()->user()->employees->count() > 0)
+                            {{-- @if (auth()->user()->employees->count() > 0) --}}
                                 <div class="card-title-group">
                                     <div class="card-title">
-                                        <h6 class="title">ECS Payment</h6>
+                                        <h6 class="title">Application Fees Payment</h6>
                                     </div>
                                 </div>
                                 <div class="data">
                                     <div class="data-group">
                                         <div class="form-group w-100">
+                                            {{-- @if (!$pending_payment || $paid_months != 0) --}}
                                             @if (!$pending_payment || $paid_months != 0)
                                                 {{-- <div class="form-group"> --}}
-                                                <form method="POST" action="{{ route('payment.remita') }}">
+                                                <form method="POST" action="{{ route('payment.remita') }}" enctype="multipart/form-data">
                                                     @csrf
                                                     <div class="row">
                                                         <div class="col-6">
@@ -77,6 +78,29 @@
                                                                 @endif
                                                                 <option>Monthly</option>
                                                             </select>
+                                                                <?php $services = \App\Models\Employee::all();
+                                                                
+                                                                ?>
+                                                                
+                                                                <label for="service_id">Select Service:</label>
+                                                                      <select class="form-select js-select2" data-ui="xl" id="service_id"
+                                                                            name="service_id" data-search="on" required>
+                                                                            @foreach($services as $service)
+                                                                                <option value="{{ $service->id }}">{{ $service->first_name }}
+                                                                                </option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                
+                                                                   <label class="form-label" for="default-06">Upload letter of intent (png only: .png)
+                                                                    </label>
+                                                                    <div class="form-control-wrap">
+                                                                        <div class="form-file">
+                                                                            <input type="file" class="form-file-input" id="document"
+                                                                                name="letter_of_intent" required>
+                                                                            <label class="form-file-label" for="customFile">Choose file</label>
+                                                                        </div>
+                                                                    </div>
+                                                                
 
                                                             <div id="nom_div" class="d-none">
                                                                 <label for="number_of_months">Number of months</label>
@@ -94,7 +118,7 @@
                                                                 RR)</button>
                                                         </div>
                                                         <div class="col-6">
-                                                            <label for="">Payment due is:</label><br />
+                                                            <label for="">Payment due for dredging is:</label><br />
                                                             <p>
                                                                 <strong class="fs-3"
                                                                     id="contribution_amount">&#8358;{{ number_format($payment_due, 2) }}</strong>
@@ -147,12 +171,12 @@
                                                     <div class="row">
                                                         <div class="col-12 my-2">
                                                             <p>
-                                                                <label for="">Your ECS Payment for the year <span
+                                                                <label for="">Your Application Payment for the year <span
                                                                         {{-- class="fw-bold">{{ date('Y', strtotime($pending_payment->paid_at)) }}</span> --}}
                                                                         class="fw-bold">{{ $pending_payment->contribution_year }}</span>
                                                                     of <span
                                                                         class="fw-bold">{{ $pending_payment->employees }}</span>
-                                                                    Employees with the amount <span
+                                                                    Service(s) with the amount <span
                                                                         class="fw-bold">&#8358;{{ number_format(\App\Models\Payment::where('payment_type', 4)
                                                                         ->whereRaw('contribution_year = ' . $pending_payment->contribution_year)
                                                                         ->sum('amount'), 2) }}</span>
@@ -165,56 +189,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            @else
-                                <div class="card-title-group">
-                                    <div class="card-title">
-                                        <h6 class="title">Notice!</h6>
-                                    </div>
-                                </div>
-                                <div class="data">
-                                    <div class="data-group">
-                                        <div class="form-group">
-                                            <label for="">You have not added any services!</label>
-                                            <div class="form-group">
-                                                <div class="toggle-wrap nk-block-tools-toggle">
-                                                    <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1"
-                                                        data-target="pageMenu"><em class="icon ni ni-more-v"></em></a>
-                                                    <div class="toggle-expand-content" data-content="pageMenu">
-                                                        <ul class="nk-block-tools g-3">
-                                                            <li>
-                                                                <div class="dropdown">
-                                                                    <a href="#" class="btn btn-primary"
-                                                                        data-bs-toggle="dropdown"><em
-                                                                            class="icon ni ni-user-add"></em> <span>Add New
-                                                                            Service(s)</span></a>
-                                                                    <div class="dropdown-menu dropdown-menu-end">
-                                                                        <ul class="link-list-opt no-bdr">
-                                                                            <li><a href="/employee/create"><em
-                                                                                        class="icon ni ni-file-plus"></em><span>Add
-                                                                                        New
-                                                                                        Service</span></a></li>
-                                                                            {{-- <li><a
-                                                                                    href="{{ route('employee.createbulk') }}"><em
-                                                                                        class="icon ni ni-upload-cloud"></em><span>Upload
-                                                                                        Bulk
-                                                                                        Employees</span></a></li>
-                                                                            <li><a
-                                                                                    href="{{ Storage::url('employees.xlsx') }}"><em
-                                                                                        class="icon ni ni-download-cloud"></em><span>Bulk
-                                                                                        Employee
-                                                                                        Template</span></a></li> --}}
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
+                           
                         </div><!-- .card-inner -->
                     </div><!-- .nk-ecwg -->
                 </div><!-- .card -->
@@ -225,7 +200,7 @@
                         <div class="card-inner">
                             <div class="card-title-group">
                                 <div class="card-title">
-                                    <h6 class="title">Employees</h6>
+                                    <h6 class="title">Services</h6>
                                 </div>
                             </div>
                             <div class="data">
