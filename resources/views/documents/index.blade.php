@@ -21,6 +21,9 @@
             <!-- .nk-block-head-content -->
         </div><!-- .nk-block-between -->
     </div><!-- .nk-block-head -->
+    <?php 
+$payment_due = 150000;
+?>
     <?php
                    $userId = \Auth::id(); // Get the authenticated user's ID
                 
@@ -45,9 +48,7 @@ if ($documentsCount !== null && $documentsCount == 6) {
 
             @if ($pending && $pending->payment_status == 0)
                 {{-- IF NO RRR IS GENERATED --}}
-                <?php 
-$payment_due = 150000;
-?>
+                
                 <div class="form-group mt-2">
                     <div class="row">
                         <div class="col-6 fw-bold">RRR:</div>
