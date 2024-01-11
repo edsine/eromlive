@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Employee;
+use App\Models\Service;
 use App\Models\SubService;
 
 class SubServiceController extends Controller
@@ -11,21 +11,21 @@ class SubServiceController extends Controller
     //
     public function index()
     {
-        $employees = SubService::all();
+        $services = SubService::all();
 
-        return view('sub_services.index', compact('employees'));
+        return view('sub_services.index', compact('services'));
     }
 
     public function create()
     {
-        $services = Employee::all();
+        $services = Service::all();
     return view('sub_services.create', compact('services'));
     }
 
     public function store(Request $request)
 {
     $request->validate([
-        'service_id' => 'required|exists:employees,id',
+        'service_id' => 'required|exists:services,id',
         'name' => 'required|string|max:255',
     ]);
 
@@ -41,14 +41,14 @@ class SubServiceController extends Controller
     public function edit($id)
     {
         $subservices = SubService::findOrFail($id);
-        $services = Employee::all();
+        $services = Service::all();
         return view('sub_services.edit', compact(['services', 'subservices']));
     }
 
     public function update(Request $request, SubService $subService)
 {
     $request->validate([
-        'service_id' => 'required|exists:employees,id',
+        'service_id' => 'required|exists:services,id',
         'name' => 'required|string|max:255',
     ]);
 

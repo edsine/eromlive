@@ -32,12 +32,12 @@
                         </a>
                         <ul class="nk-menu-sub">
                             <li class="nk-menu-item">
-                                <a href="{{ route('employee.index') }}" class="nk-menu-link"><span
+                                <a href="{{ route('services.index') }}" class="nk-menu-link"><span
                                         class="nk-menu-text">Service
                                         List</span></a>
                             </li>
                             <li class="nk-menu-item">
-                                <a href="{{ route('employee.create') }}" class="nk-menu-link"><span
+                                <a href="{{ route('services.create') }}" class="nk-menu-link"><span
                                         class="nk-menu-text">Add
                                         Service</span></a>
                             </li>

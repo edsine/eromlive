@@ -77,7 +77,7 @@ if ($documentsCount !== null && $documentsCount == 6) {
             @else
                 {{-- WHEN RRR HAS BEEN GENERATED --}}
                 <div class="form-group">
-                    <?php $services = \App\Models\Employee::all();
+                    <?php $services = \App\Models\Service::all();
                                                                 
                                                                 ?>
                     <form method="POST" action="{{ route('payment.remita') }}">
@@ -86,7 +86,7 @@ if ($documentsCount !== null && $documentsCount == 6) {
                                                                       <select class="form-select js-select2" data-ui="xl" id="service_id"
                                                                             name="service_id" data-search="on" required>
                                                                             @foreach($services as $service)
-                                                                                <option value="{{ $service->id }}">{{ $service->first_name }}
+                                                                                <option value="{{ $service->id }}">{{ $service->name }}
                                                                                 </option>
                                                                             @endforeach
                                                                         </select>

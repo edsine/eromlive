@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Sub-Services')
+@section('title', 'Services')
 
 
 @push('styles')
@@ -13,12 +13,40 @@
     <div class="nk-block-head nk-block-head-sm">
         <div class="nk-block-between">
             <div class="nk-block-head-content">
-                <h3 class="nk-block-title page-title">Services & Sub-Services</h3>
+                <h3 class="nk-block-title page-title">Services</h3>
                 <div class="nk-block-des text-soft">
-                    <p>List of registered services & sub-services.</p>
+                    <p>List of registered services.</p>
                 </div>
             </div><!-- .nk-block-head-content -->
-            <!-- .nk-block-head-content -->
+            {{-- <div class="nk-block-head-content">
+                <div class="toggle-wrap nk-block-tools-toggle">
+                    <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em
+                            class="icon ni ni-more-v"></em></a>
+                    <div class="toggle-expand-content" data-content="pageMenu">
+                        <ul class="nk-block-tools g-3">
+                            <li>
+                                <div class="dropdown">
+                                    <a href="#" class="btn btn-primary" data-bs-toggle="dropdown"><em
+                                            class="icon ni ni-user-add"></em> <span>Add New service(s)</span></a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <ul class="link-list-opt no-bdr">
+                                            <li><a href="/service/create"><em class="icon ni ni-file-plus"></em><span>Add
+                                                        New
+                                                        Service</span></a></li>
+                                            <li><a href="{{ route('service.createbulk') }}"><em
+                                                        class="icon ni ni-upload-cloud"></em><span>Upload Bulk
+                                                        services</span></a></li>
+                                            <li><a href="{{ Storage::url('services.xlsx') }}"><em
+                                                        class="icon ni ni-download-cloud"></em><span>Bulk service
+                                                        Template</span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div> --}}<!-- .nk-block-head-content -->
         </div><!-- .nk-block-between -->
     </div><!-- .nk-block-head -->
     <div class="nk-block nk-block-lg">
@@ -29,7 +57,6 @@
                         <tr>
                             <th>S/N</th>
                             <th>Service Name</th>
-                            <th>Sub-Service Name</th>
                             <th>Status</th>
                             <th>Manage</th>
                         </tr>
@@ -42,25 +69,24 @@
                                 <td>@php
                                 echo $no++;
                                 @endphp</td>
-                                <td>{{ $service->employee->first_name }}</td>
                                 <td>{{ $service->name }}</td>
                                  <td><span
                                         class="tb-status text-{{ $service->status == 1 ? 'success' : 'danger' }}">{{ $service->status == 1 ? 'ACTIVE' : 'NOT ACTIVE' }}</span>
                                 </td>
                                 <td>
-                                    <a style="padding-right: 10px;" href="{{ route('sub-services.edit', $service->id) }}" title="Edit Sub-Service"><span
+                                    <a style="padding-right:10px;" href="{{ route('services.edit', $service->id) }}" title="Edit Service"><span
                                             class="nk-menu-icon text-info"><em class="icon ni ni-edit"></em></span></a>
                                     {{-- <a data-id="{{ $service->id }}"><span class="nk-menu-icon text-danger eg-swal-av3"><em
                                                 class="icon ni ni-trash"></em></span>
                                             </a> --}}
 
-                                    <a id="delete-service" title="Terminate Sub-Service" style="cursor: pointer;"
+                                    <a id="delete-service" title="Terminate Service" style="cursor: pointer;"
                                         onclick="event.preventDefault();
                                     document.getElementById('delete-service-form').submit();"><span
                                             class="nk-menu-icon text-danger eg-swal-av3"><em
                                                 class="icon ni ni-user-remove"></em></span>
                                     </a>
-                                    <form id="delete-service-form" action="{{ route('sub-services.destroy', $service->id) }}"
+                                    <form id="delete-service-form" action="{{ route('services.destroy', $service->id) }}"
                                         method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')

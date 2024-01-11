@@ -78,7 +78,7 @@
                                                                 @endif
                                                                 <option>Monthly</option>
                                                             </select>
-                                                                <?php $services = \App\Models\Employee::all();
+                                                                <?php $services = \App\Models\Service::all();
                                                                 
                                                                 ?>
                                                                 
@@ -86,7 +86,7 @@
                                                                       <select class="form-select js-select2" data-ui="xl" id="service_id"
                                                                             name="service_id" data-search="on" required>
                                                                             @foreach($services as $service)
-                                                                                <option value="{{ $service->id }}">{{ $service->first_name }}
+                                                                                <option value="{{ $service->id }}">{{ $service->name }}
                                                                                 </option>
                                                                             @endforeach
                                                                         </select>

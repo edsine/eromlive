@@ -429,7 +429,7 @@
                                                 <div class="nk-stepper-step">
                                                     <h5 class="title mb-3">Passwords</h5>
                                                     <p>Set account access.</p>
-                                                    {{-- <div class="row g-3">
+                                                     <div class="row g-3">
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <label class="form-label"
@@ -462,7 +462,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div> --}}
+                                                    </div> 
                                                     <hr>
                                                     <div class="row g-3">
                                                         <div class="col-sm-6">
