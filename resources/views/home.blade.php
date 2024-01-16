@@ -14,100 +14,52 @@
             <div class="nk-block-head-content">
                 <h3 class="nk-block-title page-title">Dashboard</h3>
                 <div class="nk-block-des text-soft">
-                    <p>Welcome to the NIWA Dashboard.</p>
+                    {{-- <p>Welcome to the NIWA Dashboard.</p> --}}
                 </div>
             </div><!-- .nk-block-head-content -->
         </div><!-- .nk-block-between -->
     </div><!-- .nk-block-head -->
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+            <div class="dash-widget">
+                <span class="dash-widget-bg1"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
+                <div class="dash-widget-info text-right">
+                    <h3>{{ number_format($metrics['employees']) }}</h3>
+                    <span class="widget-title1">Services <i class="fa fa-cube" aria-hidden="true"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+            <div class="dash-widget">
+                <span class="dash-widget-bg2"><i class="fa fa-user-o"></i></span>
+                <div class="dash-widget-info text-right">
+                    <h3>{{ number_format($metrics['accident_claims']['amount'], 2) }}</h3>
+                    <span class="widget-title2">Inspection <i class="fa fa-check" aria-hidden="true"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+            <div class="dash-widget">
+                <span class="dash-widget-bg3"><i class="fa fa-user-md" aria-hidden="true"></i></span>
+                <div class="dash-widget-info text-right">
+                    <h3>{{ number_format($metrics['disease_claims']['amount'], 2) }}</h3>
+                    <span class="widget-title3">License <i class="fa fa-checkbox" aria-hidden="true"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+            <div class="dash-widget">
+                <span class="dash-widget-bg4"><i class="fa fa-heartbeat" aria-hidden="true"></i></span>
+                <div class="dash-widget-info text-right">
+                    <h3>{{ number_format($metrics['death_claims']['amount'], 2) }}</h3>
+                    <span class="widget-title4">Report <i class="fa fa-flag-o" aria-hidden="true"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="nk-block">
         <div class="row g-gs">
-            <div class="col-xxl-3 col-sm-6">
-                <div class="card">
-                    <div class="nk-ecwg nk-ecwg6">
-                        <div class="card-inner">
-                            <div class="card-title-group">
-                                <div class="card-title">
-                                    <h6 class="title">Services</h6>
-                                </div>
-                            </div>
-                            <div class="data">
-                                <div class="data-group">
-                                    <div class="amount">{{ number_format($metrics['employees']) }}</div>
-                                    <div class="nk-ecwg6-ck">
-                                        <canvas class="ecommerce-line-chart-s3" id="todayOrders"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- .card-inner -->
-                    </div><!-- .nk-ecwg -->
-                </div><!-- .card -->
-            </div><!-- .col -->
-            <div class="col-xxl-3 col-sm-6">
-                <div class="card">
-                    <div class="nk-ecwg nk-ecwg6">
-                        <div class="card-inner">
-                            <div class="card-title-group">
-                                <div class="card-title">
-                                    <h6 class="title">Inspection</h6>
-                                </div>
-                            </div>
-                            <div class="data">
-                                <div class="data-group">
-                                    <div class="amount">&#8358;{{ number_format($metrics['accident_claims']['amount'], 2) }}
-                                    </div>
-                                    <div class="nk-ecwg6-ck">
-                                        <canvas class="ecommerce-line-chart-s3" id="todayRevenue"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- .card-inner -->
-                    </div><!-- .nk-ecwg -->
-                </div><!-- .card -->
-            </div><!-- .col -->
-            <div class="col-xxl-3 col-sm-6">
-                <div class="card">
-                    <div class="nk-ecwg nk-ecwg6">
-                        <div class="card-inner">
-                            <div class="card-title-group">
-                                <div class="card-title">
-                                    <h6 class="title">License</h6>
-                                </div>
-                            </div>
-                            <div class="data">
-                                <div class="data-group">
-                                    <div class="amount">&#8358;{{ number_format($metrics['disease_claims']['amount'], 2) }}
-                                    </div>
-                                    <div class="nk-ecwg6-ck">
-                                        <canvas class="ecommerce-line-chart-s3" id="todayCustomers"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- .card-inner -->
-                    </div><!-- .nk-ecwg -->
-                </div><!-- .card -->
-            </div><!-- .col -->
-            <div class="col-xxl-3 col-sm-6">
-                <div class="card">
-                    <div class="nk-ecwg nk-ecwg6">
-                        <div class="card-inner">
-                            <div class="card-title-group">
-                                <div class="card-title">
-                                    <h6 class="title">Report</h6>
-                                </div>
-                            </div>
-                            <div class="data">
-                                <div class="data-group">
-                                    <div class="amount">&#8358;{{ number_format($metrics['death_claims']['amount'], 2) }}
-                                    </div>
-                                    <div class="nk-ecwg6-ck">
-                                        <canvas class="ecommerce-line-chart-s3" id="todayVisitors"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- .card-inner -->
-                    </div><!-- .nk-ecwg -->
-                </div><!-- .card -->
-            </div><!-- .col -->
+          
             <div class="col-xxl-6">
                 <div class="card card-full">
                     <div class="nk-ecwg nk-ecwg8 h-100">

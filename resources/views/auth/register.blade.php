@@ -1,4 +1,4 @@
-@extends('auth.auth')
+@extends('auth.reg')
 
 @section('title', 'Register')
 
@@ -11,12 +11,12 @@
                 <div class="col-12">
                     <div class="brand-logo pb-4 text-center mt-4">
                         <a href="html/index.html" class="logo-link">
-                            <img class="logo-light logo-img logo-img-lg"
+                            {{-- <img class="logo-light logo-img logo-img-lg"
                                 style="width: 125px !important;height: 125px !important;max-height: 125px !important;"
                                 src="{{ asset('assets/images/logo.png') }}" srcset="{{ asset('assets/images/logo.png') }}"
-                                alt="logo">
+                                alt="logo"> --}}
                             <img class="logo-dark logo-img logo-img-lg"
-                                style="width: 125px !important;height: 125px !important;max-height: 125px !important;"
+                                style="width: auto;height: 125px !important;max-height: 125px !important;"
                                 src="{{ asset('assets/images/logo.png') }}" srcset="{{ asset('assets/images/logo.png') }}"
                                 alt="logo-dark">
                         </a>
@@ -39,15 +39,15 @@
 
                 <div class="row g-0 col-sep col-sep-md col-sep-xl">
 
-                    <div class="col-md-4 col-xl-4">
+                    <div class="col-md-12 col-xl-12">
                         <div class="card-inner">
 
-                            <ul class="nk-stepper-nav nk-stepper-nav-s1 stepper-nav is-vr">
+                            <ul class="nk-stepper-nav nk-stepper-nav-s1 stepper-nav is-hr">
                                 <li>
                                     <div class="step-item">
                                         <div class="step-text">
-                                            <div class="lead-text">Serivice Status</div>
-                                            <div class="sub-text">Registered or Unregistered</div>
+                                            <div class="lead-text">Area Office</div>
+                                            <div class="sub-text">Select prefered area office</div>
                                         </div>
                                     </div>
                                 </li>
@@ -86,11 +86,11 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-8 col-xl-8 pl-5">
-                        <h5 class="title mb-3 mt-3 ml-5">Serivice Status</h5>
+                    <div class="col-md-12 col-xl-12 pl-5">
+                       {{--  <h5 class="title mb-3 mt-3 ml-5">Registration Form</h5> --}}
 
                         <div class="py-2">
-                            <ul class="nav nav-tabs nav-tabs-s2">
+                            {{-- <ul class="nav nav-tabs nav-tabs-s2">
                                 <li class="nav-item">
                                     <a class="nav-link active" data-bs-toggle="tab" href="#private">New</a>
                                 </li>
@@ -98,7 +98,7 @@
                                     <a class="nav-link" data-bs-toggle="tab" href="#public">Old</a>
                                 </li>
 
-                            </ul>
+                            </ul> --}}
                             <div class="tab-content">
                                 <div class="tab-pane active" id="private">
                                     <div class="card-inner">
@@ -223,6 +223,7 @@
 
                                                         <div class="col-12">
                                                             <div class="form-group">
+                                                                <h5 class="title mb-4">Area Office</h5>
                                                                 <label class="form-label" for="cp1-team-size">Select
                                                                     Area Office</label>
                                                                 <div class="form-control-wrap">
@@ -2871,7 +2872,7 @@
                                             </div>
                                             <ul class="nk-stepper-pagination pt-4 gx-4 gy-2 stepper-pagination">
                                                 <li class="step-prev"><button
-                                                        class="btn btn-dim btn-primary">Back</button></li>
+                                                        class="btn btn-dim btn-primary" style="background: #392C70;">Back</button></li>
                                                 <li class="step-next"><button class="btn btn-primary">Continue</button>
                                                 </li>
                                                 <li class="step-submit"><button type="submit" class="btn btn-primary"
