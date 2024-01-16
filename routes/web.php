@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     //return view('welcome');
     return view('landing.index'); //Redirect on load to login or home
-});
+})->name('landing');
 
 Route::get('login', function () {
     //return view('welcome');

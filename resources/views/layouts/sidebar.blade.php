@@ -1,137 +1,44 @@
-<div class="nk-sidebar" data-content="sidebarMenu">
-    <div class="nk-sidebar-main is-light">
-        <div class="nk-sidebar-inner" data-simplebar>
-            <div class="nk-menu-content menu-active" data-content="navHospital">
-                <div class="brand-logo pb-2 text-center">
-                    <a href="{{url('/home')}}" class="logo-link">
-                        <img class="logo-light logo-img logo-img-lg"
-                            style="width: 100px !important;height: 100px !important;max-height: 100px !important;"
-                            src="{{ asset('assets/images/logo.png') }}" srcset="{{ asset('assets/images/logo.png') }}"
-                            alt="logo">
-                        <img class="logo-dark logo-img logo-img-lg"
-                            style="width: 100px !important;height: 100px !important;max-height: 100px !important;"
-                            src="{{ asset('assets/images/logo.png') }}" srcset="{{ asset('assets/images/logo.png') }}"
-                            alt="logo-dark">
-                    </a>
-                </div>
-                <h5 class="title">NIWA Service Portal</h5>
-                <ul class="nk-menu">
-                    <li class="nk-menu-item">
-                        <a href="/home" class="nk-menu-link">
-                            <span class="nk-menu-icon"><em class="icon ni ni-dashboard-fill"></em></span>
-                            <span class="nk-menu-text">Dashboard</span>
-                        </a>
-                    </li><!-- .nk-menu-item -->
-                    <?php
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-inner slimscroll">
+        <div id="sidebar-menu" class="sidebar-menu">
+            <ul>
+                <li class="menu-title">NIWA Service Portal</li>
+                <li class="active">
+                    <a href="{{url('/home')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+                </li>
+                <?php
                         if(auth()->user()->id === 1){
                     ?>
-                    <li class="nk-menu-item has-sub">
-                        <a href="#" class="nk-menu-link nk-menu-toggle">
-                            <span class="nk-menu-icon"><em class="icon ni ni-users-fill"></em></span>
-                            <span class="nk-menu-text">Services</span>
-                        </a>
-                        <ul class="nk-menu-sub">
-                            <li class="nk-menu-item">
-                                <a href="{{ route('services.index') }}" class="nk-menu-link"><span
-                                        class="nk-menu-text">Service
-                                        List</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="{{ route('services.create') }}" class="nk-menu-link"><span
-                                        class="nk-menu-text">Add
-                                        Service</span></a>
-                            </li>
-                            {{-- <li class="nk-menu-item">
-                                <a href="{{ route('employee.createbulk') }}" class="nk-menu-link"><span
-                                        class="nk-menu-text">Add Bulk
-                                        Employees</span></a>
-                            </li> --}}
-                        </ul><!-- .nk-menu-sub -->
-                    </li><!-- .nk-menu-item -->
-                    <li class="nk-menu-item has-sub">
-                        <a href="#" class="nk-menu-link nk-menu-toggle">
-                            <span class="nk-menu-icon"><em class="icon ni ni-users-fill"></em></span>
-                            <span class="nk-menu-text">Sub-Services</span>
-                        </a>
-                        <ul class="nk-menu-sub">
-                            <li class="nk-menu-item">
-                                <a href="{{ route('sub-services.index') }}" class="nk-menu-link"><span
-                                        class="nk-menu-text">Sub-Service
-                                        List</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="{{ route('sub-services.create') }}" class="nk-menu-link"><span
-                                        class="nk-menu-text">Add
-                                        Sub-Service</span></a>
-                            </li>
-                            {{-- <li class="nk-menu-item">
-                                <a href="{{ route('employee.createbulk') }}" class="nk-menu-link"><span
-                                        class="nk-menu-text">Add Bulk
-                                        Employees</span></a>
-                            </li> --}}
-                        </ul><!-- .nk-menu-sub -->
-                    </li><!-- .nk-menu-item -->
-                    <?php
-                       }
-                   ?>
-                   
-                   <li class="nk-menu-item has-sub">
-                    <a href="#" class="nk-menu-link nk-menu-toggle">
-                        <span class="nk-menu-icon"><em class="icon ni ni-users-fill"></em></span>
-                        <span class="nk-menu-text">My Documents</span>
-                    </a>
-                    <ul class="nk-menu-sub">
-                        <li class="nk-menu-item">
-                            <a href="{{ route('documents.index') }}" class="nk-menu-link"><span
-                                    class="nk-menu-text">Documents
-                                    List</span></a>
-                        </li>
-                        <li class="nk-menu-item">
-                            <a href="{{ route('documents.create') }}" class="nk-menu-link"><span
-                                    class="nk-menu-text">Add
-                                    Documents</span></a>
-                        </li>
-                        {{-- <li class="nk-menu-item">
-                            <a href="{{ route('employee.createbulk') }}" class="nk-menu-link"><span
-                                    class="nk-menu-text">Add Bulk
-                                    Employees</span></a>
-                        </li> --}}
-                    </ul><!-- .nk-menu-sub -->
-                </li>
+                   <li class="submenu">
+                    <a href="#"><i class="fa fa-list"></i> <span> Services </span> <span class="menu-arrow"></span></a>
+                    <ul style="display: none;">
+                        <li><a href="{{ route('services.index') }}">Service List</a></li>
+                        <li><a href="{{ route('services.create') }}">Add Service</a></li>
+                    </ul>
+                </li> 
+                <li class="submenu">
+                    <a href="#"><i class="fa fa-columns"></i> <span> Sub-Services </span> <span class="menu-arrow"></span></a>
+                    <ul style="display: none;">
+                        <li><a href="{{ route('sub-services.index') }}">Sub-Service List</a></li>
+                        <li><a href="{{ route('sub-services.create') }}">Add Sub-Services</a></li>
+                    </ul>
+                </li> 
                 
-                    <li class="nk-menu-item">
-                        <a href="{{ route('payment.index') }}" class="nk-menu-link">
-                            <span class="nk-menu-icon"><em class="icon ni ni-money"></em></span>
-                            <span class="nk-menu-text">Payments</span>
-                        </a>
-                    </li><!-- .nk-menu-item -->
-                    <li class="nk-menu-item">
-                        <a href="{{ route('certificate.index') }}" class="nk-menu-link">
-                            <span class="nk-menu-icon"><em class="icon ni ni-award"></em></span>
-                            <span class="nk-menu-text">Certificates</span>
-                        </a>
-                    </li><!-- .nk-menu-item -->
-                    <li class="nk-menu-item has-sub">
-                        <a href="#" class="nk-menu-link nk-menu-toggle">
-                            <span class="nk-menu-icon"><em class="icon ni ni-sign-kobo"></em></span>
-                            <span class="nk-menu-text">Inspection & license status</span>
-                        </a>
-                        <ul class="nk-menu-sub">
-                            <li class="nk-menu-item">
-                                <a href="{{ route('death.index') }}" class="nk-menu-link"><span
-                                        class="nk-menu-text">Inspection Report</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="{{ route('accident.index') }}" class="nk-menu-link"><span
-                                        class="nk-menu-text">license status</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="{{route('disease.index')}}" class="nk-menu-link"><span class="nk-menu-text">Inspection status </span></a>
-                            </li>
-                        </ul><!-- .nk-menu-sub -->
-                    </li><!-- .nk-menu-item -->
-                </ul><!-- .nk-menu -->
-            </div>
+                <?php
+            }
+        ?>
+        <li class="submenu">
+            <a href="#"><i class="fa fa-book"></i> <span> My Documents </span> <span class="menu-arrow"></span></a>
+            <ul style="display: none;">
+                <li><a href="{{ route('documents.index') }}">Documents List</a></li>
+                <li><a href="{{ route('documents.create') }}">Add Documents</a></li>
+            </ul>
+        </li> 
+        <li>
+            <a href="{{ route('payment.index') }}"><i class="fa fa-user-md"></i> <span>Payments</span></a>
+        </li>
+        
+            </ul>
         </div>
     </div>
 </div>
