@@ -14528,7 +14528,7 @@ a:hover .btn-trigger:before {
 }
 .btn-white.btn-outline-light:not(.btn-dim):not(:disabled):not(.disabled):hover, .dt-buttons .btn-secondary:not(.btn-dim):not(:disabled):not(.disabled):hover {
   color: #fff;
-  background: #526484;
+  background: red;
   border-color: #526484;
 }
 .btn-light:focus, .dual-listbox .dual-listbox__button:focus {
@@ -34600,7 +34600,7 @@ p > span > .icon.ni {
 }
 .nk-stepper-nav > *.current .step-item:before {
   color: #fff;
-  background: #0fac81;
+  background: #392C70;
 }
 .nk-stepper-nav.is-vr {
   flex-direction: column;

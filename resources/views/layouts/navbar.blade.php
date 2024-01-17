@@ -1,157 +1,114 @@
-<!-- main header @s -->
-<div class="nk-header nk-header-fixed nk-header-fluid is-light">
-    <div class="container-fluid">
-        <div class="nk-header-wrap">
-            <div class="nk-menu-trigger d-xl-none ms-n1">
-                <a href="#" class="nk-nav-toggle nk-quick-nav-icon" data-target="sidebarMenu"><em
-                        class="icon ni ni-menu"></em></a>
-            </div>
-            <div class="nk-header-brand d-xl-none">
-                <a href="{{url('/')}}" class="logo-link">
-                    <img class="logo-light logo-img" src="{{ asset('assets/images/logo.png') }}" srcset="{{ asset('assets/images/logo.png') }} 2x"
-                        alt="logo">
-                    <img class="logo-dark logo-img" src="{{ asset('assets/images/logo.png') }}" srcset="{{ asset('assets/images/logo.png') }} 2x"
-                        alt="logo-dark">
-                </a>
-            </div><!-- .nk-header-brand -->
-            <div class="nk-header-search ms-3 ms-xl-0 text-center">
-                {{-- <h5>{{ Auth::user()->company_name }}</h5> --}}
-            </div><!-- .nk-header-news -->
-            <div class="nk-header-tools">
-                <ul class="nk-quick-nav">
-                    <li><h5>{{ Auth::user()->company_name }}</h5></li>
-                    <li class="dropdown notification-dropdown">
-                        <a href="#" class="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
-                            <div class="icon-status icon-status-info"><em class="icon ni ni-bell"></em></div>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-xl dropdown-menu-end">
-                            <div class="dropdown-head">
-                                <span class="sub-title nk-dropdown-title">Notifications</span>
-                                <a href="#">Mark All as Read</a>
-                            </div>
-                            {{-- <div class="dropdown-body">
-                                <div class="nk-notification">
-                                    <div class="nk-notification-item dropdown-inner">
-                                        <div class="nk-notification-icon">
-                                            <em class="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
-                                        </div>
-                                        <div class="nk-notification-content">
-                                            <div class="nk-notification-text">You have requested to
-                                                <span>Widthdrawl</span>
-                                            </div>
-                                            <div class="nk-notification-time">2 hrs ago</div>
-                                        </div>
-                                    </div>
-                                    <div class="nk-notification-item dropdown-inner">
-                                        <div class="nk-notification-icon">
-                                            <em class="icon icon-circle bg-success-dim ni ni-curve-down-left"></em>
-                                        </div>
-                                        <div class="nk-notification-content">
-                                            <div class="nk-notification-text">Your <span>Deposit Order</span> is placed
-                                            </div>
-                                            <div class="nk-notification-time">2 hrs ago</div>
-                                        </div>
-                                    </div>
-                                    <div class="nk-notification-item dropdown-inner">
-                                        <div class="nk-notification-icon">
-                                            <em class="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
-                                        </div>
-                                        <div class="nk-notification-content">
-                                            <div class="nk-notification-text">You have requested to
-                                                <span>Widthdrawl</span>
-                                            </div>
-                                            <div class="nk-notification-time">2 hrs ago</div>
-                                        </div>
-                                    </div>
-                                    <div class="nk-notification-item dropdown-inner">
-                                        <div class="nk-notification-icon">
-                                            <em class="icon icon-circle bg-success-dim ni ni-curve-down-left"></em>
-                                        </div>
-                                        <div class="nk-notification-content">
-                                            <div class="nk-notification-text">Your <span>Deposit Order</span> is placed
-                                            </div>
-                                            <div class="nk-notification-time">2 hrs ago</div>
-                                        </div>
-                                    </div>
-                                    <div class="nk-notification-item dropdown-inner">
-                                        <div class="nk-notification-icon">
-                                            <em class="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
-                                        </div>
-                                        <div class="nk-notification-content">
-                                            <div class="nk-notification-text">You have requested to
-                                                <span>Widthdrawl</span>
-                                            </div>
-                                            <div class="nk-notification-time">2 hrs ago</div>
-                                        </div>
-                                    </div>
-                                    <div class="nk-notification-item dropdown-inner">
-                                        <div class="nk-notification-icon">
-                                            <em class="icon icon-circle bg-success-dim ni ni-curve-down-left"></em>
-                                        </div>
-                                        <div class="nk-notification-content">
-                                            <div class="nk-notification-text">Your <span>Deposit Order</span> is placed
-                                            </div>
-                                            <div class="nk-notification-time">2 hrs ago</div>
-                                        </div>
-                                    </div>
-                                </div><!-- .nk-notification -->
-                            </div><!-- .nk-dropdown-body --> --}}
-                            {{-- <div class="dropdown-foot center">
-                                <a href="#">View All</a>
-                            </div> --}}
-                        </div>
-                    </li>
-                    <li class="dropdown user-dropdown">
-                        <a href="#" class="dropdown-toggle me-n1" data-bs-toggle="dropdown">
-                            <div class="user-toggle">
-                                <div class="user-avatar sm">
-                                    <em class="icon ni ni-user-alt"></em>
-                                </div>
-                            </div>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-end">
-                            <div class="dropdown-inner user-card-wrap bg-lighter">
-                                <div class="user-card">
-                                    <div class="user-avatar">
-                                        <span>AB</span>
-                                    </div>
-                                    <div class="user-info">
-                                        <span class="lead-text">{{ Auth::user()->company_name }}</span>
-                                        <span class="sub-text">{{ Auth::user()->company_email }}</span>
+<div class="header">
+    <div class="header-left">
+        <a href="{{url('/')}}" class="logo">
+            <img src="{{ asset('assets/images/logo.png') }}" width="35" height="35" alt=""> <span>NIWA</span>
+        </a>
+    </div>
+    <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
+    <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
+    <ul class="nav user-menu float-right">
+        <li class="nav-item dropdown d-none d-sm-block">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><i class="fa fa-bell-o"></i> <span class="badge badge-pill bg-danger float-right">0</span></a>
+            {{-- <div class="dropdown-menu notifications">
+                <div class="topnav-dropdown-header">
+                    <span>Notifications</span>
+                </div>
+                <div class="drop-scroll">
+                    <ul class="notification-list">
+                        <li class="notification-message">
+                            <a href="activities.html">
+                                <div class="media">
+                                    <span class="avatar">
+                                        <img alt="John Doe" src="assets/img/user.jpg" class="img-fluid">
+                                    </span>
+                                    <div class="media-body">
+                                        <p class="noti-details"><span class="noti-title">John Doe</span> added new task <span class="noti-title">Patient appointment booking</span></p>
+                                        <p class="noti-time"><span class="notification-time">4 mins ago</span></p>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="dropdown-inner">
-                                <ul class="link-list">
-                                    <li><a href="{{route('employer.profile')}}"><em
-                                                class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
-                                    {{-- <li><a href="html/hospital/settings.html"><em
-                                                class="icon ni ni-setting-alt"></em><span>Account Setting</span></a>
-                                    </li>
-                                    <li><a href="html/hospital/settings-account-log.html"><em
-                                                class="icon ni ni-activity-alt"></em><span>Login Activity</span></a>
-                                    </li>
-                                    <li><a class="dark-switch" href="#"><em
-                                                class="icon ni ni-moon"></em><span>Dark Mode</span></a></li> --}}
-                                </ul>
-                            </div>
-                            <div class="dropdown-inner">
-                                <ul class="link-list">
-                                    <li><a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();"><em
-                                                class="icon ni ni-signout"></em><span>Sign out</span></a></li>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        class="d-none">
-                                        @csrf
-                                    </form>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+                            </a>
+                        </li>
+                        <li class="notification-message">
+                            <a href="activities.html">
+                                <div class="media">
+                                    <span class="avatar">V</span>
+                                    <div class="media-body">
+                                        <p class="noti-details"><span class="noti-title">Tarah Shropshire</span> changed the task name <span class="noti-title">Appointment booking with payment gateway</span></p>
+                                        <p class="noti-time"><span class="notification-time">6 mins ago</span></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="notification-message">
+                            <a href="activities.html">
+                                <div class="media">
+                                    <span class="avatar">L</span>
+                                    <div class="media-body">
+                                        <p class="noti-details"><span class="noti-title">Misty Tison</span> added <span class="noti-title">Domenic Houston</span> and <span class="noti-title">Claire Mapes</span> to project <span class="noti-title">Doctor available module</span></p>
+                                        <p class="noti-time"><span class="notification-time">8 mins ago</span></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="notification-message">
+                            <a href="activities.html">
+                                <div class="media">
+                                    <span class="avatar">G</span>
+                                    <div class="media-body">
+                                        <p class="noti-details"><span class="noti-title">Rolland Webber</span> completed task <span class="noti-title">Patient and Doctor video conferencing</span></p>
+                                        <p class="noti-time"><span class="notification-time">12 mins ago</span></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="notification-message">
+                            <a href="activities.html">
+                                <div class="media">
+                                    <span class="avatar">V</span>
+                                    <div class="media-body">
+                                        <p class="noti-details"><span class="noti-title">Bernardo Galaviz</span> added new task <span class="noti-title">Private chat module</span></p>
+                                        <p class="noti-time"><span class="notification-time">2 days ago</span></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="topnav-dropdown-footer">
+                    <a href="activities.html">View all Notifications</a>
+                </div>
+            </div> --}}
+        </li>
+        {{-- <li class="nav-item dropdown d-none d-sm-block">
+            <a href="javascript:void(0);" id="open_msg_box" class="hasnotifications nav-link"><i class="fa fa-comment-o"></i> <span class="badge badge-pill bg-danger float-right">8</span></a>
+        </li> --}}
+        <li class="nav-item dropdown has-arrow">
+            <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
+                {{-- <span class="user-img">
+                    <img class="rounded-circle" src="assets/img/user.jpg" width="24" alt="Admin">
+                    <span class="status online"></span>
+                </span> --}}
+                <span>{{ Auth::user()->company_name }}</span>
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="{{route('employer.profile')}}">My Profile</a>
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();">Logout</a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                class="d-none">
+                @csrf
+            </form>
             </div>
-        </div><!-- .nk-header-wrap -->
-    </div><!-- .container-fliud -->
+        </li>
+    </ul>
+    <div class="dropdown mobile-user-menu float-right">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+        <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="profile.html">My Profile</a>
+            <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
+            <a class="dropdown-item" href="settings.html">Settings</a>
+            <a class="dropdown-item" href="login.html">Logout</a>
+        </div>
+    </div>
 </div>
-<!-- main header @e -->

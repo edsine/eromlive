@@ -28,17 +28,17 @@ class EmployerDocumentController extends Controller
     {
         $request->validate([
             'title_document' => 'required|string|max:255',
-            'title_document_file' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust allowed file types and size
+            'title_document_file' => 'required|pdf|max:2048', // Adjust allowed file types and size
             'survey_document' => 'required|string|max:255',
-            'survey_document_file' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'survey_document_file' => 'required|pdf|max:2048',
             'sand_search_report' => 'required|string|max:255',
-            'sand_search_report_file' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'sand_search_report_file' => 'required|pdf|max:2048',
             'cac_certificate' => 'required|string|max:255',
-            'cac_certificate_file' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'cac_certificate_file' => 'required|pdf|max:2048',
             'pre_post_dredge_survey_drawings' => 'required|string|max:255',
-            'pre_post_dredge_survey_drawings_file' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'pre_post_dredge_survey_drawings_file' => 'required|pdf|max:2048',
             'eia_report' => 'required|string|max:255',
-            'eia_report_file' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'eia_report_file' => 'required|pdf|max:2048',
         ]);
     
         $title = $request->input('title_document');
