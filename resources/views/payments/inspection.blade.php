@@ -164,7 +164,7 @@
                                                         </p>
 
                                                         <input type="hidden" name="payment_type" id="payment_type"
-                                                            value="4">
+                                                            value="5">
                                                         <input type="hidden" name="employees" id="employees"
                                                             value="{{ $total_services }}">
                                                         <input type="hidden" name="amount" id="amount"

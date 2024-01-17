@@ -23,7 +23,7 @@
     </div><!-- .nk-block-head -->
     <?php
                    $userId = \Auth::id(); // Get the authenticated user's ID
-$userPayment = \App\Models\Payment::where('payment_type',4)->where('employer_id', auth()->user()->id)->where('service_id','!=', null)->latest()->first();
+$userPayment = \App\Models\Payment::where('payment_type',4)->where('approval_status',1)->where('employer_id', auth()->user()->id)->where('service_id','!=', null)->latest()->first();
      if(!empty($userPayment) && $userPayment->document_uploads == 1){
                    ?>
     <div class="nk-block nk-block-lg">
@@ -40,7 +40,7 @@ $userPayment = \App\Models\Payment::where('payment_type',4)->where('employer_id'
         ?> 
         <div class="form-group">
             <label for="" class="">You can not upload documents till you make a new application fee & processing fee
-                payments for a service.</label>
+                payments for a service and wait for approval</label>
                 <br/>
                 <a class="btn btn-primary me-n1" href="{{route('payment.index')}}">Make Application Fees Payments</a>
         </div>

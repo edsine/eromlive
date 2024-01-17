@@ -347,6 +347,11 @@ class PaymentController extends Controller
 
             Storage::delete('public/invoices/invoice_' . $payment->id . '.pdf');
 
+            if($payment->payment_type == 5){
+            $employer = Employer::findOrFail($payment->employer_id);
+            $employer->update(['inspection_status' => 0]);
+            }
+
             return redirect()->route('payment.index')->with('success', $payment->payment_type == 1 ? 'Registration Payment successful!' : 'Payment successful!');
         } else { //if payment was not successful
             //get and update transaction
