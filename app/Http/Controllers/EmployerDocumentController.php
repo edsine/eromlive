@@ -91,7 +91,7 @@ class EmployerDocumentController extends Controller
             
                 // Define the roles and departments you want to notify
                 $targetRoles = ['HOD'];
-                $targetDepartments = [3, 4, 5];
+                $targetDepartments = [7, 11, 13];
             
                 // Filter email addresses based on user roles and departments
                 $filteredEmailAddresses = [];

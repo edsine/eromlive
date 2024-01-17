@@ -34,10 +34,15 @@
                 <li><a href="{{ route('documents.create') }}">Add Documents</a></li>
             </ul>
         </li> 
+        <?php 
+        $userPayment = \App\Models\Payment::where('employer_id', auth()->user()->id)->where('amount', '5000.00')->first();
+        if(!empty($userPayment)){
+        ?>
         <li>
             <a href="{{ route('payment.index') }}"><i class="fa fa-user-md"></i> <span>Register A Service</span></a>
         </li>
-        <?php 
+        <?php
+        } 
         if(auth()->user()->inspection_status == 1){
         ?>
         <li>
