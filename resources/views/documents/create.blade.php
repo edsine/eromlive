@@ -23,8 +23,8 @@
     </div><!-- .nk-block-head -->
     <?php
                    $userId = \Auth::id(); // Get the authenticated user's ID
-$userPayment = \App\Models\Payment::where('employer_id', $userId)->where('amount', '25000.00')->first();
-     if(!empty($userPayment) && $userPayment->amount == 25000.00){
+$userPayment = \App\Models\Payment::where('payment_type',4)->where('employer_id', auth()->user()->id)->where('service_id','!=', null)->latest()->first();
+     if(!empty($userPayment) && $userPayment->document_uploads == 1){
                    ?>
     <div class="nk-block nk-block-lg">
         <div class="card card-bordered card-preview">
@@ -39,10 +39,10 @@ $userPayment = \App\Models\Payment::where('employer_id', $userId)->where('amount
     <?php }else{
         ?> 
         <div class="form-group">
-            <label for="" class="">You have not made any Application
-                Payments.</label>
+            <label for="" class="">You can not upload documents till you make a new application fee & processing fee
+                payments for a service.</label>
                 <br/>
-                <a class="btn btn-primary me-n1" href="{{route('payment.index')}}">Make Application Payments</a>
+                <a class="btn btn-primary me-n1" href="{{route('payment.index')}}">Make Application Fees Payments</a>
         </div>
         <?php
     } ?>

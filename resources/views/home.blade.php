@@ -22,16 +22,16 @@
     <div class="row">
         <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
             <div class="dash-widget">
-                <span class="dash-widget-bg1"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
+                <span class="dash-widget-bg1"><i class="fa fa-cube" aria-hidden="true"></i></span>
                 <div class="dash-widget-info text-right">
-                    <h3>{{ number_format($metrics['employees']) }}</h3>
+                    <h3>{{ number_format($metrics['services']) }}</h3>
                     <span class="widget-title1">Services <i class="fa fa-cube" aria-hidden="true"></i></span>
                 </div>
             </div>
         </div>
         <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
             <div class="dash-widget">
-                <span class="dash-widget-bg2"><i class="fa fa-user-o"></i></span>
+                <span class="dash-widget-bg2"><i class="fa fa-check"></i></span>
                 <div class="dash-widget-info text-right">
                     <h3>{{ number_format($metrics['accident_claims']['amount'], 2) }}</h3>
                     <span class="widget-title2">Inspection <i class="fa fa-check" aria-hidden="true"></i></span>
@@ -40,16 +40,16 @@
         </div>
         <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
             <div class="dash-widget">
-                <span class="dash-widget-bg3"><i class="fa fa-user-md" aria-hidden="true"></i></span>
+                <span class="dash-widget-bg3"><i class="fa fa-check-square-o" aria-hidden="true"></i></span>
                 <div class="dash-widget-info text-right">
                     <h3>{{ number_format($metrics['disease_claims']['amount'], 2) }}</h3>
-                    <span class="widget-title3">License <i class="fa fa-checkbox" aria-hidden="true"></i></span>
+                    <span class="widget-title3">License <i class="fa fa-check-square-o" aria-hidden="true"></i></span>
                 </div>
             </div>
         </div>
         <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
             <div class="dash-widget">
-                <span class="dash-widget-bg4"><i class="fa fa-heartbeat" aria-hidden="true"></i></span>
+                <span class="dash-widget-bg4"><i class="fa fa-flag-o" aria-hidden="true"></i></span>
                 <div class="dash-widget-info text-right">
                     <h3>{{ number_format($metrics['death_claims']['amount'], 2) }}</h3>
                     <span class="widget-title4">Report <i class="fa fa-flag-o" aria-hidden="true"></i></span>
