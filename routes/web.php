@@ -58,12 +58,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('employee/storebulk', [App\Http\Controllers\EmployeeController::class, 'storebulk'])->name('employee.storebulk');
     Route::resource('employee', App\Http\Controllers\EmployeeController::class);
     //Route::put('/sub-services/{subService}', 'SubServiceController@update')->name('sub-services.update');
-    Route::resource('services', App\Http\Controllers\ServiceController::class);
-    Route::resource('sub-services', App\Http\Controllers\SubServiceController::class);
+    
     
     Route::get('/documents/index', 'App\Http\Controllers\EmployerDocumentController@index')->name('documents.index');
     Route::post('/documents/store', 'App\Http\Controllers\EmployerDocumentController@store')->name('documents.store');
     Route::get('/documents/create', 'App\Http\Controllers\EmployerDocumentController@create')->name('documents.create');
+    
 
 
     /**
@@ -73,7 +73,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('payment/invoice/{payment}', [App\Http\Controllers\PaymentController::class, 'invoice'])->name('payment.invoice');
     Route::get('payment/remita', [App\Http\Controllers\PaymentController::class, 'callbackRemita'])->name('payment.callback');
     Route::post('payment/remita', [App\Http\Controllers\PaymentController::class, 'generateRemita'])->name('payment.remita');
+    Route::get('payment/inspection', [App\Http\Controllers\PaymentController::class, 'inspection'])->name('payment.inspection');
     Route::resource('payment', App\Http\Controllers\PaymentController::class);
+    
 
 
     /**

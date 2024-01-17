@@ -17,7 +17,7 @@
             <tbody>
                 @foreach ($payments as $payment)
                     <tr>
-                        <td>{{ $payment->payment_type == 1 ? 'Registration Fee' : ($payment->payment_type == 2 ? 'Processing Fee' : 'Application Fee '.$payment->contribution_year . ($payment->contribution_period=='Monthly' ? ' ('.$payment->contribution_months.' months)' : '')) }}
+                        <td>{{ $payment->payment_type == 1 ? 'Registration Fee' : ($payment->payment_type == 2 ? 'Processing Fee' : 'Application Fee + Processing Fee '.$payment->contribution_year . ($payment->contribution_period=='Monthly' ? ' ('.$payment->contribution_months.' months)' : '')) }}
                         </td>
                         <td>{{ $payment->invoice_number }}</td>
                         <td>{{ $payment->rrr }}</td>
@@ -28,7 +28,7 @@
                         <td>{{ $payment->paid_at }}</td>
                         <td> @if(!empty($payment->letter_of_intent))
                             <a href="{{ 'storage/'.$payment->letter_of_intent }}" target="_blank">
-                                <img src="{{ 'storage/'.$payment->letter_of_intent }}" alt="Image" style="width: 50px;height: 50px;">
+                                View PDF
                             </a>
                             @else
                            {{ 'NILL' }}

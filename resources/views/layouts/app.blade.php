@@ -25,6 +25,22 @@
     <link rel="stylesheet" type="text/css" href="./back/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="./back/css/style.css">
     @stack('styles')
+    <style>
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #526484;
+    line-height: 1.25rem;
+    padding: 0.4375rem calc(2.125rem + 2px) 0.4375rem 1rem;
+}
+.notification-badge {
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 50%;
+    margin-left: 5px; /* Adjust the margin as needed */
+}
+
+    </style>
 </head>
 <body>
     <div class="main-wrapper">
@@ -325,7 +341,7 @@
 
     <script src="./assets/js/bundle.js?ver=3.1.3"></script>
     <script src="./assets/js/scripts.js?ver=3.1.3"></script>
-    <script></script>
+    
     @stack('scripts')
 
     @if (env('APP_ENV') == 'production')

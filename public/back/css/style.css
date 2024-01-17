@@ -1570,7 +1570,7 @@ ul.chat-user-total li i.old-users {
 	padding-left: 15px;
 }
 .select2-container--default .select2-selection--single .select2-selection__rendered {
-	color: #676767;
+	color: #111;
 	font-size: 14px;
 	font-weight: normal;
 	line-height: 38px;
