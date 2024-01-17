@@ -35,8 +35,19 @@
             </ul>
         </li> 
         <li>
-            <a href="{{ route('payment.index') }}"><i class="fa fa-user-md"></i> <span>Payments</span></a>
+            <a href="{{ route('payment.index') }}"><i class="fa fa-user-md"></i> <span>Register A Service</span></a>
         </li>
+        <?php 
+        if(auth()->user()->inspection_status == 1){
+        ?>
+        <li>
+            <a href="{{ route('payment.inspection') }}">
+                <i class="fa fa-user-md"></i>
+                <span>Inspection Status</span>
+                <span class="badge badge-pill bg-danger" title="Make payment for the inspection of the service you registered">1</span> <!-- Add this line for the notification badge -->
+            </a>
+        </li>        
+        <?php } ?>
         
             </ul>
         </div>

@@ -24,91 +24,7 @@
     <?php 
 $payment_due = 150000;
 ?>
-    <?php
-                   $userId = \Auth::id(); // Get the authenticated user's ID
-                
-$userPayment = \App\Models\Payment::where('employer_id', $userId)->where('amount', '25000.00')->first();
-$documentsCount = \App\Models\EmployerDocuments::where('employer_id', $userId)->count();
-
-if ($documentsCount !== null && $documentsCount == 6) {
-    // Code to execute if the count is not null and equals 6
-    ?>
-<div class="data">
-    <div class="data-group">
-        <div class="form-group">
-            <label for="">Complete your service registration processing fee</label>
-            @php
-                //Check if there is a registration payment
-                $pending = auth()
-                    ->user()
-                    ->payments()
-                    ->latest()
-                    ->first();
-            @endphp
-
-            @if ($pending && $pending->payment_status == 0)
-                {{-- IF NO RRR IS GENERATED --}}
-                
-                <div class="form-group mt-2">
-                    <div class="row">
-                        <div class="col-6 fw-bold">RRR:</div>
-                        <div class="col-6">{{ $pending->rrr }}</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6 fw-bold">Invoice:</div>
-                        <div class="col-6">{{ $pending->invoice_number }}</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6 fw-bold">Processing Fee:</div>
-                        <div class="col-6">{{ $payment_due }}</div>
-                    </div>
-                    <div>
-                        <form onsubmit="makePayment()" id="payment-form">
-                            <input type="hidden" class="form-control" id="js-rrr"
-                                name="rrr" value="{{ $pending->rrr }}"
-                                placeholder="Enter RRR" />
-                            <button type="button" onclick="makePayment()"
-                                class="btn btn-primary btn-lg mt-2"><em
-                                    class="icon ni ni-send me-2"></em> Click to pay online
-                                now!</button>
-                        </form>
-                    </div>
-                </div>
-            @else
-                {{-- WHEN RRR HAS BEEN GENERATED --}}
-                <div class="form-group">
-                    <?php $services = \App\Models\Service::all();
-                                                                
-                                                                ?>
-                    <form method="POST" action="{{ route('payment.remita') }}">
-                        @csrf
-                        <label for="service_id">Select Service:</label>
-                                                                      <select class="form-select js-select2" data-ui="xl" id="service_id"
-                                                                            name="service_id" data-search="on" required>
-                                                                            @foreach($services as $service)
-                                                                                <option value="{{ $service->id }}">{{ $service->name }}
-                                                                                </option>
-                                                                            @endforeach
-                                                                        </select>
-                        <input type="hidden" name="payment_type" id="payment_type"
-                            value="2">
-                        <input type="hidden" name="amount" id="amount" value="150000">
-                        <button type="submit" class="btn btn-secondary btn-lg mt-2"><em
-                                class="icon ni ni-save me-2"></em> Generate Invoice (Remita
-                            RR)</button>
-                    </form>
-            @endif
-        </div>
-    </div>
-</div>
-</div>
-    <?php
-} else {
-    // Code to execute if the count is null or not equal to 6
-}
-$userPayment = \App\Models\Payment::where('employer_id', $userId)->where('amount', '25000.00')->first();
-     if(!empty($userPayment) && $userPayment->amount == 25000.00){
-                   ?>
+   
     <div class="nk-block nk-block-lg">
         <div class="card card-bordered card-preview">
             <div class="card-inner">
@@ -118,8 +34,8 @@ $userPayment = \App\Models\Payment::where('employer_id', $userId)->where('amount
                             <th>S/N</th>
                             {{-- <th>Name</th> --}}
                             <th>Document Name</th>
-                            <th>Document Image</th>
-                            <th>Payment Status</th>
+                            <th>Document (PDF)</th>
+                            <th>Approval Status</th>
                             {{-- <th>Manage</th> --}}
                         </tr>
                     </thead>
@@ -135,11 +51,11 @@ $userPayment = \App\Models\Payment::where('employer_id', $userId)->where('amount
                                 <td>{{ $employer_document->title }}</td>
                                 <td>
                                     <a href="{{ 'storage/'.$employer_document->file_path }}" target="_blank">
-                                        <img src="{{ 'storage/'.$employer_document->file_path }}" alt="Image" style="width: 50px;height: 50px;">
+                                        View PDF
                                     </a>
                                 </td>
                                  <td><span
-                                        class="tb-status text-{{ $employer_document->payment_status == 1 ? 'success' : 'danger' }}">{{ $employer_document->payment_status == 1 ? 'ACTIVE' : 'NOT ACTIVE' }}</span>
+                                        class="tb-status text-{{ $employer_document->payment_status == 1 ? 'success' : 'danger' }}">{{ $employer_document->payment_status == 1 ? 'APPROVED' : 'NOT APPROVED' }}</span>
                                 </td>
                                 {{-- <td>
                                     <a style="padding-right: 10px;" href="{{ route('sub-services.edit', $employee->id) }}" title="Edit Sub-Service"><span
@@ -169,16 +85,7 @@ $userPayment = \App\Models\Payment::where('employer_id', $userId)->where('amount
             </div>
         </div><!-- .card-preview -->
     </div> <!-- nk-block -->
-    <?php }else{
-        ?> 
-        <div class="form-group">
-            <label for="" class="">You have not made any Application
-                Payments.</label>
-                <br/>
-                <a class="btn btn-primary me-n1" href="{{route('payment.index')}}">Make Application Payments</a>
-        </div>
-        <?php
-    } ?>
+   
     {{-- </div><!-- .components-preview --> --}}
 
 @endsection

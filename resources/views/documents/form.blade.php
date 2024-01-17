@@ -4,7 +4,7 @@
     <div class="row gy-4">
         <div class="col-lg-6 col-sm-6">
             <div class="form-group">
-                <label class="form-label" for="default-06">Title Document (png,jpg,jpeg only: .png,.jpg,.jpeg)
+                <label class="form-label" for="default-06">Title Document (pdf only: .pdf (2MB max size))
                 </label>
                 <div class="form-control-wrap">
                     <div class="form-file">
@@ -18,7 +18,7 @@
         </div>
         <div class="col-lg-6 col-sm-6">
             <div class="form-group">
-                <label class="form-label" for="default-06">Survey document (png,jpg,jpeg only: .png,.jpg,.jpeg)
+                <label class="form-label" for="default-06">Survey document (pdf only: .pdf (2MB max size))
                 </label>
                 <div class="form-control-wrap">
                     <div class="form-file">
@@ -32,7 +32,7 @@
         </div>
         <div class="col-lg-6 col-sm-6">
             <div class="form-group">
-                <label class="form-label" for="default-06">Sand search report (png,jpg,jpeg only: .png,.jpg,.jpeg)
+                <label class="form-label" for="default-06">Sand search report (pdf only: .pdf (2MB max size))
                 </label>
                 <div class="form-control-wrap">
                     <div class="form-file">
@@ -46,7 +46,7 @@
         </div>
         <div class="col-lg-6 col-sm-6">
             <div class="form-group">
-                <label class="form-label" for="default-06">CAC certificate (png,jpg,jpeg only: .png,.jpg,.jpeg)
+                <label class="form-label" for="default-06">CAC certificate (pdf only: .pdf (2MB max size))
                 </label>
                 <div class="form-control-wrap">
                     <div class="form-file">
@@ -60,7 +60,7 @@
         </div>
         <div class="col-lg-6 col-sm-6">
             <div class="form-group">
-                <label class="form-label" for="default-06">Pre & Post Dredge survey drawings (png,jpg,jpeg only: .png,.jpg,.jpeg)
+                <label class="form-label" for="default-06">Pre & Post Dredge survey drawings (pdf only: .pdf (2MB max size))
                 </label>
                 <div class="form-control-wrap">
                     <div class="form-file">
@@ -74,7 +74,7 @@
         </div>
         <div class="col-lg-6 col-sm-6">
             <div class="form-group">
-                <label class="form-label" for="default-06">E.I.A Report (png,jpg,jpeg only: .png,.jpg,.jpeg)
+                <label class="form-label" for="default-06">E.I.A Report (pdf only: .pdf (2MB max size))
                 </label>
                 <div class="form-control-wrap">
                     <div class="form-file">
@@ -89,8 +89,8 @@
         <div class="col-lg-12 col-sm-12">
             
             <div class="form-group">
-                <label for="">Snap the follwing document
-                    as listed below in png or jpg or jpeg format</label>
+                <label for="">Get the follwing documents
+                    as listed below in pdf format</label>
                 <span class="list text-muted">
                     <ol>
                         {{-- <li>Title document</li> --}}

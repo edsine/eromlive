@@ -11,6 +11,11 @@
     {{-- <div class="components-preview wide-md mx-auto"> --}}
     <div class="nk-block-head nk-block-head-sm">
         <div class="nk-block-between">
+            {{-- <div class="card-title-group">
+                <div class="card-title">
+                    <h6 class="title">New Inspection Fees Payment</h6>
+                </div>
+            </div> --}}
             <!-- .nk-block-head-content -->
             <div class="nk-block-head-content">
                 <div class="toggle-wrap nk-block-tools-toggle">
@@ -40,39 +45,39 @@
                             {{-- @if (auth()->user()->employees->count() > 0) --}}
                                 <div class="card-title-group">
                                     <div class="card-title">
-                                        <h6 class="title">New Application Fees Payment</h6>
+                                        <h6 class="title">New Inspection Fees Payment</h6>
                                     </div>
                                 </div>
                                 <div class="data">
                                     <div class="data-group">
                                         <div class="form-group w-100">
-                                            {{-- @if (!$pending_payment || $paid_months != 0) --}}
+                                            {{-- @if (!$inspection_payment || $paid_months != 0) --}}
                                             <?php 
                                             //$pending_payments = Payment::where('payment_status',4)->where('employer_id', auth()->user()->id)->where('service_id','!=', null)->first();
                                             ?>
-                                            {{-- @if (!$pending_payment || $paid_months != 0) --}}
+                                            {{-- @if (!$inspection_payment || $paid_months != 0) --}}
                                                 {{-- <div class="form-group"> --}}
                                            
                                                 {{--  </div> --}}
-                                            @if(!$pending_payment || $pending_payment->payment_status == 0)
+                                            @if(isset($inspection_payment))
                                                 <div class="form-group mt-2">
                                                     <div class="row">
                                                         <div class="col-6 fw-bold">RRR:</div>
-                                                        <div class="col-6">{{ $pending_payment->rrr }}</div>
+                                                        <div class="col-6">{{ $inspection_payment->rrr }}</div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-6 fw-bold">Invoice:</div>
-                                                        <div class="col-6">{{ $pending_payment->invoice_number }}</div>
+                                                        <div class="col-6">{{ $inspection_payment->invoice_number }}</div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-6 fw-bold">Amount:</div>
                                                         <div class="col-6">
-                                                            &#8358;{{ number_format($pending_payment->amount, 2) }}</div>
+                                                            &#8358;{{ number_format($inspection_payment->amount, 2) }}</div>
                                                     </div>
                                                     <div>
                                                         <form onsubmit="makePayment()" id="payment-form">
                                                             <input type="hidden" class="form-control" id="js-rrr"
-                                                                name="rrr" value="{{ $pending_payment->rrr }}"
+                                                                name="rrr" value="{{ $inspection_payment->rrr }}"
                                                                 placeholder="Enter RRR" />
                                                             <button type="button" onclick="makePayment()"
                                                                 class="btn btn-primary btn-lg mt-2"><em
@@ -88,30 +93,26 @@
                                                     <div class="col-6">
                                                         <label for="year">Payment year:</label>
                                                         <select name="year" id="year" class="form-select">
-                                                            <option @selected(date('Y') == $start_year)>{{ $start_year }}
+                                                            <option>{{ date('Y') }}
                                                             </option>
-                                                            {{-- @if (date('Y') > $start_year)
-                                                                @for ($i = $start_year + 1; $i <= date('Y'); $i++)
-                                                                    <option @selected(date('Y') == $i)>
-                                                                        {{ $i }}</option>
-                                                                @endfor
-                                                            @endif --}}
+                                                            
                                                         </select>
 
-                                                        <label for="contribution_period">Contribution Period:</label>
+                                                        <label for="contribution_period">Inspection Period:</label>
                                                         <select name="contribution_period" id="contribution_period"
                                                             class="form-select">
-                                                            @if ($paid_months == 0)
-                                                                <option>Annually</option>
-                                                            @endif
-                                                            <option>Monthly</option>
+                                                            <option>Annually</option>
                                                         </select>
-                                                            <?php $services = \App\Models\Service::all();
-                                                            
+                                                            <?php 
+                                                            $services = \App\Models\Service::join('payments', 'services.id', '=', 'payments.service_id')
+    ->whereYear('payments.created_at', date('Y'))
+    ->where('payments.payment_status', 1)
+    ->where('payments.employer_id', auth()->user()->id)
+    ->get();
                                                             ?>
                                                             
                                                             <label for="service_id">Select Service:</label>
-                                                                  <select class="form-select js-select2" data-ui="xl" id="service_id"
+                                                                  <select class="form-select" id="service_id"
                                                                         name="service_id" data-search="on" required>
                                                                         <option>Select A Service</option>
                                                                         @foreach($services as $service)
@@ -120,13 +121,13 @@
                                                                         @endforeach
                                                                     </select>
                                                                     <label for="service_type_id">Service Type:</label>
-                                                                    <select class="form-select js-select2" data-ui="xl" id="service_type_id" name="service_type_id" onchange="calculateFees()" required>
+                                                                    <select class="form-select" id="service_type_id" name="service_type_id" onchange="calculateFees()" required>
                                                                         <option>Select Service Type</option>
                                                                         <option value="mechanical">Mechanical</option>
                                                                         <option value="manual">Manual</option>
                                                                     </select>
                                                             
-                                                               <label class="form-label" for="default-06">Upload letter of intent (pdf only: .pdf)
+                                                               {{-- <label class="form-label" for="default-06">Upload letter of intent (pdf only: .pdf)
                                                                 </label>
                                                                 <div class="form-control-wrap">
                                                                     <div class="form-file">
@@ -134,18 +135,17 @@
                                                                             name="letter_of_intent" required>
                                                                         <label class="form-file-label" for="customFile">Choose file</label>
                                                                     </div>
-                                                                </div>
+                                                                </div> --}}
                                                             
 
                                                         <div id="nom_div" class="d-none">
                                                             <label for="number_of_months">Number of months</label>
                                                             <select name="number_of_months" id="number_of_months"
                                                                 class="form-select">
-                                                                @for ($i = 1; $i <= 12-$paid_months; $i++)
-                                                                    <option>{{ $i }}</option>
-                                                                @endfor
+                                                                <option>12</option>
                                                             </select>
                                                         </div>
+                                                        <br/><br/><br/>
 
                                                         <button type="submit" class="btn btn-secondary btn-lg mt-2"><em
                                                                 class="icon ni ni-save me-2"></em> Generate Invoice
@@ -154,21 +154,19 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <label for="">Payment due is:</label><br />
-                                                        <p>Application Fees:
-                                                            <strong class="fs-3" id="contribution_amount">&#8358;{{ number_format(25000.00, 2) }}</strong>
-                                                        </p>
-                                                        <p>Processing Fees:
+                                                        
+                                                        <p>Inspection Fees:
                                                             <strong class="fs-3" id="processing_fee">&#8358;{{ number_format(0.00, 2) }}</strong>
                                                         </p>
                                                         <p>Total Fees:
-                                                            <strong class="fs-3" id="total_fees">&#8358;{{ number_format(25000.00, 2) }}</strong>
+                                                            <strong class="fs-3" id="total_fees">&#8358;{{ number_format(0.00, 2) }}</strong>
                                                             <strong class="fs-3" id="total_fees1" style="display:none;"></strong>
                                                         </p>
 
                                                         <input type="hidden" name="payment_type" id="payment_type"
                                                             value="4">
                                                         <input type="hidden" name="employees" id="employees"
-                                                            value="{{ $employees_count }}">
+                                                            value="{{ $total_services }}">
                                                         <input type="hidden" name="amount" id="amount"
                                                             value="">
 
@@ -179,25 +177,7 @@
                                                 </div>
 
                                             </form>
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <div class="col-12 my-2">
-                                                            <p>
-                                                                <label for="">Your Application Payment for the year <span
-                                                                        {{-- class="fw-bold">{{ date('Y', strtotime($pending_payment->paid_at)) }}</span> --}}
-                                                                        class="fw-bold">{{ $pending_payment->contribution_year }}</span>
-                                                                    of <span
-                                                                        class="fw-bold">{{ $total_services }}</span>
-                                                                    Service(s) with the amount <span
-                                                                        class="fw-bold">&#8358;{{ number_format(\App\Models\Payment::where('payment_type', 4)
-                                                                        ->whereRaw('contribution_year = ' . $pending_payment->contribution_year)
-                                                                        ->where('employer_id', auth()->user()->id)
-                                                                        ->sum('amount'), 2) }}</span>
-                                                                    has been PAID!</label>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                              
                                             @endif
                                         </div>
                                     </div>
@@ -207,57 +187,8 @@
                     </div><!-- .nk-ecwg -->
                 </div><!-- .card -->
             </div><!-- .col -->
-            <div class="nk-block-head-content">
-                <h3 class="nk-block-title page-title">Register A Service</h3>
-                <div class="nk-block-des text-soft">
-                    <p>List of registered services.</p>
-                </div>
-            </div>
-            <div class="col-xxl-3 col-sm-6">
-                <div class="card">
-                    <div class="nk-ecwg nk-ecwg6">
-                        <div class="card-inner">
-                            <div class="card-title-group">
-                                <div class="card-title">
-                                    <h6 class="title">Services</h6>
-                                </div>
-                            </div>
-                            <div class="data">
-                                <div class="data-group">
-                                    <div class="amount">{{ $total_services }}</div>
-                                    <div class="nk-ecwg6-ck">
-                                        <canvas class="ecommerce-line-chart-s3" id="todayOrders"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- .card-inner -->
-                    </div><!-- .nk-ecwg -->
-                </div><!-- .card -->
-            </div><!-- .col -->
-            <div class="col-xxl-3 col-sm-6">
-                <div class="card">
-                    <div class="nk-ecwg nk-ecwg6">
-                        <div class="card-inner">
-                            <div class="card-title-group">
-                                <div class="card-title">
-                                    <h6 class="title">Payments</h6>
-                                </div>
-                            </div>
-                            <div class="data">
-                                <div class="data-group">
-                                    <div class="amount">&#8358;{{ number_format($year_total_payment, 2) }}</div>
-                                    <div class="nk-ecwg6-ck">
-                                        <canvas class="ecommerce-line-chart-s3" id="todayRevenue"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- .card-inner -->
-                    </div><!-- .nk-ecwg -->
-                </div><!-- .card -->
-            </div><!-- .col -->
+            
         </div><!-- .row -->
-
-        @include('partials.payments-table')
 
     </div> <!-- nk-block -->
 
@@ -355,9 +286,9 @@
             var totalFees = appFees + processingFee;
     
             document.getElementById('processing_fee').textContent = '₦' + processingFee.toFixed(2);
-            document.getElementById('total_fees').textContent = '₦' + totalFees.toFixed(2);
-            document.getElementById('total_fees1').textContent = totalFees.toFixed(2);
-            document.getElementById('amount').value = totalFees.toFixed(2);
+            document.getElementById('total_fees').textContent = '₦' + processingFee.toFixed(2);
+            document.getElementById('total_fees1').textContent = processingFee.toFixed(2);
+            document.getElementById('amount').value = processingFee.toFixed(2);
         }
     </script>
 @endpush

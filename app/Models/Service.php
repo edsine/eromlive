@@ -23,4 +23,9 @@ class Service extends Model
     {
         return $this->hasMany(DeathClaim::class);
     }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'service_id', 'id');
+    }
 }

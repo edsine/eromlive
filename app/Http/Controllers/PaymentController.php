@@ -72,8 +72,18 @@ class PaymentController extends Controller
 
         //fetch all payments
         $payments = auth()->user()->payments;
+        $total_services = Payment::where('payment_type',4)->where('employer_id', auth()->user()->id)->where('service_id','!=', null)->count();
 
-        return view('payments.index', compact('payments', 'employees_count', 'year_total_payment', 'payment_due', 'pending_payment', 'start_year', 'paid_months'));
+        return view('payments.index', compact('payments', 'employees_count', 'year_total_payment', 'payment_due', 'pending_payment', 'start_year', 'paid_months', 'total_services'));
+    }
+
+    public function inspection()
+    {
+        //
+        $total_services = Payment::where('payment_type',4)->where('employer_id', auth()->user()->id)->where('service_id','!=', null)->count();
+
+         $inspection_payment = Payment::where('payment_type',5)->where('employer_id', auth()->user()->id)->latest()->first();
+         return view('payments.inspection', compact('inspection_payment', 'total_services'));
     }
 
     /**
@@ -134,17 +144,17 @@ class PaymentController extends Controller
             'amount' => 'required|numeric',
             'payment_type' => 'required|numeric',
             'employees' => 'required_with:year,contribution_period',
-            //'letter_of_intent' => 'file|mimes:png|max:10240',
+            'letter_of_intent' => 'file|mimes:pdf|max:2048',
         ]);
 
         //generate invoice number
         $lastInvoice = Payment::get()->last();
         if ($lastInvoice) {
-            $idd = str_replace("NSITF-", "", $lastInvoice['invoice_number']);
+            $idd = str_replace("NIWA-", "", $lastInvoice['invoice_number']);
             $id = str_pad($idd + 1, 7, 0, STR_PAD_LEFT);
-            $lastInvoice = 'NSITF-' . $id;
+            $lastInvoice = 'NIWA-' . $id;
         } else {
-            $lastInvoice = "NSITF-0000001";
+            $lastInvoice = "NIWA-0000001";
         }
 
         //$serviceTypeId = $request->payment_type ==  1 ? env('ECS_REGISTRATION') : ($request->payment_type == 4 ? env('ECS_CONTRIBUTION') : env('ECS_CERTIFICATE'));
@@ -160,7 +170,7 @@ class PaymentController extends Controller
             "payerName" => auth()->user()->company_name,
             "payerEmail" => auth()->user()->company_email,
             "payerPhone" => auth()->user()->company_phone,
-            "description" => $request->payment_type ==  1 ? "ECS Registration Fees" : ($request->payment_type == 2 ? "Certificate Processing Fees" : "ECS Payment"),
+            "description" => $request->payment_type ==  1 ? "Registration Fees" : ($request->payment_type == 2 ? "Processing Fees" : "Application Fee + Processing Fees"),
             "customFields" => [
                 [
                     "name" => 'Invoice Number',
@@ -168,7 +178,7 @@ class PaymentController extends Controller
                     "type" => "ALL",
                 ],
                 [
-                    "name" => 'ECS Order ID',
+                    "name" => 'NIWA Order ID',
                     "value" => auth()->user()->ecs_number,
                     "type" => "ALL",
                 ],
@@ -241,10 +251,12 @@ class PaymentController extends Controller
                 'service_id' => $request->service_id ?? null,
                 'letter_of_intent' => $path1 ?? null,
                 //below for ECS payments
+                'service_type_id' => $request->service_type_id ?? null,
                 'contribution_year' => $request->year ?? null,
                 'contribution_period' => $request->contribution_period ?? null,
                 'contribution_months' => $request->number_of_months ?? null,
                 'employees' => $request->employees,
+                
             ]);
 
             //for certificate request, link payment to certificates
@@ -305,6 +317,7 @@ class PaymentController extends Controller
             $payment->payment_status = 1;
             $payment->transaction_id = $request->tid;
             $payment->paid_at = $result['responseData'][0]['paymentDate'];
+            $payment->document_uploads = 1;
             $payment->save();
 
             if ($payment->payment_type == 1) {
