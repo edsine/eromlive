@@ -54,7 +54,7 @@
                                                 {{-- <div class="form-group"> --}}
                                            
                                                 {{--  </div> --}}
-                                            @if(!$pending_payment || $pending_payment->payment_status == 0)
+                                            @if(!empty($pending_payment) && $pending_payment->payment_status == 0)
                                                 <div class="form-group mt-2">
                                                     <div class="row">
                                                         <div class="col-6 fw-bold">RRR:</div>
@@ -182,6 +182,7 @@
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <div class="col-12 my-2">
+                                                            <?php if(!empty($pending_payment)){ ?>
                                                             <p>
                                                                 <label for="">Your Application Payment for the year <span
                                                                         {{-- class="fw-bold">{{ date('Y', strtotime($pending_payment->paid_at)) }}</span> --}}
@@ -195,6 +196,7 @@
                                                                         ->sum('amount'), 2) }}</span>
                                                                     has been PAID!</label>
                                                             </p>
+                                                            <?php } ?>
                                                         </div>
                                                     </div>
                                                 </div>

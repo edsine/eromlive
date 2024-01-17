@@ -39,7 +39,9 @@
     border-radius: 50%;
     margin-left: 5px; /* Adjust the margin as needed */
 }
-
+.fs-3{
+    color: red;
+}
     </style>
 </head>
 <body>
