@@ -74,7 +74,7 @@
                             <!-- <lottie-player src="https://lottie.host/32660aa6-4f6d-4480-a91b-d9ca8cb9d9d7/x1Fk9UJwm2.json" background="#ffffff"
                                 speed="1" style="width: 600px; height: 600px; background: transparent;" loop autoplay direction="1" mode="normal">
                             </lottie-player> -->
-                            <img src="{{ asset('assets/assets/images/businessperson.png') }}" alt="">
+                            <img src="{{ asset('assets/assets/images/man.png') }}" alt="">
                         </div>
                     </div>
                 </div> <!-- header image -->

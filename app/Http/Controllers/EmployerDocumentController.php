@@ -27,6 +27,11 @@ class EmployerDocumentController extends Controller
         return view('documents.create');
     }
 
+    public function niwaAct()
+    {
+        return view('documents.niwa_act');
+    }
+
     public function store(Request $request)
     {
         $request->validate([

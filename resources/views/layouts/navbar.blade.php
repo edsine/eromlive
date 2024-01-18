@@ -8,7 +8,39 @@
     <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
     <ul class="nav user-menu float-right">
         <li class="nav-item dropdown d-none d-sm-block">
-            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><i class="fa fa-bell-o"></i> <span class="badge badge-pill bg-danger float-right">0</span></a>
+            <?php $notify = \App\Models\Notification::where('user_id', auth()->user()->id)->where('is_read', 1)->first(); 
+            if(!empty($notify)){
+            ?>
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><i class="fa fa-bell-o"></i> <span class="badge badge-pill bg-danger float-right">1</span></a>
+            
+            <div class="dropdown-menu notifications">
+                <div class="topnav-dropdown-header">
+                    <span>Notifications</span>
+                </div>
+                <div class="drop-scroll">
+                    <ul class="notification-list">
+                        <li class="notification-message">
+                            <a href="{{ route('payment.inspection') }}">
+                                <div class="media">
+                                    <span class="avatar">
+                                        <img alt="John Doe" src="./assets/images/logo.png" class="img-fluid">
+                                    </span>
+                                    <div class="media-body">
+                                        <h3>Inspection Notification</h3>
+                                        <p class="noti-details"><span class="noti-title">{{ 'Inspectioin Message: '.$notify->data }}</span></p>
+                                        <p class="noti-time"><span class="notification-time">{{ 'Inspection Date: '. \Carbon\Carbon::parse($notify->type)->format('F j, Y H:i:s') }}
+                                        </span></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="topnav-dropdown-footer">
+                    <a href="{{ route('payment.inspection') }}">Pay For Inspection</a>
+                </div>
+            </div>
+            <?php } ?>
             {{-- <div class="dropdown-menu notifications">
                 <div class="topnav-dropdown-header">
                     <span>Notifications</span>

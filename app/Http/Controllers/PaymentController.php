@@ -8,6 +8,7 @@ use App\Mail\PaymentStatusMail;
 use App\Models\Employee;
 use App\Models\Employer;
 use App\Models\Payment;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
@@ -80,6 +81,11 @@ class PaymentController extends Controller
     public function inspection()
     {
         //
+        $notify = Notification::where('user_id', auth()->user()->id)->where('is_read', 1)->first();
+        if(!empty($notify->is_read)){
+        $notify->is_read = 0;
+        $notify->save();
+        }
         $total_services = Payment::where('payment_type',4)->where('employer_id', auth()->user()->id)->where('service_id','!=', null)->count();
 
          $inspection_payment = Payment::where('payment_type',5)->where('employer_id', auth()->user()->id)->latest()->first();
