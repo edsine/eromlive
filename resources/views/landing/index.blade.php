@@ -11,7 +11,7 @@
                 <div class="col-lg-12" style="background-color: #ffffff;">
                     <nav class="navbar navbar-expand-lg" style="background-color: #ffffff;">
                         <a class="navbar-brand" href="{{ url('/') }}" style="text-decoration: none;">
-                            <img style="height: 6vh;" src="{{ asset('assets/images/logo.png') }}" alt="">
+                            <img style="height: 8vh;" src="{{ asset('assets/images/logo.png') }}" alt="">
                             <!-- <b style="font-size: 30px; color: #02a14d; font-family:verdana;">Employer Self Service Portal</b> -->
                         </a>
 
