@@ -348,8 +348,17 @@ class PaymentController extends Controller
             //$pdf->save(Storage::path('/invoices/invoice_' . $payment->id . '.pdf'))->stream('invoice_' . $payment->id . '.pdf');
             Storage::put('public/invoices/invoice_' . $payment->id . '.pdf', $content);
 
-            //send mail with invoice notification
-            Mail::to($payment->employer->company_email)->send(new PaymentStatusMail($payment));
+            try {
+                // Send mail with invoice notification
+                Mail::to($payment->employer->company_email)->send(new PaymentStatusMail($payment));
+                
+                // Add any additional logic after successfully sending the mail if needed
+            
+                //return redirect('/dashboard')->with('success', 'Invoice notification sent successfully.');
+            } catch (\Exception $e) {
+                // Handle the exception
+                //return redirect('/dashboard')->with('error', 'Failed to send invoice notification: ' . $e->getMessage());
+            }
 
             Storage::delete('public/invoices/invoice_' . $payment->id . '.pdf');
 
