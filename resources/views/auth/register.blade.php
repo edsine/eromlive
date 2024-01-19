@@ -296,7 +296,7 @@
                                                                 <div class="form-control-wrap">
                                                                     <input type="text" class="form-control"
                                                                         id="company_phone" name="company_phone"
-                                                                        placeholder="Enter Contact Phone" required>
+                                                                        placeholder="Enter Contact Phone" required pattern="\d+">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -306,7 +306,7 @@
                                                                 <div class="form-control-wrap">
                                                                     <input type="text" class="form-control"
                                                                         id="contact_number" name="contact_number"
-                                                                        placeholder="Enter Contact NIN" required>
+                                                                        placeholder="Enter Contact NIN" required pattern="\d+">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -326,7 +326,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-sm-6">
+                                                       {{--  <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="business_area">Business
                                                                     Type</label>
@@ -348,7 +348,7 @@
                                                                     </select>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </div> --}}
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="company_rcnumber">RC
@@ -379,7 +379,7 @@
                                                                 <label class="form-label" for="company_email">Company
                                                                     Email</label>
                                                                 <div class="form-control-wrap">
-                                                                    <input type="text" class="form-control"
+                                                                    <input type="email" class="form-control"
                                                                         id="company_email" name="company_email"
                                                                         placeholder="Company Email" required>
                                                                 </div>
