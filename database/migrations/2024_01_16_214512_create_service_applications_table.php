@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('service_applications', function (Blueprint $table) {
             $table->id();
-            $table->integer('service_type');
+            $table->bigInteger('service_id');
             $table->tinyInteger('application_form_payment_status')->default(0);
-            $table->dateTime('date_of_inspection');
-            $table->integer('processing_fee_type');
-            $table->integer('inspection_fee_type');
+            $table->dateTime('date_of_inspection')->nullable();
+            $table->string('service_type_id');
             $table->timestamps();
         });
     }

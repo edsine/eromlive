@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePaymentRequest;
-use App\Http\Requests\UpdatePaymentRequest;
-use App\Mail\PaymentStatusMail;
 use App\Models\Employee;
 use App\Models\Employer;
 use App\Models\Payment;
 use App\Models\Notification;
 use Illuminate\Http\Request;
+use App\Mail\PaymentStatusMail;
+use App\Models\ServiceApplication;
 use Illuminate\Support\Facades\Mail;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
-//use PDF;
 use Illuminate\Support\Facades\Storage;
+//use PDF;
+use App\Http\Requests\StorePaymentRequest;
+use App\Http\Requests\UpdatePaymentRequest;
 
 class PaymentController extends Controller
 {
@@ -23,7 +24,7 @@ class PaymentController extends Controller
     public function index()
     {
         //year to start ECS payment count: 2023- system deployment OR year employer registered
-        $cac = date('Y');//date('Y', strtotime(auth()->user()->cac_reg_year));
+        $cac = date('Y'); //date('Y', strtotime(auth()->user()->cac_reg_year));
         $initial_year = date('Y') - $cac > 2 ? date('Y') - 2 : $cac;
         $start_year = date('Y', strtotime(auth()->user()->created_at)) > $initial_year ? date('Y', strtotime(auth()->user()->created_at)) : $initial_year;
 
@@ -73,7 +74,7 @@ class PaymentController extends Controller
 
         //fetch all payments
         $payments = auth()->user()->payments;
-        $total_services = Payment::where('payment_type',4)->where('employer_id', auth()->user()->id)->where('service_id','!=', null)->count();
+        $total_services = Payment::where('payment_type', 4)->where('employer_id', auth()->user()->id)->where('service_id', '!=', null)->count();
 
         return view('payments.index', compact('payments', 'employees_count', 'year_total_payment', 'payment_due', 'pending_payment', 'start_year', 'paid_months', 'total_services'));
     }
@@ -88,8 +89,8 @@ class PaymentController extends Controller
         }
         $total_services = Payment::where('payment_type',4)->where('employer_id', auth()->user()->id)->where('service_id','!=', null)->count();
 
-         $inspection_payment = Payment::where('payment_type',5)->where('employer_id', auth()->user()->id)->latest()->first();
-         return view('payments.inspection', compact('inspection_payment', 'total_services'));
+        $inspection_payment = Payment::where('payment_type', 5)->where('employer_id', auth()->user()->id)->latest()->first();
+        return view('payments.inspection', compact('inspection_payment', 'total_services'));
     }
 
     /**
@@ -228,23 +229,23 @@ class PaymentController extends Controller
         $result = substr($result, 0, $newLength - 1);
         $data = json_decode($result, true);
         //dd($orderId);
-// dd($fields);
-// exit();
+        // dd($fields);
+        // exit();
         if ($data['statuscode'] == "025" && $data['RRR']) {
             //add record to transactions table
-           
+
             if ($request->hasFile('letter_of_intent')) {
-                        $letter_of_intent = $request->file('letter_of_intent');
-                        $path = 'documents/';
-                        $name = \Auth::user()->id . '_documents.' . $letter_of_intent->getClientOriginalExtension();
-                    
-                        // Move the uploaded file to the desired location
-                        $letter_of_intent->move(public_path('storage/'.$path), $name);
-                    
-                        // Build the full path to the saved file
-                        $path1 = $path . $name;
+                $letter_of_intent = $request->file('letter_of_intent');
+                $path = 'documents/';
+                $name = \Auth::user()->id . '_documents.' . $letter_of_intent->getClientOriginalExtension();
+
+                // Move the uploaded file to the desired location
+                $letter_of_intent->move(public_path('storage/' . $path), $name);
+
+                // Build the full path to the saved file
+                $path1 = $path . $name;
             }
-                        
+
             $payment = auth()->user()->payments()->create([
                 'payment_type' => $request->payment_type,
                 'payment_employee' => $request->employees,
@@ -262,7 +263,7 @@ class PaymentController extends Controller
                 'contribution_period' => $request->contribution_period ?? null,
                 'contribution_months' => $request->number_of_months ?? null,
                 'employees' => $request->employees,
-                
+                'service_application_id' => $request->service_application_id
             ]);
 
             //for certificate request, link payment to certificates
@@ -326,6 +327,21 @@ class PaymentController extends Controller
             $payment->document_uploads = 1;
             $payment->save();
 
+            // Get Service Application and Update
+            $service_application = ServiceApplication::where('id', $payment->service_application_id)->first();
+            if (!empty($service_application)) {
+                $service_application->application_form_payment_status = 1;
+                $new_current_step = $service_application->current_step + 1;
+                $service_application->current_step = $new_current_step;
+                if ($new_current_step) {
+                    $service_application->status_summary = 'Waiting for document and payment verification';
+                } else if($new_current_step == 12){
+                    $service_application->status_summary = 'Payment for equipment has been made. Please wait for verification';
+                }
+                $service_application->save();
+            }
+
+
             if ($payment->payment_type == 1) {
                 //update employer
                 //$employer = Employer::where('id', $payment->employer_id)->first();
@@ -351,9 +367,7 @@ class PaymentController extends Controller
             try {
                 // Send mail with invoice notification
                 Mail::to($payment->employer->company_email)->send(new PaymentStatusMail($payment));
-                
-                // Add any additional logic after successfully sending the mail if needed
-            
+              
                 //return redirect('/dashboard')->with('success', 'Invoice notification sent successfully.');
             } catch (\Exception $e) {
                 // Handle the exception
@@ -362,25 +376,25 @@ class PaymentController extends Controller
 
             Storage::delete('public/invoices/invoice_' . $payment->id . '.pdf');
 
-            if($payment->payment_type == 5){
-            $employer = Employer::findOrFail($payment->employer_id);
-            $employer->update(['inspection_status' => 0]);
+            if ($payment->payment_type == 5) {
+                $employer = Employer::findOrFail($payment->employer_id);
+                $employer->update(['inspection_status' => 0]);
             }
 
-            return redirect()->route('payment.index')->with('success', $payment->payment_type == 1 ? 'Registration Payment successful!' : 'Payment successful!');
+            return redirect()->back()->with('success', $payment->payment_type == 0 ? 'Registration Payment successful!' : 'Payment successful!');
         } else { //if payment was not successful
             //get and update transaction
             $payment = Payment::where('rrr', $request->ref)->first();
 
             //if already processed
             if ($payment->payment_status == 1)
-                return redirect()->route('payment.index')->with('info', 'Payment already processed!');
+                return redirect()->back()->with('info', 'Payment already processed!');
 
             //update payments
             $payment->payment_status = 2;
             $payment->save();
 
-            return redirect()->route('payment.index')->with('info', $result['responseMsg']);
+            return redirect()->back()->with('info', $result['responseMsg']);
         }
     }
 
