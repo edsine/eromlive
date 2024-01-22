@@ -11,7 +11,7 @@
                 <div class="col-lg-12" style="background-color: #ffffff;">
                     <nav class="navbar navbar-expand-lg" style="background-color: #ffffff;">
                         <a class="navbar-brand" href="{{ url('/') }}" style="text-decoration: none;">
-                            <img style="height: 6vh;" src="{{ asset('assets/images/logo.png') }}" alt="">
+                            <img style="height: 8vh;" src="{{ asset('assets/images/logo.png') }}" alt="">
                             <!-- <b style="font-size: 30px; color: #02a14d; font-family:verdana;">Employer Self Service Portal</b> -->
                         </a>
 
@@ -74,7 +74,7 @@
                             <!-- <lottie-player src="https://lottie.host/32660aa6-4f6d-4480-a91b-d9ca8cb9d9d7/x1Fk9UJwm2.json" background="#ffffff"
                                 speed="1" style="width: 600px; height: 600px; background: transparent;" loop autoplay direction="1" mode="normal">
                             </lottie-player> -->
-                            <img src="{{ asset('assets/assets/images/businessperson.png') }}" alt="">
+                            <img src="{{ asset('assets/assets/images/man.png') }}" alt="">
                         </div>
                     </div>
                 </div> <!-- header image -->

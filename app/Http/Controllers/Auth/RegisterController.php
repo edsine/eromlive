@@ -71,7 +71,7 @@ class RegisterController extends Controller
 
             //'company_name' => ['required', 'string', 'max:255'],
 
-            'business_area' => ['required', 'string', 'max:255'],
+            //'business_area' => ['required', 'string', 'max:255'],
 
             'company_rcnumber' => ['required', 'string', 'max:255'],
             'cac_reg_year' => ['required', 'date', 'max:255'],

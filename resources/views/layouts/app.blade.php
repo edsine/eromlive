@@ -41,6 +41,7 @@
 }
 .fs-3{
     color: red;
+    font-size: 1rem !important;
 }
     </style>
 </head>

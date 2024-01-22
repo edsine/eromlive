@@ -63,6 +63,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/documents/index', 'App\Http\Controllers\EmployerDocumentController@index')->name('documents.index');
     Route::post('/documents/store', 'App\Http\Controllers\EmployerDocumentController@store')->name('documents.store');
     Route::get('/documents/create', 'App\Http\Controllers\EmployerDocumentController@create')->name('documents.create');
+    Route::get('download/niwa/act', 'App\Http\Controllers\EmployerDocumentController@niwaAct')->name('download.niwa.act');
 
 
 

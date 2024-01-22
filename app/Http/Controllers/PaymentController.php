@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Payment;
 use App\Models\Employee;
 use App\Models\Employer;
+use App\Models\Payment;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Mail\PaymentStatusMail;
 use App\Models\ServiceApplication;
@@ -81,7 +82,12 @@ class PaymentController extends Controller
     public function inspection()
     {
         //
-        $total_services = Payment::where('payment_type', 4)->where('employer_id', auth()->user()->id)->where('service_id', '!=', null)->count();
+        $notify = Notification::where('user_id', auth()->user()->id)->where('is_read', 1)->first();
+        if(!empty($notify->is_read)){
+        $notify->is_read = 0;
+        $notify->save();
+        }
+        $total_services = Payment::where('payment_type',4)->where('employer_id', auth()->user()->id)->where('service_id','!=', null)->count();
 
         $inspection_payment = Payment::where('payment_type', 5)->where('employer_id', auth()->user()->id)->latest()->first();
         return view('payments.inspection', compact('inspection_payment', 'total_services'));
@@ -358,8 +364,17 @@ class PaymentController extends Controller
             //$pdf->save(Storage::path('/invoices/invoice_' . $payment->id . '.pdf'))->stream('invoice_' . $payment->id . '.pdf');
             Storage::put('public/invoices/invoice_' . $payment->id . '.pdf', $content);
 
-            //send mail with invoice notification
-            Mail::to($payment->employer->company_email)->send(new PaymentStatusMail($payment));
+            try {
+                // Send mail with invoice notification
+                Mail::to($payment->employer->company_email)->send(new PaymentStatusMail($payment));
+
+                // Add any additional logic after successfully sending the mail if needed
+
+                //return redirect('/dashboard')->with('success', 'Invoice notification sent successfully.');
+            } catch (\Exception $e) {
+                // Handle the exception
+                //return redirect('/dashboard')->with('error', 'Failed to send invoice notification: ' . $e->getMessage());
+            }
 
             Storage::delete('public/invoices/invoice_' . $payment->id . '.pdf');
 

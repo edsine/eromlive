@@ -118,7 +118,7 @@ p {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  border: 2px solid green;
+  border: 2px solid #392C70;
   padding: 0 25px;
   font-size: 16px;
   height: 55px;
@@ -132,11 +132,11 @@ p {
   -ms-transition: all 0.4s ease-out 0s;
   -o-transition: all 0.4s ease-out 0s;
   transition: all 0.4s ease-out 0s;
-  background-color: #4aa35f;
+  background-color: #392C70;
 }
 
 .main-btn:hover {
-  background-color: #80be8f;
+  background-color: #392C70;
   color: #fff;
   border-color: transparent;
 }
@@ -773,7 +773,7 @@ p {
 
 .navbar-nav .nav-item.active>a,
 .navbar-nav .nav-item:hover>a {
-  color: green;
+  color: #392C70;
 }
 
 .navbar-nav .nav-item:hover .sub-menu {
