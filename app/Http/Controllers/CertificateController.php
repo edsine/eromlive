@@ -21,7 +21,7 @@ class CertificateController extends Controller
      */
     public function index()
     {
-/*         $initial_year = 2023;
+        /*         $initial_year = 2023;
         $start_year = date('Y', strtotime(auth()->user()->created_at)) > $initial_year ? date('Y', strtotime(auth()->user()->created_at)) : $initial_year;
 
         $certificate_years = [];
@@ -66,42 +66,42 @@ class CertificateController extends Controller
         //then employer cannot generate certificate
         $initial_year = 2023;
         $start_year = date('Y', strtotime(auth()->user()->created_at)) > $initial_year ? date('Y', strtotime(auth()->user()->created_at)) : $initial_year;
-        
+
         $certificate_years = [];
         --$start_year;
 
         do {
             ++$start_year;
             $payment = DB::table('payments')
-    ->select(DB::raw('SUM(contribution_months) AS contribution_months, contribution_period, contribution_year'))
-    ->where('payment_type', 4)
-    ->where('payment_status', 1)
-    ->where('employer_id', auth()->user()->id)
-    ->where('contribution_year', $start_year)
-    ->groupBy(['contribution_year', 'contribution_period'])/* 
+                ->select(DB::raw('SUM(contribution_months) AS contribution_months, contribution_period, contribution_year'))
+                ->where('payment_type', 4)
+                ->where('payment_status', 1)
+                ->where('employer_id', auth()->user()->id)
+                ->where('contribution_year', $start_year)
+                ->groupBy(['contribution_year', 'contribution_period'])/*
     ->whereNotExists(function ($query) use ($start_year) {
         $query->select(DB::raw(1))
             ->from('certificates')
             ->whereRaw('application_year = ' . $start_year);
     }) */
-    ->first();
+                ->first();
 
-    $certificate = DB::table('certificates')->where('employer_id', auth()->user()->id)
-    ->whereRaw('application_year = ' . $start_year)->latest()->first();
+            $certificate = DB::table('certificates')->where('employer_id', auth()->user()->id)
+                ->whereRaw('application_year = ' . $start_year)->latest()->first();
 
-    if(!$certificate){
-if (
-    ($payment && $payment->contribution_period == 'Annually') ||
-    ($payment && $payment->contribution_period == 'Monthly' && $payment->contribution_months == 12)
-) {
-    $certificate_years[] = $start_year;
-}
-    }
+            if (!$certificate) {
+                if (
+                    ($payment && $payment->contribution_period == 'Annually') ||
+                    ($payment && $payment->contribution_period == 'Monthly' && $payment->contribution_months == 12)
+                ) {
+                    $certificate_years[] = $start_year;
+                }
+            }
             //$certificate_years[] = $start_year;
 
         } while ($start_year < date('Y'));
 
-        
+
 
         $certificates = auth()->user()->certificates;
 
@@ -125,40 +125,40 @@ if (
         //
         $initial_year = 2023;
         $start_year = date('Y', strtotime(auth()->user()->created_at)) > $initial_year ? date('Y', strtotime(auth()->user()->created_at)) : $initial_year;
-        
+
         $certificate_years = [];
         --$start_year;
-        
+
         do {
             ++$start_year;
-        
+
             $payment = auth()->user()->payments()
-    ->where('payment_type', 4)
-    ->where('payment_status', 1)
-    ->where('contribution_year', $start_year)
-    ->selectRaw("SUM(contribution_months) AS contribution_months, contribution_period, contribution_year")
-    ->groupBy(['contribution_year', 'contribution_period'])
-    ->first();
+                ->where('payment_type', 4)
+                ->where('payment_status', 1)
+                ->where('contribution_year', $start_year)
+                ->selectRaw("SUM(contribution_months) AS contribution_months, contribution_period, contribution_year")
+                ->groupBy(['contribution_year', 'contribution_period'])
+                ->first();
 
-    $certificate = DB::table('certificates')->where('employer_id', auth()->user()->id)
-    ->whereRaw('application_year = ' . $start_year)->latest()->first();
+            $certificate = DB::table('certificates')->where('employer_id', auth()->user()->id)
+                ->whereRaw('application_year = ' . $start_year)->latest()->first();
 
-    if(!$certificate){
-if (
-    ($payment && $payment->contribution_period == 'Annually') ||
-    ($payment && $payment->contribution_period == 'Monthly' && $payment->contribution_months == 12)
-) {
-    $certificate_years[] = $start_year;
-}
-    }
-            
+            if (!$certificate) {
+                if (
+                    ($payment && $payment->contribution_period == 'Annually') ||
+                    ($payment && $payment->contribution_period == 'Monthly' && $payment->contribution_months == 12)
+                ) {
+                    $certificate_years[] = $start_year;
+                }
+            }
+
             //$certificate_years[] = $start_year;
 
         } while ($start_year < date('Y'));
 
 
-       // dd($payment->contribution_period);
-        
+        // dd($payment->contribution_period);
+
     }
 
     /**
@@ -240,10 +240,10 @@ if (
         //$qrCode = QrCode::generate('http://ebsnsitf.com.ng/');
         $qrCode = QrCode::generate('http://ebsnsitf.com.ng/');
         $signature = DB::table('signatures')
-    ->select('signatures.*', 'users.first_name', 'users.middle_name', 'users.last_name')
-    ->join('users', 'signatures.user_id', '=', 'users.id')
-    ->where('signatures.id', 1)
-    ->first();
+            ->select('signatures.*', 'users.first_name', 'users.middle_name', 'users.last_name')
+            ->join('users', 'signatures.user_id', '=', 'users.id')
+            ->where('signatures.id', 1)
+            ->first();
 
 
         return view('certificates.details', compact('certificate', 'totalEmployees', 'paymentsAmount', 'currentYearExpiration', 'lastThreeYears', 'qrCode', 'signature'));
@@ -282,10 +282,10 @@ if (
         $qrCode = QrCode::generate('http://ebs.nsitf.com.ng/');
 
         $signature = DB::table('signatures')
-    ->select('signatures.*', 'users.first_name', 'users.middle_name', 'users.last_name')
-    ->join('users', 'signatures.user_id', '=', 'users.id')
-    ->where('signatures.id', 1)
-    ->first();
+            ->select('signatures.*', 'users.first_name', 'users.middle_name', 'users.last_name')
+            ->join('users', 'signatures.user_id', '=', 'users.id')
+            ->where('signatures.id', 1)
+            ->first();
 
 
         return view('certificates.detailspage', compact('certificate', 'totalEmployees', 'paymentsAmount', 'currentYearExpiration', 'lastThreeYears', 'qrCode', 'signature'));

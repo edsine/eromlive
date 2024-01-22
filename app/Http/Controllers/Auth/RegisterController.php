@@ -82,7 +82,7 @@ class RegisterController extends Controller
 
             'password' => ['required', 'string', 'min:8', 'confirmed'],
 
-            'certificate_of_incorporation' => ['required', 'file', 'mimes:pdf'],
+            // 'certificate_of_incorporation' => ['required', 'file', 'mimes:pdf'],
         ]);
     }
 

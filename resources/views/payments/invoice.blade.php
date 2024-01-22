@@ -57,8 +57,7 @@
             </div>
             <div class="nk-block-head mb-3">
                 <div class="nk-block-head-content">
-                    <h4 class="nk-block-title text-center">Nigeria Social Insurance Trust Fund<br />Employer Self
-                        Service Portal</h4>
+                    <h4 class="nk-block-title text-center">NIWA<br />EROM</h4>
                 </div>
             </div>
             @php
