@@ -35,8 +35,8 @@ Route::get('employer/ecs', [App\Http\Controllers\EmployerController::class, 'ecs
 Route::get('employer/lgas', [App\Http\Controllers\EmployerController::class, 'lgas'])->name('employer.lgas');
 
 Route::get('certificate/{certificateId}/detailspage', 'App\Http\Controllers\CertificateController@displayCertificateDetailsPage')->name('certificate.detailspage');
- Route::get('certificate/verify', 'App\Http\Controllers\CertificateController@verifyCertificate')->name('certificate.verify');
- Route::get('verification', 'App\Http\Controllers\CertificateController@verification')->name('verification');
+Route::get('certificate/verify', 'App\Http\Controllers\CertificateController@verifyCertificate')->name('certificate.verify');
+Route::get('verification', 'App\Http\Controllers\CertificateController@verification')->name('verification');
 
 
 Route::middleware(['auth'])->group(function () {
@@ -58,12 +58,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('employee/storebulk', [App\Http\Controllers\EmployeeController::class, 'storebulk'])->name('employee.storebulk');
     Route::resource('employee', App\Http\Controllers\EmployeeController::class);
     //Route::put('/sub-services/{subService}', 'SubServiceController@update')->name('sub-services.update');
-    
-    
+
+
     Route::get('/documents/index', 'App\Http\Controllers\EmployerDocumentController@index')->name('documents.index');
     Route::post('/documents/store', 'App\Http\Controllers\EmployerDocumentController@store')->name('documents.store');
     Route::get('/documents/create', 'App\Http\Controllers\EmployerDocumentController@create')->name('documents.create');
-    
+
 
 
     /**
@@ -75,7 +75,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('payment/remita', [App\Http\Controllers\PaymentController::class, 'generateRemita'])->name('payment.remita');
     Route::get('payment/inspection', [App\Http\Controllers\PaymentController::class, 'inspection'])->name('payment.inspection');
     Route::resource('payment', App\Http\Controllers\PaymentController::class);
-    
+
 
 
     /**
@@ -98,6 +98,14 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('claim/death', App\Http\Controllers\DeathClaimController::class);
     Route::resource('claim/disease', App\Http\Controllers\DiseaseClaimController::class);
 
+    Route::resource('service-applications', App\Http\Controllers\ServiceApplicationController::class);
+    Route::get('service-application-documents/{id}', [App\Http\Controllers\ServiceApplicationController::class, 'documentIndex'])->name('service-applications.documents.index');
+    Route::post('service-application-documents/{id}', [App\Http\Controllers\ServiceApplicationController::class, 'documentStore'])->name('service-applications.documents.store');
+    Route::post('resubmit-documents/{id}', [App\Http\Controllers\ServiceApplicationController::class, 'resubmitDocuments'])->name('documents.resubmit');
+    Route::get('application-form-payment/{id}', [App\Http\Controllers\ServiceApplicationController::class, 'applicationFormPayment'])->name('application_form_payment');
+    Route::get('processing-fee-payment/{id}', [App\Http\Controllers\ServiceApplicationController::class, 'processingFeePayment'])->name('processing_fee_payment');
+    Route::get('inspection-fee-payment/{id}', [App\Http\Controllers\ServiceApplicationController::class, 'inspectionFeePayment'])->name('inspection_fee_payment');
+    Route::get('equipment-fee-payment/{id}', [App\Http\Controllers\ServiceApplicationController::class, 'equipmentFeePayment'])->name('equipment_fee_payment');
 });
 
 Route::get('/notification', function () {
@@ -132,7 +140,7 @@ Route::get('/notification', function () {
 Route::get('/pdf', function () {
     $payment = App\Models\Payment::get()->last();
 
-    $pdf = PDF::setOptions(['dpi' => 150, 'defaultFont' => 'DejaVu Sans', ])
+    $pdf = PDF::setOptions(['dpi' => 150, 'defaultFont' => 'DejaVu Sans',])
         ->loadView('payments.invoice', ['pid' => $payment->id])
         ->setPaper('a4', 'portrait')
         //->set_option('isHtml5ParserEnabled', true)
