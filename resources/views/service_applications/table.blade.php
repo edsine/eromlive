@@ -67,6 +67,12 @@
                                         Equipment and Monitoring Fees</span>
                                 </a>
                             @endif
+
+                            @if ($application->current_step == 15)
+                                <a href="#" target="_blank" title="Download Permit"><span
+                                        class="nk-menu-icon text-secondary">Download Permit</span>
+                                </a>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
