@@ -16,7 +16,7 @@ return new class extends Migration
             $table->bigInteger('service_id');
             $table->tinyInteger('application_form_payment_status')->default(0);
             $table->dateTime('date_of_inspection')->nullable();
-            $table->integer('service_type_id');
+            $table->string('service_type_id');
             $table->timestamps();
         });
     }
