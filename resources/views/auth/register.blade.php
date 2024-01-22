@@ -3,7 +3,12 @@
 @section('title', 'Register')
 
 @section('content')
-
+<style>
+    span.text-danger{
+        font-size: 1.5rem;
+        font-weight: 800;
+    }
+</style>
     <div class="nk-block nk-block-middle nk-auth-body wide-xs" style="max-width: 1000px !important;">
 
         <div class="card card-bordered">
@@ -224,22 +229,18 @@
                                                         <div class="col-12">
                                                             <div class="form-group">
                                                                 <h5 class="title mb-4">Area Office</h5>
-                                                                <label class="form-label" for="cp1-team-size">Select
-                                                                    Area Office</label>
+                                                                <label class="form-label" for="cp1-team-size">Select Area Office <span class="text-danger">*</span></label>
                                                                 <div class="form-control-wrap">
-                                                                    <select class="form-select js-select2" id="branch_id"
-                                                                        name="branch_id" data-placeholder="Select Branch"
-                                                                        data-search="on" required>
+                                                                    <select class="form-select js-select2" id="branch_id" name="branch_id" data-placeholder="Select Branch" data-search="on" required>
                                                                         <option value=""></option>
                                                                         @foreach ($branches as $branch)
-                                                                            <option
-                                                                                value="{{ $branch->id ?? $branch->branch_id }}">
-                                                                                {{ $branch->branch_name }}</option>
+                                                                            <option value="{{ $branch->id ?? $branch->branch_id }}">{{ $branch->branch_name }}</option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        
                                                     </div>
                                                 </div>
                                                 <div class="nk-stepper-step">
@@ -248,7 +249,7 @@
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="contact_surname">Last
-                                                                    Name</label>
+                                                                    Name <span class="text-danger">*</span></label>
                                                                 <div class="form-control-wrap">
                                                                     <input type="text" class="form-control"
                                                                         id="contact_surname" name="contact_surname"
@@ -259,7 +260,7 @@
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="contact_firstname">First
-                                                                    Name</label>
+                                                                    Name <span class="text-danger">*</span></label>
                                                                 <div class="form-control-wrap">
                                                                     <input type="text" class="form-control"
                                                                         id="contact_firstname" name="contact_firstname"
@@ -270,7 +271,7 @@
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="contact_name">Middle
-                                                                    Name</label>
+                                                                    Name <span class="text-danger">*</span></label>
                                                                 <div class="form-control-wrap">
                                                                     <input type="text" class="form-control"
                                                                         id="contact_middlename" name="contact_middlename"
@@ -281,7 +282,7 @@
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <label class="form-label"
-                                                                    for="contact_position">Position</label>
+                                                                    for="contact_position">Position <span class="text-danger">*</span></label>
                                                                 <div class="form-control-wrap">
                                                                     <input type="text" class="form-control"
                                                                         id="contact_position" name="contact_position"
@@ -292,7 +293,7 @@
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="company_phone">Contact
-                                                                    Phone</label>
+                                                                    Phone <span class="text-danger">*</span></label>
                                                                 <div class="form-control-wrap">
                                                                     <input type="text" class="form-control"
                                                                         id="company_phone" name="company_phone"
@@ -302,7 +303,7 @@
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
-                                                                <label class="form-label" for="contact_number">NIN</label>
+                                                                <label class="form-label" for="contact_number">NIN <span class="text-danger">*</span></label>
                                                                 <div class="form-control-wrap">
                                                                     <input type="text" class="form-control"
                                                                         id="contact_number" name="contact_number"
@@ -318,7 +319,7 @@
                                                         <div class="col-12">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="company_name">Company
-                                                                    Name</label>
+                                                                    Name <span class="text-danger">*</span></label>
                                                                 <div class="form-control-wrap">
                                                                     <input type="text" class="form-control"
                                                                         id="company_name" name="company_name"
@@ -352,7 +353,7 @@
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="company_rcnumber">RC
-                                                                    Number</label>
+                                                                    Number <span class="text-danger">*</span></label>
                                                                 <div class="form-control-wrap">
                                                                     <input type="text" class="form-control"
                                                                         id="company_rcnumber" name="company_rcnumber"
@@ -364,7 +365,7 @@
                                                             <div class="form-group">
                                                                 <label class="form-label" for="cac_reg_year">CAC
                                                                     Registration
-                                                                    Date</label>
+                                                                    Date <span class="text-danger">*</span></label>
                                                                 <div class="form-control-wrap">
                                                                     <input type="text"
                                                                         class="form-control date-picker-alt"
@@ -377,7 +378,7 @@
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="company_email">Company
-                                                                    Email</label>
+                                                                    Email <span class="text-danger">*</span></label>
                                                                 <div class="form-control-wrap">
                                                                     <input type="email" class="form-control"
                                                                         id="company_email" name="company_email"
@@ -385,10 +386,10 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-sm-12">
+                                                        <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="company_address">Company
-                                                                    Address</label>
+                                                                    Address <span class="text-danger">*</span></label>
                                                                 <div class="form-control-wrap">
                                                                     <input type="text" class="form-control"
                                                                         id="company_address" name="company_address"
@@ -398,6 +399,8 @@
                                                         </div>
                                                         <div class="col-6">
                                                             <div class="form-group">
+                                                                <label class="form-label" for="company_state">Company
+                                                                    State <span class="text-danger">*</span></label>
                                                                 <div class="form-control-wrap">
                                                                     <select class="form-select js-select2"
                                                                         id="company_state" name="company_state"
@@ -415,6 +418,8 @@
                                                         </div>
                                                         <div class="col-6">
                                                             <div class="form-group">
+                                                                <label class="form-label" for="company_localgovt">Company
+                                                                    LGA <span class="text-danger">*</span></label>
                                                                 <div class="form-control-wrap">
                                                                     <select class="form-select js-select2"
                                                                         id="company_localgovt" name="company_localgovt"
@@ -469,7 +474,7 @@
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="cp1-card-number">New
-                                                                    Password</label>
+                                                                    Password <span class="text-danger">*</span></label>
                                                                 <div class="form-control-wrap">
                                                                     <input type="password" minlength="8" maxlength="12"
                                                                         class="form-control" id="password"
@@ -481,7 +486,7 @@
                                                             <div class="form-group">
                                                                 <label class="form-label"
                                                                     for="password_confirmation">Confirm
-                                                                    Password</label>
+                                                                    Password <span class="text-danger">*</span></label>
                                                                 <div class="form-control-wrap">
                                                                     <input type="password" minlength="8" maxlength="12"
                                                                         class="form-control" id="password_confirmation"
@@ -2912,9 +2917,10 @@
                 </div>
             </form>
         </div>
-        <div class="form-note-s2 text-center pt-4"> Already have an account? <a href="{{ route('login') }}"><strong>Sign
-                    in instead</strong></a>
-        </div>
+        <div class="form-note-s2 text-center pt-4">
+            <p>All fields marked with asterisks are compulsory.</p>
+            Already have an account? <a href="{{ route('login') }}"><strong>Sign in instead</strong></a>
+        </div>        
     </div>
 
 @endsection

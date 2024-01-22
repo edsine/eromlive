@@ -367,9 +367,7 @@ class PaymentController extends Controller
             try {
                 // Send mail with invoice notification
                 Mail::to($payment->employer->company_email)->send(new PaymentStatusMail($payment));
-
-                // Add any additional logic after successfully sending the mail if needed
-
+              
                 //return redirect('/dashboard')->with('success', 'Invoice notification sent successfully.');
             } catch (\Exception $e) {
                 // Handle the exception
