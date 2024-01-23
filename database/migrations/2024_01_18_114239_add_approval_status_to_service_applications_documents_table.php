@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('service_applications_rates', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('service_application_id');
-            $table->bigInteger('product_id');
-            $table->timestamps();
+        Schema::table('service_applications_documents', function (Blueprint $table) {
+            $table->integer('approval_status')->default(0);
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('service_applications_rates');
+        Schema::table('service_applications_documents', function (Blueprint $table) {
+            $table->dropColumn('approval_status');
+        });
     }
 };
