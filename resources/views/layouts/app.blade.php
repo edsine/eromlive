@@ -113,11 +113,12 @@
             @endif
 
             {{-- CHECK IF ECS REGISTRATION DONE --}}
-            @if (Auth::user()->paid_registration != 1)
-                @include('payments.ecs')
+           {{--  @if (Auth::user()->paid_registration != 1)
+                @include('payments.steps')
             @else
                 @yield('content')
-            @endif
+            @endif --}}
+            @yield('content')
             </div>
         
             {{-- <div class="notification-box">
