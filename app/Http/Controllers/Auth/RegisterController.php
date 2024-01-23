@@ -38,6 +38,12 @@ class RegisterController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+    public function redirectTo()
+    {
+        // Customize the redirect logic here
+        return route('payment.steps');
+    }
+    
     /**
      * Create a new controller instance.
      *
@@ -148,14 +154,14 @@ class RegisterController extends Controller
         //send notification
         //$employer->notify(new EmployerRegistrationNotification($employer));
         //send email
-        try {
-            Mail::to($employer->company_email)->send(new EmployerRegisteredMail($employer, $password));
+      //  try {
+           // Mail::to($employer->company_email)->send(new EmployerRegisteredMail($employer, $password));
             // Your success logic here
-        } catch (\Exception $e) {
+      //  } catch (\Exception $e) {
             // Handle the exception
             // For example, you can log the error, redirect the user, or display a friendly error message
             //return redirect()->back()->with('error', 'Failed to send registration email: ' . $e->getMessage());
-        }
+        //}
 
         return $employer;
     }

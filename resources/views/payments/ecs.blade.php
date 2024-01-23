@@ -1,3 +1,8 @@
+@extends('layouts.app')
+
+@section('title', 'Service Registration Steps')
+
+@section('content')
 <div class="nk-block-head nk-block-head-sm">
     <div class="nk-block-between">
         <div class="nk-block-head-content">
@@ -296,3 +301,4 @@ $pending = auth()
         printWindow.print();
     }
 </script>
+@endsection

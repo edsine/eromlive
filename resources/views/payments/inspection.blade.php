@@ -248,7 +248,7 @@
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        <label for="year">Payment year:</label>
+                                                        {{-- <label for="year">Payment year:</label>
                                                         <select name="year" id="year" class="form-select">
                                                             <option>{{ date('Y') }}
                                                             </option>
@@ -259,7 +259,11 @@
                                                         <select name="contribution_period" id="contribution_period"
                                                             class="form-select">
                                                             <option>Annually</option>
-                                                        </select>
+                                                        </select> --}}
+                                                        <input type="hidden" name="year" id="year"
+                                                        value="{{ date('Y') }}">
+                                                        <input type="hidden" name="contribution_period" id="contribution_period"
+                                                        value="Annually">
                                                             <?php 
                                                             $services = \App\Models\Service::join('payments', 'services.id', '=', 'payments.service_id')
     ->whereYear('payments.created_at', date('Y'))

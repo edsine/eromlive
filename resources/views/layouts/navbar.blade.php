@@ -27,7 +27,7 @@
                                     </span>
                                     <div class="media-body">
                                         <h3>Inspection Notification</h3>
-                                        <p class="noti-details"><span class="noti-title">{{ 'Inspectioin Message: '.$notify->data }}</span></p>
+                                        <p class="noti-details"><span class="noti-title">{{ 'Inspection Message: '.$notify->data }}</span></p>
                                         <p class="noti-time"><span class="notification-time">{{ 'Inspection Date: '. \Carbon\Carbon::parse($notify->type)->format('F j, Y H:i:s') }}
                                         </span></p>
                                     </div>
