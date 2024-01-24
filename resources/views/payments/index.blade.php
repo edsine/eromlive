@@ -225,7 +225,7 @@
                             {{-- @if (auth()->user()->employees->count() > 0) --}}
                                 <div class="card-title-group">
                                     <div class="card-title">
-                                        <h6 class="title">New Application Fees Payment</h6>
+                                        <h3 class="title">New service registration form</h3>
                                     </div>
                                 </div>
                                 <div class="data">
@@ -244,33 +244,57 @@
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        <label for="year">Payment year:</label>
+                                                       {{--  <label for="year">Payment year:</label>
                                                         <select name="year" id="year" class="form-select">
                                                             <option @selected(date('Y') == $start_year)>{{ $start_year }}
-                                                            </option>
+                                                            </option> --}}
                                                             {{-- @if (date('Y') > $start_year)
                                                                 @for ($i = $start_year + 1; $i <= date('Y'); $i++)
                                                                     <option @selected(date('Y') == $i)>
                                                                         {{ $i }}</option>
                                                                 @endfor
                                                             @endif --}}
-                                                        </select>
+                                                       {{--  </select> --}}
 
-                                                        <label for="contribution_period">Contribution Period:</label>
+                                                        {{-- <label for="contribution_period">Contribution Period:</label>
                                                         <select name="contribution_period" id="contribution_period"
                                                             class="form-select">
                                                             @if ($paid_months == 0)
                                                                 <option>Annually</option>
                                                             @endif
                                                             <option>Monthly</option>
+                                                        </select> --}}
+                                                        <?php 
+                                                        $branches = \App\Models\Branch::get();
+                                                        ?>
+                                                        <label for="branch_id">Area Offices:</label>
+                                                        <select name="branch_id" id="branch_id"
+                                                            class="form-select">
+                                                            @foreach ($branches as $branch)
+                                                            <option value="{{ $branch->id }}">{{ $branch->branch_name }}</option>  
+                                                            @endforeach
+                                                            
                                                         </select>
+                                                        <label for="applicant_type">Applicant:</label>
+                                                        <select name="applicant_type" id="applicant_type"
+                                                            class="form-select">
+                                                            <option>Individual</option>
+                                                            <option>Company</option>
+                                                        </select>
+                                                        <label for="applicant_name">Individual/Company Name:</label>
+                                                        <input type="text" class="form-control" name="applicant_name" id="applicant_name"
+                                                        value="">
+                                                        <input type="hidden" name="year" id="year"
+                                                        value="{{ date('Y') }}">
+                                                        <input type="hidden" name="contribution_period" id="contribution_period"
+                                                        value="Annually">
                                                             <?php $services = \App\Models\Service::all();
                                                             
                                                             ?>
                                                             
                                                             <label for="service_id">Select Service:</label>
-                                                                  <select class="form-select js-select2" data-ui="xl" id="service_id"
-                                                                        name="service_id" data-search="on" required>
+                                                                  <select class="form-select"  id="service_id"
+                                                                        name="service_id" required>
                                                                         <option>Select A Service</option>
                                                                         @foreach($services as $service)
                                                                             <option value="{{ $service->id }}">{{ $service->name }}
@@ -278,7 +302,7 @@
                                                                         @endforeach
                                                                     </select>
                                                                     <label for="service_type_id">Service Type:</label>
-                                                                    <select class="form-select js-select2" data-ui="xl" id="service_type_id" name="service_type_id" onchange="calculateFees()" required>
+                                                                    <select class="form-select" id="service_type_id" name="service_type_id" onchange="calculateFees()" required>
                                                                         <option>Select Service Type</option>
                                                                         <option value="mechanical">Mechanical</option>
                                                                         <option value="manual">Manual</option>
@@ -342,7 +366,7 @@
                                                         <div class="col-12 my-2">
                                                             <?php if(!empty($pending_payment)){ ?>
                                                             <p>
-                                                                <label for="">Your Application Payment for the year <span
+                                                                <label for="">Your Service Payment for the year <span
                                                                         {{-- class="fw-bold">{{ date('Y', strtotime($pending_payment->paid_at)) }}</span> --}}
                                                                         class="fw-bold">{{ $pending_payment->contribution_year }}</span>
                                                                     of <span

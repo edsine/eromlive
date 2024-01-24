@@ -39,7 +39,10 @@
             </a>
         </li>
         <?php } ?>
-
+        <li>
+            <a href="{{ route('payment.steps') }}"><i class="fa fa-user-md"></i> <span>Service Registration Steps</span></a>
+        </li>
+        
             </ul>
         </div>
     </div>

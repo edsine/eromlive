@@ -93,6 +93,18 @@ class PaymentController extends Controller
         return view('payments.inspection', compact('inspection_payment', 'total_services'));
     }
 
+    public function steps()
+    {
+        //
+        return view('payments.steps');
+    }
+
+    public function regPayment()
+    {
+        //
+        return view('payments.ecs');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -257,6 +269,9 @@ class PaymentController extends Controller
                 'amount' => $amount,
                 'service_id' => $request->service_id ?? null,
                 'letter_of_intent' => $path1 ?? null,
+                'branch_id' => $request->branch_id ?? null,
+                'applicant_type' => $request->applicant_type ?? null,
+                'applicant_name' => $request->applicant_name ?? null,
                 //below for ECS payments
                 'service_type_id' => $request->service_type_id ?? null,
                 'contribution_year' => $request->year ?? null,
@@ -381,7 +396,7 @@ class PaymentController extends Controller
                 $employer->update(['inspection_status' => 0]);
             }
 
-            return redirect()->back()->with('success', $payment->payment_type == 0 ? 'Registration Payment successful!' : 'Payment successful!');
+            return redirect()->route('payment.steps')->with('success', $payment->payment_type == 1 ? 'Registration Payment successful!' : 'Payment successful!');
         } else { //if payment was not successful
             //get and update transaction
             $payment = Payment::where('rrr', $request->ref)->first();
