@@ -69,7 +69,7 @@
                             @endif
 
                             @if ($application->current_step == 15)
-                                <a href="#" target="_blank" title="Download Permit"><span
+                                <a href="{{ route('download_permit', $application->id) }}" target="_blank" title="Download Permit"><span
                                         class="nk-menu-icon text-secondary">Download Permit</span>
                                 </a>
                             @endif

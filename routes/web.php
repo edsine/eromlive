@@ -107,6 +107,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('processing-fee-payment/{id}', [App\Http\Controllers\ServiceApplicationController::class, 'processingFeePayment'])->name('processing_fee_payment');
     Route::get('inspection-fee-payment/{id}', [App\Http\Controllers\ServiceApplicationController::class, 'inspectionFeePayment'])->name('inspection_fee_payment');
     Route::get('equipment-fee-payment/{id}', [App\Http\Controllers\ServiceApplicationController::class, 'equipmentFeePayment'])->name('equipment_fee_payment');
+    Route::get('permit-document/{id}', [App\Http\Controllers\ServiceApplicationController::class, 'downloadPermit'])->name('download_permit');
 });
 
 Route::get('/notification', function () {
