@@ -5,7 +5,7 @@
 @section('content')
 
 <style>
-    .btn-dim.btn-primary {
+    .btn-dim.btn-danger {
 
 background-color: #392C70;
 border-color: transparent;
@@ -25,6 +25,12 @@ border-left: 0px solid #e5e9f2;
     span.text-danger{
         font-size: 1.5rem;
         font-weight: 800;
+    }
+    body{
+        background: #eee;
+    }
+    b{
+        color: green;
     }
 </style>
     <div class="" style="">
@@ -46,7 +52,7 @@ border-left: 0px solid #e5e9f2;
                     </div>
                     <div class="nk-block-head">
                         <div class="nk-block-head-content">
-                            <h4 class="nk-block-title text-center">NIWA Service Registration Steps</h4>
+                            <h4 class="nk-block-title text-center">NIWA Service Registration Status</h4>
                             {{-- <div class="nk-block-des">
                             <p>Create New Dashlite Account</p>
                         </div> --}}
@@ -59,7 +65,7 @@ border-left: 0px solid #e5e9f2;
                 <div class="col-md-12 col-xl-12" >
                     <div class="card-inner">
 
-                        <ul class="nk-stepper-nav nk-stepper-nav-s1 stepper-nav is-hr">
+                        <ul class="nk-stepper-nav nk-stepper-nav-s1 stepper-nav is-vr">
                             <li class="current">
                                 <div class="step-item">
                                     <div class="step-text">
@@ -73,6 +79,7 @@ border-left: 0px solid #e5e9f2;
                             $reg_payment = \App\Models\Payment::where('payment_type',1)->where('employer_id', auth()->user()->id)->where('amount', '5000.00')->latest()->first();
                             $inspection_payment = \App\Models\Payment::where('payment_type',5)->where('employer_id', auth()->user()->id)->latest()->first();
                            $service =  \App\Models\Payment::where('payment_type',4)->where('employer_id', auth()->user()->id)->where('service_id','!=', null)->latest()->first();
+                           $service1 =  \App\Models\Payment::where('payment_type',4)->where('employer_id', auth()->user()->id)->where('service_id','!=', null)->sum('amount');
                            $service_count =  \App\Models\Payment::where('payment_type',4)->where('employer_id', auth()->user()->id)->where('service_id','!=', null)->count();
                            $documents = \App\Models\EmployerDocuments::whereYear('created_at', date('Y'))->where('employer_id', auth()->user()->id)->count();
                            $documents1 = \App\Models\EmployerDocuments::whereYear('created_at', date('Y'))->where('employer_id', auth()->user()->id)->latest()->first();
@@ -90,7 +97,7 @@ border-left: 0px solid #e5e9f2;
                                             @if (!empty($reg_payment))
                                             <b> {{ $settings['site_currency_symbol'] }}{{ number_format($reg_payment->amount,2) }}</b> Paid
                             @else
-                            <a href="{{ route('payment.reg') }}" class="btn btn-primary">Pay Now</a>
+                            <a href="{{ route('payment.reg') }}" class="btn btn-danger">Pay Now</a>
                             @endif
                                             </div>
                                     </div>
@@ -106,9 +113,10 @@ border-left: 0px solid #e5e9f2;
                                         <div class="lead-text">Register For A Service</div>
                                         <div class="sub-text">
                                             @if (!empty($service))
-                                            <b>{{ $service_count }}</b> service registered and <b>{{ $settings['site_currency_symbol'] }}{{ number_format($service->amount,2) }}</b> paid
+                                            <b>{{ $service_count }}</b> service registered and <b>
+                                                {{ $settings['site_currency_symbol'] }}{{ number_format($service1,2) }}</b> paid
                             @else
-                            <a href="{{ route('payment.index') }}" class="btn btn-primary">Register</a>
+                            <a href="{{ route('payment.index') }}" class="btn btn-danger">Register</a>
                             @endif
                                             </div>
                                     </div>
@@ -124,7 +132,7 @@ border-left: 0px solid #e5e9f2;
                                         <div class="lead-text">Payment Approval</div>
                                         <div class="sub-text">
                                             @if (!empty($service ) && $service->approval_status ==1)
-                                            {{ $service_count }} service registered and <b>{{ $settings['site_currency_symbol'] }}{{ number_format($service->amount,2) }}</b> payment confirmed & approved
+                                            {{ $service_count }} service registered and <b>{{ $settings['site_currency_symbol'] }}{{ number_format($service1,2) }}</b> payment confirmed & approved
                             @else
                             Wait for admin to confirm and approve your payments
                             @endif
@@ -144,7 +152,7 @@ border-left: 0px solid #e5e9f2;
                                             @if (!empty($documents))
                                             <b>{{ $documents }}</b> documents uploaded
                             @else
-                            <a href="{{ route('documents.create') }}" class="btn btn-primary">Upload Now</a>
+                            <a href="{{ route('documents.create') }}" class="btn btn-danger">Upload Now</a>
                             @endif
                                             </div>
                                     </div>
@@ -186,7 +194,7 @@ border-left: 0px solid #e5e9f2;
                                         @endif
                                         
                             @else
-                            <a href="{{ route('payment.inspection') }}" class="btn btn-primary">Pay Now</a>
+                            <a href="{{ route('payment.inspection') }}" class="btn btn-danger">Pay Now</a>
                             @endif
                                             </div>
                                     </div>

@@ -19,13 +19,13 @@
         if(!empty($userPayment)){
         ?>
         <li>
-            <a href="{{ route('payment.index') }}"><i class="fa fa-user-md"></i> <span>Register A Service</span></a>
+            <a href="{{ route('payment.index') }}"><i class="fa fa-bank"></i> <span>Register A Service</span></a>
         </li>
         <li class="{{ Request::is('service-applications*') ? 'active' : '' }}">
             <a href="{{ route('service-applications.index') }}"><i class="fa fa-user-md"></i> <span>Application Management</span></a>
         </li>
         <li>
-            <a href="{{ route('download.niwa.act') }}"><i class="fa fa-user-md"></i> <span>Download NIWA Act</span></a>
+            <a href="{{ route('download.niwa.act') }}"><i class="fa fa-download"></i> <span>Download NIWA Act</span></a>
         </li>
         <?php
         }
@@ -40,7 +40,7 @@
         </li>
         <?php } ?>
         <li>
-            <a href="{{ route('payment.steps') }}"><i class="fa fa-user-md"></i> <span>Service Registration Steps</span></a>
+            <a href="{{ route('payment.steps') }}"><i class="fa fa-user-circle"></i> <span>Service Registration Status</span></a>
         </li>
         
             </ul>

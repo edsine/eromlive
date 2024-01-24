@@ -267,14 +267,14 @@
                                                         <?php 
                                                         $branches = \App\Models\Branch::get();
                                                         ?>
-                                                        <label for="branch_id">Area Offices:</label>
+                                                        {{-- <label for="branch_id">Area Offices:</label>
                                                         <select name="branch_id" id="branch_id"
                                                             class="form-select">
                                                             @foreach ($branches as $branch)
                                                             <option value="{{ $branch->id }}">{{ $branch->branch_name }}</option>  
                                                             @endforeach
                                                             
-                                                        </select>
+                                                        </select> --}}
                                                         <label for="applicant_type">Applicant:</label>
                                                         <select name="applicant_type" id="applicant_type"
                                                             class="form-select">
