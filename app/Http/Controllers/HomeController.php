@@ -26,7 +26,11 @@ class HomeController extends Controller
     public function index()
     {
         $metrics = [
+            'reg' => Payment::where('payment_type',1)->where('employer_id', auth()->user()->id)->sum('amount'),
             'services' => Payment::where('payment_type',4)->where('employer_id', auth()->user()->id)->where('service_id','!=', null)->count(),
+            'app' => Payment::where('payment_type',4)->where('employer_id', auth()->user()->id)->sum('amount'),
+            'inspect' => Payment::where('payment_type',5)->where('employer_id', auth()->user()->id)->sum('amount'),
+            'total' => Payment::where('employer_id', auth()->user()->id)->sum('amount'),
             'accident_claims' => ['amount' => 0, 'number'=> auth()->user()->accident_claims()->count()],
             'death_claims' => ['amount' => 0, 'number'=> auth()->user()->death_claims()->count()],
             'disease_claims' => ['amount' => 0, 'number'=> auth()->user()->disease_claims()->count()],

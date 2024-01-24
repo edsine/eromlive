@@ -269,7 +269,7 @@ class PaymentController extends Controller
                 'amount' => $amount,
                 'service_id' => $request->service_id ?? null,
                 'letter_of_intent' => $path1 ?? null,
-                'branch_id' => $request->branch_id ?? null,
+                'branch_id' => auth()->user()->branch_id ?? null,
                 'applicant_type' => $request->applicant_type ?? null,
                 'applicant_name' => $request->applicant_name ?? null,
                 //below for ECS payments
