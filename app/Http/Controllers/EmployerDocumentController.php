@@ -112,7 +112,7 @@ class EmployerDocumentController extends Controller
                     Mail::to($email)->send(new EmployerDocumentEmail($employer_documents, auth()->user()));
                 }
             
-                return redirect('/documents/index')->with('success', 'Document uploaded successfully.');
+                return redirect('/documents/index')->with('success', 'Document uploaded successfully. You will be notified as soon as they are approved.');
             } catch (\Exception $e) {
                 // Handle the exception here
                 return redirect()->route('documents.index')->with('error', 'Failed to notify everyone: ' . $e->getMessage());

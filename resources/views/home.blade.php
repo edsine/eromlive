@@ -33,8 +33,8 @@
             <div class="dash-widget">
                 <span class="dash-widget-bg2"><i class="fa fa-check"></i></span>
                 <div class="dash-widget-info text-right">
-                    <h3>{{ number_format($metrics['accident_claims']['amount'], 2) }}</h3>
-                    <span class="widget-title2">Inspection <i class="fa fa-check" aria-hidden="true"></i></span>
+                    <h3>{{ number_format($metrics['reg'], 2) }}</h3>
+                    <span class="widget-title2">Registration Fee <i class="fa fa-check" aria-hidden="true"></i></span>
                 </div>
             </div>
         </div>
@@ -42,8 +42,8 @@
             <div class="dash-widget">
                 <span class="dash-widget-bg3"><i class="fa fa-check-square-o" aria-hidden="true"></i></span>
                 <div class="dash-widget-info text-right">
-                    <h3>{{ number_format($metrics['disease_claims']['amount'], 2) }}</h3>
-                    <span class="widget-title3">License <i class="fa fa-check-square-o" aria-hidden="true"></i></span>
+                    <h3>{{ number_format($metrics['app'], 2) }}</h3>
+                    <span class="widget-title3">Application/Processing Fee <i class="fa fa-check-square-o" aria-hidden="true"></i></span>
                 </div>
             </div>
         </div>
@@ -51,8 +51,8 @@
             <div class="dash-widget">
                 <span class="dash-widget-bg4"><i class="fa fa-flag-o" aria-hidden="true"></i></span>
                 <div class="dash-widget-info text-right">
-                    <h3>{{ number_format($metrics['death_claims']['amount'], 2) }}</h3>
-                    <span class="widget-title4">Report <i class="fa fa-flag-o" aria-hidden="true"></i></span>
+                    <h3>{{ number_format($metrics['inspect'], 2) }}</h3>
+                    <span class="widget-title4">Inspection Fee <i class="fa fa-flag-o" aria-hidden="true"></i></span>
                 </div>
             </div>
         </div>
