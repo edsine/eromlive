@@ -53,6 +53,8 @@ $pending = auth()
         <div class="btn-group btn-group-sm">
             
             <form onsubmit="makePayment()" id="payment-form">
+                <input type="hidden" name="approval_status" id="approval_status"
+                                                    value="1">
                 <input type="hidden" class="form-control" id="js-rrr"
                     name="rrr" value="{{ $pending->rrr }}"
                     placeholder="Enter RRR" />
@@ -224,6 +226,7 @@ $pending = auth()
                                                 
                                                 <input type="hidden" name="payment_type" id="payment_type"
                                                     value="1">
+                                                    
                                                 <input type="hidden" name="amount" id="amount" value="5000">
                                                 <button type="submit" class="btn btn-secondary btn-lg mt-2"><em
                                                         class="icon ni ni-save me-2"></em> Generate Invoice (Remita
@@ -254,7 +257,7 @@ $pending = auth()
 
 <script type="text/javascript" src="https://remitademo.net/payment/v1/remita-pay-inline.bundle.js"></script>
 <script>
-    var cUrl = "{{ route('payment.callback') }}?";
+    var cUrl = "{{ route('payment.callbackdata') }}?";
     var pubKey = "{{ env('REMITA_PUBLIC_KEY') }}";
 
     function makePayment() {
@@ -270,6 +273,9 @@ $pending = auth()
                     value: form.querySelector('input[name="rrr"]').value
                 }, {
                     name: "payment_type",
+                    value: 1
+                }, {
+                    name: "approval_status",
                     value: 1
                 }]
             },

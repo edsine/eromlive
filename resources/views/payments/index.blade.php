@@ -275,15 +275,15 @@
                                                             @endforeach
                                                             
                                                         </select> --}}
-                                                        <label for="applicant_type">Applicant:</label>
+                                                        {{-- <label for="applicant_type">Applicant:</label>
                                                         <select name="applicant_type" id="applicant_type"
                                                             class="form-select">
                                                             <option>Individual</option>
                                                             <option>Company</option>
-                                                        </select>
-                                                        <label for="applicant_name">Individual/Company Name:</label>
+                                                        </select> --}}
+                                                        {{-- <label for="applicant_name">Individual/Company Name:</label>
                                                         <input type="text" class="form-control" name="applicant_name" id="applicant_name"
-                                                        value="">
+                                                        value=""> --}}
                                                         <input type="hidden" name="year" id="year"
                                                         value="{{ date('Y') }}">
                                                         <input type="hidden" name="contribution_period" id="contribution_period"

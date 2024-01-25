@@ -73,6 +73,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('payment/invoice/download/{payment}', [App\Http\Controllers\PaymentController::class, 'download'])->name('payment.invoice.download');
     Route::get('payment/invoice/{payment}', [App\Http\Controllers\PaymentController::class, 'invoice'])->name('payment.invoice');
     Route::get('payment/remita', [App\Http\Controllers\PaymentController::class, 'callbackRemita'])->name('payment.callback');
+    Route::get('payment/remitadata', [App\Http\Controllers\PaymentController::class, 'callbackRemitaData'])->name('payment.callbackdata');
     Route::post('payment/remita', [App\Http\Controllers\PaymentController::class, 'generateRemita'])->name('payment.remita');
     Route::get('payment/inspection', [App\Http\Controllers\PaymentController::class, 'inspection'])->name('payment.inspection');
     Route::get('payment/steps', [App\Http\Controllers\PaymentController::class, 'steps'])->name('payment.steps');
