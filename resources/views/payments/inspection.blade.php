@@ -37,7 +37,7 @@
     </div><!-- .nk-block-head -->
 
     <div class="nk-block nk-block-lg">
-        @if(isset($inspection_payment))
+        @if(isset($inspection_payment) && $inspection_payment->payment_status == 0)
        {{--  <div class="form-group mt-2">
             <div class="row">
                 <div class="col-6 fw-bold">RRR:</div>
@@ -265,22 +265,33 @@
                                                         <input type="hidden" name="contribution_period" id="contribution_period"
                                                         value="Annually">
                                                             <?php 
-                                                            $services = \App\Models\Service::join('payments', 'services.id', '=', 'payments.service_id')
+                                                            /* $services = \App\Models\Service::join('payments', 'services.id', '=', 'payments.service_id')
     ->whereYear('payments.created_at', date('Y'))
     ->where('payments.payment_status', 1)
     ->where('payments.employer_id', auth()->user()->id)
-    ->get();
+    ->get(); */
+    $services = \App\Models\Service::join('payments', 'services.id', '=', 'payments.service_id')
+    ->whereYear('payments.created_at', date('Y'))
+    ->where('payments.payment_status', 1)
+    ->where('payments.approval_status', 1)
+    ->where('payments.employer_id', auth()->user()->id)
+    ->where('payments.service_id', $service_name->service_id)
+    ->latest('payments.created_at') // Specify the table for ordering
+    ->first();
                                                             ?>
                                                             
-                                                            <label for="service_id">Select Service:</label>
-                                                                  <select class="form-select" id="service_id"
+                                                            <label for="service_id">My Service:</label>
+                                                            <input type="hidden" class="form-control" id="service_app"
+                                                                            name="service_app" value="{{ $services->id }}" placeholder="{{ $services->name }}" readonly>
+                                                                            <p><b>{{ $services->name }}</b></p>
+                                                                  {{-- <select class="form-select" id="service_id"
                                                                         name="service_id" data-search="on" required>
                                                                         <option>Select A Service</option>
                                                                         @foreach($services as $service)
                                                                             <option value="{{ $service->id }}">{{ $service->name }}
                                                                             </option>
                                                                         @endforeach
-                                                                    </select>
+                                                                    </select> --}}
                                                                     <label for="service_type_id">Service Type:</label>
                                                                     <select class="form-select" id="service_type_id" name="service_type_id" onchange="calculateFees()" required>
                                                                         <option>Select Service Type</option>

@@ -66,14 +66,7 @@ border-left: 0px solid #e5e9f2;
                     <div class="card-inner">
 
                         <ul class="nk-stepper-nav nk-stepper-nav-s1 stepper-nav is-vr">
-                            <li class="current">
-                                <div class="step-item">
-                                    <div class="step-text">
-                                        <div class="lead-text">Sign Up</div>
-                                        <div class="sub-text">Sign up completed</div>
-                                    </div>
-                                </div>
-                            </li>
+                            
                             <?php 
                             $settings = App\Models\Utility::settings();
                             $reg_payment = \App\Models\Payment::where('payment_type',1)->where('employer_id', auth()->user()->id)->where('amount', '5000.00')->latest()->first();
@@ -84,7 +77,17 @@ border-left: 0px solid #e5e9f2;
                            $documents = \App\Models\EmployerDocuments::whereYear('created_at', date('Y'))->where('employer_id', auth()->user()->id)->count();
                            $documents1 = \App\Models\EmployerDocuments::whereYear('created_at', date('Y'))->where('employer_id', auth()->user()->id)->latest()->first();
                            $notify = \App\Models\Notification::where('user_id', auth()->user()->id)->latest()->first();
+                           
+                           if (!empty($reg_payment) && $reg_payment->payment_status == 1 && $reg_payment->approval_status == 1){
                           ?>
+                          <li class="current">
+                            <div class="step-item">
+                                <div class="step-text">
+                                    <div class="lead-text">Sign Up</div>
+                                    <div class="sub-text">Sign up completed</div>
+                                </div>
+                            </div>
+                        </li>
                             <li @if (!empty($reg_payment))
                             class="current"
                             @else
@@ -226,6 +229,14 @@ border-left: 0px solid #e5e9f2;
                                     </div>
                                 </div>
                             </li>
+                            <?php }else{ ?>
+                                <h3>Kindly pay the &#8358;5,000 registration fee by clicking on the button below</h3>
+                                <div class="col-md-2">
+                                    
+                                    <a href="{{ route('payment.reg') }}"  class="btn btn-secondary btn-lg mt-2"><em
+                                        class="icon ni ni-save me-2"></em> Pay Now</a>
+                                </div>
+                            <?php } ?>
                         </ul>
                     </div>
                 </div>
