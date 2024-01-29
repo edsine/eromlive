@@ -86,7 +86,7 @@
                                     <img src="{{ asset('assets/images/logo.png') }}" class="inv-logo" alt="NIWA Logo">
                                     <ul class="list-unstyled">
                                         <?php
-                                            $settings = App\Models\Utility::settings();
+                                            $settings = get_settings();
                                             ?>
                                         <li>{{ $settings['company_name'] }}</li>
                                         <li>{{ $settings['company_address'] }}</li>
