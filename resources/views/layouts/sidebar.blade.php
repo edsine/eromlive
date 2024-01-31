@@ -19,7 +19,7 @@
         if(!empty($userPayment) && $userPayment->payment_status == 1 && $userPayment->approval_status == 1){
         ?>
         <li>
-            <a href="{{ route('payment.index') }}"><i class="fa fa-bank"></i> <span>Register A Service</span></a>
+            <a href="{{ route('payment.index') }}"><i class="fa fa-bank"></i> <span>Apply For A Service</span></a>
         </li>
         <li class="{{ Request::is('service-applications*') ? 'active' : '' }}">
             <a href="{{ route('service-applications.index') }}"><i class="fa fa-user-md"></i> <span>Application Management</span></a>

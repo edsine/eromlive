@@ -225,7 +225,7 @@
                             {{-- @if (auth()->user()->employees->count() > 0) --}}
                                 <div class="card-title-group">
                                     <div class="card-title">
-                                        <h3 class="title">New service registration form</h3>
+                                        <h3 class="title">Apply for a service</h3>
                                     </div>
                                 </div>
                                 <div class="data">
@@ -393,9 +393,9 @@
             </div><!-- .col -->
             @endif
             <div class="nk-block-head-content">
-                <h3 class="nk-block-title page-title">Register A Service</h3>
+                <h3 class="nk-block-title page-title">Apply A Service</h3>
                 <div class="nk-block-des text-soft">
-                    <p>List of registered services.</p>
+                    <p>List of applied services.</p>
                 </div>
             </div>
             <div class="col-xxl-3 col-sm-6">
