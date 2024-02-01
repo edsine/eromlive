@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StorePaymentRequest;
 use App\Http\Requests\UpdatePaymentRequest;
 
+
 class PaymentController extends Controller
 {
     /**
@@ -395,9 +396,10 @@ class PaymentController extends Controller
                 $employer = Employer::findOrFail($payment->employer_id);
                 $employer->update(['inspection_status' => 0]);
             }
-
+            
             return redirect()->route('payment.steps')->with('success', $payment->payment_type == 1 ? 'Registration Payment successful!' : 'Payment successful!');
-        } else { //if payment was not successful
+            
+            } else { //if payment was not successful
             //get and update transaction
             $payment = Payment::where('rrr', $request->ref)->first();
 

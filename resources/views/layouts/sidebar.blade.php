@@ -39,9 +39,9 @@
             </a>
         </li>
         <?php } ?>
-        <li>
+        {{-- <li>
             <a href="{{ route('payment.steps') }}"><i class="fa fa-user-circle"></i> <span>Service Registration Status</span></a>
-        </li>
+        </li> --}}
         
             </ul>
         </div>
