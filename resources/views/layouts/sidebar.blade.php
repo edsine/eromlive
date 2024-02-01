@@ -15,11 +15,11 @@
             </ul>
         </li>
         <?php
-        $userPayment = \App\Models\Payment::where('employer_id', auth()->user()->id)->where('amount', '5000.00')->first();
-        if(!empty($userPayment)){
+        $userPayment = \App\Models\Payment::where('payment_type',1)->where('employer_id', auth()->user()->id)->where('amount', '5000.00')->first();
+        if(!empty($userPayment) && $userPayment->payment_status == 1 && $userPayment->approval_status == 1){
         ?>
         <li>
-            <a href="{{ route('payment.index') }}"><i class="fa fa-bank"></i> <span>Register A Service</span></a>
+            <a href="{{ route('payment.index') }}"><i class="fa fa-bank"></i> <span>Apply For A Service</span></a>
         </li>
         <li class="{{ Request::is('service-applications*') ? 'active' : '' }}">
             <a href="{{ route('service-applications.index') }}"><i class="fa fa-user-md"></i> <span>Application Management</span></a>
@@ -39,9 +39,9 @@
             </a>
         </li>
         <?php } ?>
-        {{-- <li>
+        <li>
             <a href="{{ route('payment.steps') }}"><i class="fa fa-user-circle"></i> <span>Service Registration Status</span></a>
-        </li> --}}
+        </li>
         
             </ul>
         </div>

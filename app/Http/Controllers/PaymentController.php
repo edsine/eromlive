@@ -91,7 +91,8 @@ class PaymentController extends Controller
         $total_services = Payment::where('payment_type',4)->where('employer_id', auth()->user()->id)->where('service_id','!=', null)->count();
 
         $inspection_payment = Payment::where('payment_type', 5)->where('employer_id', auth()->user()->id)->latest()->first();
-        return view('payments.inspection', compact('inspection_payment', 'total_services'));
+        $service_name = Payment::where('payment_type', 4)->where('employer_id', auth()->user()->id)->latest()->first();
+        return view('payments.inspection', compact('inspection_payment', 'total_services', 'service_name'));
     }
 
     public function steps()
@@ -400,6 +401,124 @@ class PaymentController extends Controller
             return redirect()->route('payment.steps')->with('success', $payment->payment_type == 1 ? 'Registration Payment successful!' : 'Payment successful!');
             
             } else { //if payment was not successful
+            //get and update transaction
+            $payment = Payment::where('rrr', $request->ref)->first();
+
+            //if already processed
+            if ($payment->payment_status == 1)
+                return redirect()->back()->with('info', 'Payment already processed!');
+
+            //update payments
+            $payment->payment_status = 2;
+            $payment->save();
+
+            return redirect()->back()->with('info', $result['responseMsg']);
+        }
+    }
+
+    public function callbackRemitaData(Request $request)
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://remitademo.net/payment/v1/payment/query/' . $request->tid,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'publicKey: ' . env('REMITA_PUBLIC_KEY'),
+                'Content-Type: application/json',
+                'TXN_HASH: ' . hash('sha512', $request->tid . env('REMITA_SECRET_KEY'))
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            return redirect()->back()->with('error', $err);
+        }
+
+        $result = json_decode($response, true);
+        if ($result && $result['responseCode'] == "00") {
+            //get and update transaction
+            $payment = Payment::where('rrr', $request->ref)->first();
+
+            //if already processed
+            if ($payment->payment_status == 1) {
+                return redirect()->route('payment.index')->with('info', 'Payment already processed!');
+            }
+
+            //update payments
+            $payment->payment_status = 1;
+            $payment->approval_status = 1;
+            $payment->transaction_id = $request->tid;
+            $payment->paid_at = $result['responseData'][0]['paymentDate'];
+            $payment->document_uploads = 1;
+            $payment->save();
+
+            // Get Service Application and Update
+            $service_application = ServiceApplication::where('id', $payment->service_application_id)->first();
+            if (!empty($service_application)) {
+                $service_application->application_form_payment_status = 1;
+                $new_current_step = $service_application->current_step + 1;
+                $service_application->current_step = $new_current_step;
+                if ($new_current_step) {
+                    $service_application->status_summary = 'Waiting for document and payment verification';
+                } else if($new_current_step == 12){
+                    $service_application->status_summary = 'Payment for equipment has been made. Please wait for verification';
+                }
+                $service_application->save();
+            }
+
+
+            if ($payment->payment_type == 1) {
+                //update employer
+                //$employer = Employer::where('id', $payment->employer_id)->first();
+                $payment->employer->paid_registration = 1;
+                $payment->employer->save();
+            }
+
+            if ($payment->payment_type == 2) {
+                auth()->user()->certificates()->where('payment_id', $payment->id)->update(['payment_status' => 1]);
+            }
+
+            //generate invoice pdf
+            $pdf = PDF::setOptions(['dpi' => 150, 'defaultFont' => 'DejaVu Sans'])
+                //->loadView('emails.payment.status', ['pid' => $payment->id])
+                ->loadView('payments.invoice', ['pid' => $payment->id])
+                ->setPaper('a4', 'portrait');
+
+            $content = $pdf->download()->getOriginalContent();
+
+            //$pdf->save(Storage::path('/invoices/invoice_' . $payment->id . '.pdf'))->stream('invoice_' . $payment->id . '.pdf');
+            Storage::put('public/invoices/invoice_' . $payment->id . '.pdf', $content);
+
+            try {
+                // Send mail with invoice notification
+                Mail::to($payment->employer->company_email)->send(new PaymentStatusMail($payment));
+              
+                //return redirect('/dashboard')->with('success', 'Invoice notification sent successfully.');
+            } catch (\Exception $e) {
+                // Handle the exception
+                //return redirect('/dashboard')->with('error', 'Failed to send invoice notification: ' . $e->getMessage());
+            }
+
+            Storage::delete('public/invoices/invoice_' . $payment->id . '.pdf');
+
+            if ($payment->payment_type == 5) {
+                $employer = Employer::findOrFail($payment->employer_id);
+                $employer->update(['inspection_status' => 0]);
+            }
+
+            return redirect()->route('payment.steps')->with('success', $payment->payment_type == 1 ? 'Registration Payment successful!' : 'Payment successful!');
+        } else { //if payment was not successful
             //get and update transaction
             $payment = Payment::where('rrr', $request->ref)->first();
 

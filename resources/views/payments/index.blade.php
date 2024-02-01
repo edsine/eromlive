@@ -86,7 +86,7 @@
                                     <img src="{{ asset('assets/images/logo.png') }}" class="inv-logo" alt="NIWA Logo">
                                     <ul class="list-unstyled">
                                         <?php
-                                            $settings = App\Models\Utility::settings();
+                                            $settings = get_settings();
                                             ?>
                                         <li>{{ $settings['company_name'] }}</li>
                                         <li>{{ $settings['company_address'] }}</li>
@@ -225,7 +225,7 @@
                             {{-- @if (auth()->user()->employees->count() > 0) --}}
                                 <div class="card-title-group">
                                     <div class="card-title">
-                                        <h3 class="title">New service registration form</h3>
+                                        <h3 class="title">Apply for a service</h3>
                                     </div>
                                 </div>
                                 <div class="data">
@@ -275,15 +275,15 @@
                                                             @endforeach
                                                             
                                                         </select> --}}
-                                                        <label for="applicant_type">Applicant:</label>
+                                                        {{-- <label for="applicant_type">Applicant:</label>
                                                         <select name="applicant_type" id="applicant_type"
                                                             class="form-select">
                                                             <option>Individual</option>
                                                             <option>Company</option>
-                                                        </select>
-                                                        <label for="applicant_name">Individual/Company Name:</label>
+                                                        </select> --}}
+                                                        {{-- <label for="applicant_name">Individual/Company Name:</label>
                                                         <input type="text" class="form-control" name="applicant_name" id="applicant_name"
-                                                        value="">
+                                                        value=""> --}}
                                                         <input type="hidden" name="year" id="year"
                                                         value="{{ date('Y') }}">
                                                         <input type="hidden" name="contribution_period" id="contribution_period"
@@ -393,9 +393,9 @@
             </div><!-- .col -->
             @endif
             <div class="nk-block-head-content">
-                <h3 class="nk-block-title page-title">Register A Service</h3>
+                <h3 class="nk-block-title page-title">Apply A Service</h3>
                 <div class="nk-block-des text-soft">
-                    <p>List of registered services.</p>
+                    <p>List of applied services.</p>
                 </div>
             </div>
             <div class="col-xxl-3 col-sm-6">
