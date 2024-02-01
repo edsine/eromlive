@@ -56,7 +56,7 @@
                     </div>
                     <div class="nk-block-head">
                         <div class="nk-block-head-content">
-                            <h4 class="nk-block-title text-center">NIWA Service Registration Status</h4>
+                            <h4 class="nk-block-title text-center">NIWA Service Application Status</h4>
                             {{-- <div class="nk-block-des">
                             <p>Create New Dashlite Account</p>
                         </div> --}}
@@ -117,16 +117,15 @@
                             class="" @endif>
                                 <div class="step-item">
                                     <div class="step-text">
-                                        <div class="lead-text">Register For A Service</div>
+                                        <div class="lead-text">Apply For A Service</div>
                                         <div class="sub-text">
                                             @if (!empty($service))
-                                                <b>{{ $service_count }}</b> service registered and <b>
-                                                    {{ $settings['site_currency_symbol'] }}{{ number_format($service1, 2) }}</b>
-                                                paid
-                                            @else
-                                                <a href="{{ route('payment.index') }}" class="btn btn-danger">Register</a>
-                                            @endif
-                                        </div>
+                                            <b>{{ $service_count }}</b> applied service and <b>
+                                                {{ $settings['site_currency_symbol'] }}{{ number_format($service1,2) }}</b> paid
+                            @else
+                             <a href="{{ route('payment.index') }}" class="btn btn-danger">Register</a>
+                            @endif
+                                            </div>
                                     </div>
                                 </div>
                             </li>
