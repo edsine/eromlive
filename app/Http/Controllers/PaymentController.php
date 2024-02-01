@@ -398,7 +398,7 @@ class PaymentController extends Controller
                 $employer->update(['inspection_status' => 0]);
             }
             
-            return redirect()->route('payment.steps')->with('success', $payment->payment_type == 1 ? 'Registration Payment successful!' : 'Payment successful!');
+            return redirect()->route('service-applications.index')->with('success', $payment->payment_type == 1 ? 'Registration Payment successful!' : 'Payment successful!');
             
             } else { //if payment was not successful
             //get and update transaction
@@ -517,7 +517,7 @@ class PaymentController extends Controller
                 $employer->update(['inspection_status' => 0]);
             }
 
-            return redirect()->route('payment.steps')->with('success', $payment->payment_type == 1 ? 'Registration Payment successful!' : 'Payment successful!');
+            return redirect()->route('service-applications.index')->with('success', $payment->payment_type == 1 ? 'Registration Payment successful!' : 'Payment successful!');
         } else { //if payment was not successful
             //get and update transaction
             $payment = Payment::where('rrr', $request->ref)->first();
