@@ -47,7 +47,7 @@
                                 }
 
                             @endphp
-                            @if ($application->current_step == 4 || !$is_processing_fee_paid)
+                            @if ($application->current_step == 4 && !$is_processing_fee_paid)
                                 <a href="{{ route('processing_fee_payment', $application->id) }}" target="_blank"
                                     title="Processing fee payment"><span class="nk-menu-icon text-secondary">Pay for
                                         Processing Fee</span>

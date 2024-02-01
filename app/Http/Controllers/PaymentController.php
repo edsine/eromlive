@@ -83,11 +83,11 @@ class PaymentController extends Controller
     {
         //
         $notify = Notification::where('user_id', auth()->user()->id)->where('is_read', 1)->first();
-        if(!empty($notify->is_read)){
-        $notify->is_read = 0;
-        $notify->save();
+        if (!empty($notify->is_read)) {
+            $notify->is_read = 0;
+            $notify->save();
         }
-        $total_services = Payment::where('payment_type',4)->where('employer_id', auth()->user()->id)->where('service_id','!=', null)->count();
+        $total_services = Payment::where('payment_type', 4)->where('employer_id', auth()->user()->id)->where('service_id', '!=', null)->count();
 
         $inspection_payment = Payment::where('payment_type', 5)->where('employer_id', auth()->user()->id)->latest()->first();
         $service_name = Payment::where('payment_type', 4)->where('employer_id', auth()->user()->id)->latest()->first();
@@ -190,7 +190,8 @@ class PaymentController extends Controller
             "payerName" => auth()->user()->company_name,
             "payerEmail" => auth()->user()->company_email,
             "payerPhone" => auth()->user()->company_phone,
-            "description" => $request->payment_type ==  1 ? "Registration Fees" : ($request->payment_type == 2 ? "Processing Fees" : "Application Fee + Processing Fees"),
+            // "description" => $request->payment_type ==  1 ? "Registration Fees" : ($request->payment_type == 2 ? "Processing Fees" : "Application Fee + Processing Fees"),
+            "description" => enum_payment_types()[$request->payment_type],
             "customFields" => [
                 [
                     "name" => 'Invoice Number',
@@ -351,7 +352,7 @@ class PaymentController extends Controller
                 $service_application->current_step = $new_current_step;
                 if ($new_current_step) {
                     $service_application->status_summary = 'Waiting for document and payment verification';
-                } else if($new_current_step == 12){
+                } else if ($new_current_step == 12) {
                     $service_application->status_summary = 'Payment for equipment has been made. Please wait for verification';
                 }
                 $service_application->save();
@@ -383,7 +384,7 @@ class PaymentController extends Controller
             try {
                 // Send mail with invoice notification
                 Mail::to($payment->employer->company_email)->send(new PaymentStatusMail($payment));
-              
+
                 //return redirect('/dashboard')->with('success', 'Invoice notification sent successfully.');
             } catch (\Exception $e) {
                 // Handle the exception
@@ -469,7 +470,7 @@ class PaymentController extends Controller
                 $service_application->current_step = $new_current_step;
                 if ($new_current_step) {
                     $service_application->status_summary = 'Waiting for document and payment verification';
-                } else if($new_current_step == 12){
+                } else if ($new_current_step == 12) {
                     $service_application->status_summary = 'Payment for equipment has been made. Please wait for verification';
                 }
                 $service_application->save();
@@ -501,7 +502,7 @@ class PaymentController extends Controller
             try {
                 // Send mail with invoice notification
                 Mail::to($payment->employer->company_email)->send(new PaymentStatusMail($payment));
-              
+
                 //return redirect('/dashboard')->with('success', 'Invoice notification sent successfully.');
             } catch (\Exception $e) {
                 // Handle the exception
