@@ -20,6 +20,12 @@ class ServiceApplication extends Model
         return $this->belongsTo(Service::class, 'service_id');
     }
 
+    public function employer()
+    {
+        $employer = Employer::where('id', $this->user_id)->first();
+        return $employer;
+    }
+
     public function payments()
     {
         $payments = Payment::where('employer_id', $this->user_id)->get();

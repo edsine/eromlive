@@ -153,6 +153,13 @@ class ServiceApplicationController extends Controller
         return view('service_applications.equipment_fee_payment', compact('payments', 'pending_payment', 'service_application'));
     }
 
+    public function downloadPermit($service_application_id)
+    {
+        $service_application = ServiceApplication::findOrFail($service_application_id);
+
+        return view('service_applications.permit', compact('service_application'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */

@@ -21,7 +21,7 @@ if (!function_exists('get_settings')) {
 
 
 /* function enum_payment_types()
-{ 
+{
     $option[1] = 'Registration Fee';
     //$option[1] = 'Application Form Fee';
     //$option[2] = 'Processing Fee';
