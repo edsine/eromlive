@@ -56,7 +56,7 @@
                                             <div class="row">
                                                 <div class="row col-12">
 
-                                                    <div class="col-sm-6">
+                                                    <div class="col-sm-6 mb-3">
                                                         <label for="service_id">Select Service:</label>
                                                         <select class="form-select js-select2" data-ui="xl"
                                                             id="service_id" name="service_id" data-search="on" required>
@@ -67,7 +67,7 @@
                                                             @endforeach
                                                         </select>
                                                     </div>
-                                                    <div class="col-sm-6">
+                                                    <div class="col-sm-6 mb-3">
                                                         <label for="service_type_id">Service Type:</label>
                                                         <select class="form-select js-select2" data-ui="xl"
                                                             id="service_type_id" name="service_type_id" required>
@@ -76,6 +76,23 @@
                                                             <option value="manual">Manual</option>
                                                         </select>
                                                     </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="latitude">Latitude:</label>
+                                                            <div class="form-control-wrap">
+                                                                <input type="text" class="form-control" name="latitude" id="latitude" required/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="longitude">Longitude:</label>
+                                                            <div class="form-control-wrap">
+                                                                <input type="text" class="form-control" name="longitude" id="longitude" required/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
 
                                                     {{-- <div class="mt-5 col-sm-12">
                                                         <label class="form-label" for="default-06">Upload Documents
