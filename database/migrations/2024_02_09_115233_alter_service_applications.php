@@ -12,8 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('service_applications', function (Blueprint $table) {
-            $table->decimal('latitude', 15, 7)->nullable();
-            $table->decimal('longitude', 15, 7)->nullable();
+            $table->decimal('latitude1', 15, 7)->nullable();
+            $table->decimal('longitude1', 15, 7)->nullable();
+            $table->decimal('latitude2', 15, 7)->nullable();
+            $table->decimal('longitude2', 15, 7)->nullable();
         });        
     }
 

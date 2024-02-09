@@ -76,11 +76,12 @@
                                                             <option value="manual">Manual</option>
                                                         </select>
                                                     </div>
+                                                    <div class="col-sm-12 mb-1">Coordinate 1:</div>
                                                     <div class="col-sm-6">
-                                                        <div class="form-group">
+                                                        <div class="form-group mb-3">
                                                             <label for="latitude">Latitude:</label>
                                                             <div class="form-control-wrap">
-                                                                <input type="text" class="form-control" name="latitude" id="latitude" required/>
+                                                                <input type="text" class="form-control" name="latitude1" id="latitude1" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -88,7 +89,24 @@
                                                         <div class="form-group">
                                                             <label for="longitude">Longitude:</label>
                                                             <div class="form-control-wrap">
-                                                                <input type="text" class="form-control" name="longitude" id="longitude" required/>
+                                                                <input type="text" class="form-control" name="longitude1" id="longitude1" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12 mb-1">Coordinate 2:</div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="latitude">Latitude:</label>
+                                                            <div class="form-control-wrap">
+                                                                <input type="text" class="form-control" name="latitude2" id="latitude2" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="longitude">Longitude:</label>
+                                                            <div class="form-control-wrap">
+                                                                <input type="text" class="form-control" name="longitude2" id="longitude2" />
                                                             </div>
                                                         </div>
                                                     </div>
