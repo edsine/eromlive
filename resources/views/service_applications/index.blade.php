@@ -63,9 +63,8 @@
                                                             id="service_id" name="service_id" data-search="on" required>
                                                             <option>Select A Service</option>
                                                             @foreach ($services as $service)
-                                                                <option value="{{ $service->id }}">{{ $service->name }}
-                                                                </option>
-                                                            @endforeach
+                                                            <option value="{{ $service->id }}">{{ ucfirst($service->name) }}</option>
+                                                        @endforeach
                                                         </select>
                                                     </div>
                                                     <div class="col-sm-6 mb-3">
@@ -147,9 +146,8 @@
                                                             id="service_id" name="service_id" data-search="on" required>
                                                             <option>Select A Service</option>
                                                             @foreach ($services as $service)
-                                                                <option value="{{ $service->id }}">{{ $service->name }}
-                                                                </option>
-                                                            @endforeach
+                                                            <option value="{{ $service->id }}">{{ ucfirst($service->name) }}</option>
+                                                        @endforeach
                                                         </select>
                                                     </div>
                                                     <div class="col-sm-6 mb-3">
