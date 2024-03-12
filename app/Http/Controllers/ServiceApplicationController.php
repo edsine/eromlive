@@ -23,7 +23,9 @@ class ServiceApplicationController extends Controller
 
         $service_applications = ServiceApplication::where('user_id', $user->id)->paginate(10);
 
-        return view('service_applications.index', compact('services', 'service_applications'));
+        $service_app = ServiceApplication::where('user_id', $user->id)->first();
+
+        return view('service_applications.index', compact('services', 'service_applications', 'service_app'));
     }
 
     public function documentIndex($id)

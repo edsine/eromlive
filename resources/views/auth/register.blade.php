@@ -298,6 +298,8 @@
                                                                     <input type="text" class="form-control"
                                                                         id="company_phone" name="company_phone"
                                                                         placeholder="Enter Contact Phone" required pattern="\d+">
+                                                                        <span id="phone-error" class="text-danger"></span> <!-- Display error message here -->
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -377,12 +379,10 @@
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
-                                                                <label class="form-label" for="company_email">Company
-                                                                    Email <span class="text-danger">*</span></label>
+                                                                <label class="form-label" for="company_email">Company Email <span class="text-danger">*</span></label>
                                                                 <div class="form-control-wrap">
-                                                                    <input type="email" class="form-control"
-                                                                        id="company_email" name="company_email"
-                                                                        placeholder="Company Email" required>
+                                                                    <input type="email" class="form-control" id="company_email" name="company_email" placeholder="Company Email" required>
+                                                                    <span id="email-error" class="text-danger"></span> <!-- Display error message here -->
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -3128,5 +3128,70 @@
                 });
             })
         });
+    </script>
+
+    <script>
+        document.getElementById('company_email').addEventListener('blur', function() {
+    var email = this.value.trim();
+    var emailError = document.getElementById('email-error');
+    
+    // Clear previous error message
+    emailError.textContent = '';
+
+    // Check if email is empty
+    if (email === '') {
+        return;
+    }
+
+    // Perform AJAX request to check if email already exists
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/check-email?email=' + encodeURIComponent(email), true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.exists) {
+                    emailError.textContent = 'Email already exists';
+                }
+            } else {
+                console.error('Request failed:', xhr.status, xhr.statusText);
+            }
+        }
+    };
+    xhr.send();
+});
+
+    </script>
+    <script>
+        document.getElementById('company_phone').addEventListener('blur', function() {
+    var phone = this.value.trim();
+    var phoneError = document.getElementById('phone-error');
+    
+    // Clear previous error message
+    phoneError.textContent = '';
+
+    // Check if email is empty
+    if (phone === '') {
+        return;
+    }
+
+    // Perform AJAX request to check if email already exists
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/check-phone?phone=' + encodeURIComponent(phone), true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.exists) {
+                    phoneError.textContent = 'Phone number already exists';
+                }
+            } else {
+                console.error('Request failed:', xhr.status, xhr.statusText);
+            }
+        }
+    };
+    xhr.send();
+});
+
     </script>
 @endpush

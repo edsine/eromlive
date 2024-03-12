@@ -15,8 +15,8 @@
             </ul>
         </li> --}}
         <?php
-        $userPayment = \App\Models\Payment::where('payment_type',1)->where('employer_id', auth()->user()->id)->where('amount', '5000.00')->first();
-        if(!empty($userPayment) && $userPayment->payment_status == 1 && $userPayment->approval_status == 1){
+        $userPayment = \App\Models\Payment::where('payment_type',0)->where('employer_id', auth()->user()->id)->where('amount', '5000.00')->latest()->first();
+        if(!empty($userPayment) && $userPayment->payment_status == 1){
         ?>
         {{-- <li>
             <a href="{{ route('payment.index') }}"><i class="fa fa-bank"></i> <span>Apply For A Service</span></a>

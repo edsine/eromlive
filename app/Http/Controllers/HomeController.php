@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Models\Payment;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -35,6 +36,11 @@ class HomeController extends Controller
             'death_claims' => ['amount' => 0, 'number'=> auth()->user()->death_claims()->count()],
             'disease_claims' => ['amount' => 0, 'number'=> auth()->user()->disease_claims()->count()],
         ];
-        return view('home', compact(['metrics']));
+        if (Auth::user()->paid_registration != 1){
+            return view('payments.steps');
+        }else{
+            return view('home', compact(['metrics']));
+        }
+        
     }
 }

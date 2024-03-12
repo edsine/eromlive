@@ -58,8 +58,8 @@
                             <div class="example-alert">
                                 <div class="alert alert-primary alert-icon alert-dismissible">
                                     <em class="icon ni ni-alert-circle"></em>
-                                    <strong>Success:</strong>
-                                    <span>{{ session('success') }}</span>
+                                    <strong style="font-size: 14pt;">Success:</strong>
+                                    <span style="font-size: 14pt;">{{ session('success') }}</span>
                                     <button class="close" data-bs-dismiss="alert"></button>
                                 </div>
                             </div>
@@ -114,7 +114,7 @@
 
             {{-- CHECK IF ECS REGISTRATION DONE --}}
            {{--  @if (Auth::user()->paid_registration != 1)
-                @include('payments.steps')
+                @include('payments.reg')
             @else
                 @yield('content')
             @endif --}}

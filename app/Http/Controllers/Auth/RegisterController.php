@@ -68,7 +68,7 @@ class RegisterController extends Controller
             'contact_firstname' => ['required', 'string', 'max:255'],
             'contact_middlename' => ['required', 'string', 'max:255'],
             'contact_position' => ['required', 'string', 'max:255'],
-            'company_phone' => ['required', 'string', 'max:255'],
+            'company_phone' => ['required', 'string', 'max:255', 'unique:employers'],
             'contact_number' => ['required', 'string', 'max:255'],
 
             'company_state' => ['required', 'string', 'max:255'],
@@ -84,7 +84,7 @@ class RegisterController extends Controller
 
             'company_address' => ['required', 'string'],
 
-            'company_email' => ['required', 'string', 'email', 'max:255',], // 'unique:employers'],
+            'company_email' => ['required', 'string', 'email', 'max:255', 'unique:employers'], // 'unique:employers'],
 
             'password' => ['required', 'string', 'min:8', 'confirmed'],
 
