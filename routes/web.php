@@ -34,6 +34,11 @@ Route::post('employer/otp', [App\Http\Controllers\EmployerController::class, 've
 Route::get('employer/ecs', [App\Http\Controllers\EmployerController::class, 'ecs'])->name('employer.ecs');
 Route::get('employer/lgas', [App\Http\Controllers\EmployerController::class, 'lgas'])->name('employer.lgas');
 
+Route::get('/check-email', 'App\Http\Controllers\EmployerController@checkEmail')->name('check-email');
+Route::get('/check-phone', 'App\Http\Controllers\EmployerController@checkPhone')->name('check-phone');
+
+
+
 Route::get('certificate/{certificateId}/detailspage', 'App\Http\Controllers\CertificateController@displayCertificateDetailsPage')->name('certificate.detailspage');
 Route::get('certificate/verify', 'App\Http\Controllers\CertificateController@verifyCertificate')->name('certificate.verify');
 Route::get('verification', 'App\Http\Controllers\CertificateController@verification')->name('verification');

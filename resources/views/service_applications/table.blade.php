@@ -25,7 +25,7 @@
                         <td>
                             @if ($application->current_step == 2 || !$application->application_form_payment_status)
                                 <a href="{{ route('application_form_payment', $application->id) }}" target="_blank"
-                                    title="Application form payment"><span class="nk-menu-icon text-secondary">Pay for
+                                    title="Application form payment"><span class="nk-menu-icon text-danger">Pay for
                                         Application form</span>
                                 </a>
                             @endif
@@ -49,21 +49,21 @@
                             @endphp
                             @if ($application->current_step == 4 && !$is_processing_fee_paid)
                                 <a href="{{ route('processing_fee_payment', $application->id) }}" target="_blank"
-                                    title="Processing fee payment"><span class="nk-menu-icon text-secondary">Pay for
+                                    title="Processing fee payment"><span class="nk-menu-icon text-danger">Pay for
                                         Processing Fee</span>
                                 </a>
                             @endif
 
                             @if ($application->current_step == 7)
                                 <a href="{{ route('inspection_fee_payment', $application->id) }}" target="_blank"
-                                    title="Inspection fee payment"><span class="nk-menu-icon text-secondary">Pay for
+                                    title="Inspection fee payment"><span class="nk-menu-icon text-danger">Pay for
                                         Inspection Fee</span>
                                 </a>
                             @endif
 
                             @if ($application->current_step == 11)
                                 <a href="{{ route('equipment_fee_payment', $application->id) }}" target="_blank"
-                                    title="Equipment fee payment"><span class="nk-menu-icon text-secondary">Pay for
+                                    title="Equipment fee payment"><span class="nk-menu-icon text-danger">Pay for
                                         Equipment and Monitoring Fees</span>
                                 </a>
                             @endif

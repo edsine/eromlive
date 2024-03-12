@@ -18,6 +18,24 @@ class EmployerController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function checkEmail(Request $request)
+    {
+        $email = $request->input('email');
+
+        // Check if the email already exists in the database
+        $exists = Employer::where('company_email', $email)->exists();
+
+        return response()->json(['exists' => $exists]);
+    }
+    public function checkPhone(Request $request)
+    {
+        $email = $request->input('phone');
+
+        // Check if the email already exists in the database
+        $exists = Employer::where('company_phone', $email)->exists();
+
+        return response()->json(['exists' => $exists]);
+    }
     public function index()
     {
         //

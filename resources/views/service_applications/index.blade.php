@@ -42,6 +42,91 @@
                                     <small class="text-danger">{{ $error }}</small>
                                 @endforeach
                             @endif
+                            @if(empty($service_app))
+                            <div class="card-title-group">
+                                <div class="card-title">
+                                    <h6 class="title">New Application</h6>
+                                </div>
+                            </div>
+                            <div class="data">
+                                <div class="data-group">
+                                    <div class="form-group w-100">
+                                        <form method="POST" action="{{ route('service-applications.store') }}"
+                                            enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="row">
+                                                <div class="row col-12">
+
+                                                    <div class="col-sm-6 mb-3">
+                                                        <label for="service_id">Select Service:</label>
+                                                        <select class="form-select js-select2" data-ui="xl"
+                                                            id="service_id" name="service_id" data-search="on" required>
+                                                            <option>Select A Service</option>
+                                                            @foreach ($services as $service)
+                                                                <option value="{{ $service->id }}">{{ $service->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-6 mb-3">
+                                                        <label for="service_type_id">Service Type:</label>
+                                                        <select class="form-select js-select2" data-ui="xl"
+                                                            id="service_type_id" name="service_type_id" required>
+                                                            <option>Select Service Type</option>
+                                                            <option value="mechanical">Mechanical</option>
+                                                            <option value="manual">Manual</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-12 mb-1">Coordinate 1:</div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group mb-3">
+                                                            <label for="latitude">Latitude:</label>
+                                                            <div class="form-control-wrap">
+                                                                <input type="text" class="form-control" name="latitude1" id="latitude1" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="longitude">Longitude:</label>
+                                                            <div class="form-control-wrap">
+                                                                <input type="text" class="form-control" name="longitude1" id="longitude1" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12 mb-1">Coordinate 2:</div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="latitude">Latitude:</label>
+                                                            <div class="form-control-wrap">
+                                                                <input type="text" class="form-control" name="latitude2" id="latitude2" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="longitude">Longitude:</label>
+                                                            <div class="form-control-wrap">
+                                                                <input type="text" class="form-control" name="longitude2" id="longitude2" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                
+
+                                                    <div class="col-sm-3">
+                                                        <button type="submit"
+                                                            class="mt-5 btn btn-secondary btn-lg mt-2"><em
+                                                                class="icon ni ni-save me-2"></em>Submit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+                            @if(!empty($service_app) && $service_app->current_step == 15)
                             <div class="card-title-group">
                                 <div class="card-title">
                                     <h6 class="title">New Application</h6>
@@ -112,99 +197,7 @@
                                                     </div>
                                                     
 
-                                                    {{-- <div class="mt-5 col-sm-12">
-                                                        <label class="form-label" for="default-06">Upload Documents
-                                                        </label>
-                                                    </div>
-
-                                                    <div class="col-sm-6">
-                                                        <label for="title_document">Title Document:</label>
-                                                        <div class="form-control-wrap">
-                                                            <div class="form-file">
-                                                                <input type="hidden" name="title_document"
-                                                                    value="Title Document" />
-                                                                <input type="file" class="form-file-input" id="document"
-                                                                    name="title_document_file" required>
-                                                                <label class="form-file-label" for="customFile">Choose
-                                                                    file</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6">
-                                                        <label for="survey_document">Survey Document:</label>
-                                                        <div class="form-control-wrap">
-                                                            <div class="form-file">
-                                                                <input type="hidden" name="survey_document"
-                                                                    value="Survey document" />
-                                                                <input type="file" class="form-file-input" id="document"
-                                                                    name="survey_document_file" required>
-                                                                <label class="form-file-label" for="customFile">Choose
-                                                                    file</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6">
-                                                        <label for="sand_search_report">Sand Search Report:</label>
-                                                        <div class="form-control-wrap">
-                                                            <div class="form-file">
-                                                                <input type="hidden" name="sand_search_report"
-                                                                    value="Sand search report" />
-                                                                <input type="file" class="form-file-input" id="document"
-                                                                    name="sand_search_report_file" required>
-                                                                <label class="form-file-label" for="customFile">Choose
-                                                                    file</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6">
-                                                        <label for="cac_certificate">CAC Certificate:</label>
-                                                        <div class="form-control-wrap">
-                                                            <div class="form-file">
-                                                                <input type="hidden" name="cac_certificate"
-                                                                    value="CAC certificate" />
-                                                                <input type="file" class="form-file-input" id="document"
-                                                                    name="cac_certificate_file" required>
-                                                                <label class="form-file-label" for="customFile">Choose
-                                                                    file</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6">
-                                                        <label for="pre_post_dredge_survey_drawings">Pre & Post Dredge
-                                                            Survey Drawings:</label>
-                                                        <div class="form-control-wrap">
-                                                            <div class="form-file">
-                                                                <input type="hidden"
-                                                                    name="pre_post_dredge_survey_drawings"
-                                                                    value="Pre & Post Dredge survey drawings" />
-                                                                <input type="file" class="form-file-input"
-                                                                    id="document"
-                                                                    name="pre_post_dredge_survey_drawings_file" required>
-                                                                <label class="form-file-label" for="customFile">Choose
-                                                                    file</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6">
-                                                        <label for="eia_report">E.I.A Report:</label>
-                                                        <div class="form-control-wrap">
-                                                            <div class="form-file">
-                                                                <input type="hidden" name="eia_report"
-                                                                    value="E.I.A Report" />
-                                                                <input type="file" class="form-file-input"
-                                                                    id="document" name="eia_report_file" required>
-                                                                <label class="form-file-label" for="customFile">Choose
-                                                                    file</label>
-                                                            </div>
-                                                        </div>
-                                                    </div> --}}
-
-
+                                                   
                                                     <div class="col-sm-3">
                                                         <button type="submit"
                                                             class="mt-5 btn btn-secondary btn-lg mt-2"><em
@@ -217,6 +210,9 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
+
+
 
                         </div><!-- .card-inner -->
                     </div><!-- .nk-ecwg -->
