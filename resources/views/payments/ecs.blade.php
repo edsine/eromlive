@@ -18,6 +18,7 @@
         $pending = auth()
             ->user()
             ->payments()
+            ->latest()
             ->first();
     @endphp
 
