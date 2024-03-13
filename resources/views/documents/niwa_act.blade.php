@@ -9,7 +9,7 @@
 
 @section('content')
 <?php 
-$userPayment = \App\Models\Payment::where('payment_type',1)->where('employer_id', auth()->user()->id)->where('amount', '5000.00')->first();
+$userPayment = \App\Models\Payment::where('payment_type',0)->where('employer_id', auth()->user()->id)->where('amount', '5000.00')->first();
         if(!empty($userPayment) && $userPayment->payment_status == 1 && $userPayment->approval_status == 1){
 ?>
     {{-- <div class="components-preview wide-md mx-auto"> --}}
