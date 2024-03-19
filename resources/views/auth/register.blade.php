@@ -3,12 +3,12 @@
 @section('title', 'Register')
 
 @section('content')
-<style>
-    span.text-danger{
-        font-size: 1.5rem;
-        font-weight: 800;
-    }
-</style>
+    <style>
+        span.text-danger {
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+    </style>
     <div class="nk-block nk-block-middle nk-auth-body wide-xs" style="max-width: 1000px !important;">
 
         <div class="card card-bordered">
@@ -29,7 +29,8 @@
                     <div class="nk-block-head">
                         <div class="nk-block-head-content">
                             <h4 class="nk-block-title text-center">National Inland Waterways Authority
-                                <br />Self Service Portal</h4>
+                                <br />Self Service Portal
+                            </h4>
                             {{-- <div class="nk-block-des">
                             <p>Create New Dashlite Account</p>
                         </div> --}}
@@ -43,10 +44,8 @@
                 @csrf
 
                 <div class="row g-0 col-sep col-sep-md col-sep-xl">
-
                     <div class="col-md-12 col-xl-12">
                         <div class="card-inner">
-
                             <ul class="nk-stepper-nav nk-stepper-nav-s1 stepper-nav is-hr">
                                 <li>
                                     <div class="step-item">
@@ -64,7 +63,7 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li>
+                                <li id="company_hide">
                                     <div class="step-item">
                                         <div class="step-text">
                                             <div class="lead-text">Company Details</div>
@@ -92,27 +91,13 @@
                         </div>
                     </div>
                     <div class="col-md-12 col-xl-12 pl-5">
-                       {{--  <h5 class="title mb-3 mt-3 ml-5">Registration Form</h5> --}}
-
                         <div class="py-2">
-                            {{-- <ul class="nav nav-tabs nav-tabs-s2">
-                                <li class="nav-item">
-                                    <a class="nav-link active" data-bs-toggle="tab" href="#private">New</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" data-bs-toggle="tab" href="#public">Old</a>
-                                </li>
-
-                            </ul> --}}
                             <div class="tab-content">
                                 <div class="tab-pane active" id="private">
                                     <div class="card-inner">
                                         <div class="nk-stepper-content">
                                             <div class="nk-stepper-steps stepper-steps">
-
                                                 <div class="nk-stepper-step">
-                                                    <!-- <h5 class="title mb-3">Employer Status</h5> -->
-                                                    {{-- <p>Registered Employers can use their ECS Number </p> --}}
                                                     <ul class="row g-3" style="display: none;">
                                                         <li class="col-6">
                                                             <div
@@ -169,8 +154,8 @@
                                                             <div
                                                                 class="custom-control custom-control-sm custom-radio pro-control custom-control-full">
                                                                 <input type="radio" class="custom-control-input"
-                                                                    name="employer_status" id="new_employer2" value="new"
-                                                                    required>
+                                                                    name="employer_status" id="new_employer2"
+                                                                    value="new" required>
                                                                 <label class="custom-control-label" for="new_employer2">
                                                                     <span class="d-flex flex-column text-center px-sm-3">
                                                                         <em
@@ -228,19 +213,70 @@
 
                                                         <div class="col-12">
                                                             <div class="form-group">
+                                                                <h5 class="title mb-4">User Type</h5>
+                                                                <label class="form-label" for="cp1-team-size">Select User
+                                                                    Type<span class="text-danger">*</span></label>
+
+                                                                <div class="card-group">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input"
+                                                                                    type="radio" name="user_type"
+                                                                                    id="privateRadio" value="private"
+                                                                                    checked>
+                                                                                <label class="form-check-label"
+                                                                                    for="privateRadio">Private</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input"
+                                                                                    type="radio" name="user_type"
+                                                                                    id="companyRadio" value="company">
+                                                                                <label class="form-check-label"
+                                                                                    for="companyRadio">Registered
+                                                                                    Company</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input"
+                                                                                    type="radio" name="user_type"
+                                                                                    id="partnersRadio" value="partners">
+                                                                                <label class="form-check-label"
+                                                                                    for="partnersRadio">Partners/Investors</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group">
                                                                 <h5 class="title mb-4">Area Office</h5>
-                                                                <label class="form-label" for="cp1-team-size">Select Area Office <span class="text-danger">*</span></label>
+                                                                <label class="form-label" for="cp1-team-size">Select Area
+                                                                    Office <span class="text-danger">*</span></label>
                                                                 <div class="form-control-wrap">
-                                                                    <select class="form-select js-select2" id="branch_id" name="branch_id" data-placeholder="Select Branch" data-search="on" required>
+                                                                    <select class="form-select js-select2" id="branch_id"
+                                                                        name="branch_id" data-placeholder="Select Branch"
+                                                                        data-search="on" required>
                                                                         <option value=""></option>
                                                                         @foreach ($branches as $branch)
-                                                                            <option value="{{ $branch->id ?? $branch->branch_id }}">{{ $branch->branch_name }}</option>
+                                                                            <option
+                                                                                value="{{ $branch->id ?? $branch->branch_id }}">
+                                                                                {{ $branch->branch_name }}</option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        
+
                                                     </div>
                                                 </div>
                                                 <div class="nk-stepper-step">
@@ -279,10 +315,21 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <div class="col-sm-6" id="personal_address-hide">
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="personal_address">Personal
+                                                                    Address <span class="text-danger">*</span></label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" class="form-control"
+                                                                        id="personal_address" name="personal_address"
+                                                                        placeholder="Personal Address" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
-                                                                <label class="form-label"
-                                                                    for="contact_position">Position <span class="text-danger">*</span></label>
+                                                                <label class="form-label" for="contact_position">Position
+                                                                    <span class="text-danger">*</span></label>
                                                                 <div class="form-control-wrap">
                                                                     <input type="text" class="form-control"
                                                                         id="contact_position" name="contact_position"
@@ -297,25 +344,29 @@
                                                                 <div class="form-control-wrap">
                                                                     <input type="text" class="form-control"
                                                                         id="company_phone" name="company_phone"
-                                                                        placeholder="Enter Contact Phone" required pattern="\d+">
-                                                                        <span id="phone-error" class="text-danger"></span> <!-- Display error message here -->
+                                                                        placeholder="Enter Contact Phone" required
+                                                                        pattern="\d+">
+                                                                    <span id="phone-error" class="text-danger"></span>
+                                                                    <!-- Display error message here -->
 
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-sm-6">
+                                                        <div class="col-sm-6" id="contact_number-hide">
                                                             <div class="form-group">
-                                                                <label class="form-label" for="contact_number">NIN <span class="text-danger">*</span></label>
+                                                                <label class="form-label" for="contact_number">NIN <span
+                                                                        class="text-danger">*</span></label>
                                                                 <div class="form-control-wrap">
                                                                     <input type="text" class="form-control"
                                                                         id="contact_number" name="contact_number"
-                                                                        placeholder="Enter Contact NIN" required pattern="\d+">
+                                                                        placeholder="Enter Contact NIN" required
+                                                                        pattern="\d+">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="nk-stepper-step">
+                                                <div class="nk-stepper-step" id="company_hide-content">
                                                     <h5 class="title mb-3">Company Details</h5>
                                                     <div class="row g-3">
                                                         <div class="col-12">
@@ -329,29 +380,6 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                       {{--  <div class="col-sm-6">
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="business_area">Business
-                                                                    Type</label>
-                                                                <div class="form-control-wrap">
-                                                                    <select class="form-select js-select2"
-                                                                        id="business_area" name="business_area"
-                                                                        data-placeholder="Select Type" required>
-                                                                        <option value="">Select Type</option>
-                                                                        <option value="Public / Private Limited Company">
-                                                                            Public /
-                                                                            Private Limited
-                                                                            Company</option>
-                                                                        <option value="Informal Sector Employer">Informal
-                                                                            Sector
-                                                                            Employer</option>
-                                                                        <option value="Partnership">Partnership</option>
-                                                                        <option value="Sole Proprietor">Sole Proprietor
-                                                                        </option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div> --}}
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="company_rcnumber">RC
@@ -379,10 +407,14 @@
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
-                                                                <label class="form-label" for="company_email">Company Email <span class="text-danger">*</span></label>
+                                                                <label class="form-label" for="company_email">Company
+                                                                    Email <span class="text-danger">*</span></label>
                                                                 <div class="form-control-wrap">
-                                                                    <input type="email" class="form-control" id="company_email" name="company_email" placeholder="Company Email" required>
-                                                                    <span id="email-error" class="text-danger"></span> <!-- Display error message here -->
+                                                                    <input type="email" class="form-control"
+                                                                        id="company_email" name="company_email"
+                                                                        placeholder="Company Email" required>
+                                                                    <span id="email-error" class="text-danger"></span>
+                                                                    <!-- Display error message here -->
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -435,7 +467,7 @@
                                                 <div class="nk-stepper-step">
                                                     <h5 class="title mb-3">Passwords</h5>
                                                     <p>Set account access.</p>
-                                                     {{-- <div class="row g-3">
+                                                    {{-- <div class="row g-3">
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <label class="form-label"
@@ -2876,8 +2908,8 @@
                                                 </div>
                                             </div>
                                             <ul class="nk-stepper-pagination pt-4 gx-4 gy-2 stepper-pagination">
-                                                <li class="step-prev"><button
-                                                        class="btn btn-dim btn-primary" style="background: #392C70;">Back</button></li>
+                                                <li class="step-prev"><button class="btn btn-dim btn-primary"
+                                                        style="background: #392C70;">Back</button></li>
                                                 <li class="step-next"><button class="btn btn-primary">Continue</button>
                                                 </li>
                                                 <li class="step-submit"><button type="submit" class="btn btn-primary"
@@ -2887,7 +2919,7 @@
                                     </div>
                                 </div>
                                 <div class="tab-pane" id="public">
-                                    
+
                                     <div class="row ml-3 g-3 mt-1">
                                         <div class="col-sm-8">
                                             <div class="form-group">
@@ -2920,13 +2952,65 @@
         <div class="form-note-s2 text-center pt-4">
             <p>All fields marked with asterisks are compulsory.</p>
             Already have an account? <a href="{{ route('login') }}"><strong>Sign in instead</strong></a>
-        </div>        
+        </div>
     </div>
 
 @endsection
 
 
 @push('scripts')
+    <script>
+                    const companyContent = document.getElementById('company_hide-content');
+        function hideCompanyFields() {
+
+                                document.getElementById('personal_address-hide').style.display = 'block';
+                    document.getElementById('contact_number-hide').style.display = 'block';
+                    document.getElementById('company_hide').style.display = 'none';
+
+                    companyContent.classList.remove('nk-stepper-step');
+                    companyContent.style.display = 'none';
+        }
+
+        hideCompanyFields();
+
+        document.querySelectorAll('input[name="user_type"]').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                var userType = this.value;
+                
+        
+                if (userType === 'private') {
+
+                    hideCompanyFields();
+
+                } else {
+                    document.getElementById('contact_number-hide').style.display = 'none';
+                    document.getElementById('personal_address-hide').style.display = 'none';
+                    document.getElementById('company_hide').style.display = 'block';
+                    companyContent.classList.add('nk-stepper-step');
+                    companyContent.style.display = 'block';
+                }
+                // Update UserType column value based on selected radio button
+                document.getElementById('UserType').value = userType;
+            });
+        });
+    </script>
+
+
+    <script>
+        // Add click event listener to each radio button
+        document.querySelectorAll('input[name="userType"]').forEach(function(radio) {
+            radio.addEventListener('click', function() {
+                // Remove border from all cards
+                document.querySelectorAll('.card').forEach(function(card) {
+                    card.classList.remove('border', 'border-primary');
+                });
+                // Add border to the clicked card
+                this.closest('.card').classList.add('border', 'border-primary');
+            });
+        });
+    </script>
+
+
     <script>
         function formSubmit() {
             document.getElementById("stepper-create-profile").submit();
@@ -3132,66 +3216,64 @@
 
     <script>
         document.getElementById('company_email').addEventListener('blur', function() {
-    var email = this.value.trim();
-    var emailError = document.getElementById('email-error');
-    
-    // Clear previous error message
-    emailError.textContent = '';
+            var email = this.value.trim();
+            var emailError = document.getElementById('email-error');
 
-    // Check if email is empty
-    if (email === '') {
-        return;
-    }
+            // Clear previous error message
+            emailError.textContent = '';
 
-    // Perform AJAX request to check if email already exists
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/check-email?email=' + encodeURIComponent(email), true);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                var response = JSON.parse(xhr.responseText);
-                if (response.exists) {
-                    emailError.textContent = 'Email already exists';
-                }
-            } else {
-                console.error('Request failed:', xhr.status, xhr.statusText);
+            // Check if email is empty
+            if (email === '') {
+                return;
             }
-        }
-    };
-    xhr.send();
-});
 
+            // Perform AJAX request to check if email already exists
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/check-email?email=' + encodeURIComponent(email), true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        if (response.exists) {
+                            emailError.textContent = 'Email already exists';
+                        }
+                    } else {
+                        console.error('Request failed:', xhr.status, xhr.statusText);
+                    }
+                }
+            };
+            xhr.send();
+        });
     </script>
     <script>
         document.getElementById('company_phone').addEventListener('blur', function() {
-    var phone = this.value.trim();
-    var phoneError = document.getElementById('phone-error');
-    
-    // Clear previous error message
-    phoneError.textContent = '';
+            var phone = this.value.trim();
+            var phoneError = document.getElementById('phone-error');
 
-    // Check if email is empty
-    if (phone === '') {
-        return;
-    }
+            // Clear previous error message
+            phoneError.textContent = '';
 
-    // Perform AJAX request to check if email already exists
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/check-phone?phone=' + encodeURIComponent(phone), true);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                var response = JSON.parse(xhr.responseText);
-                if (response.exists) {
-                    phoneError.textContent = 'Phone number already exists';
-                }
-            } else {
-                console.error('Request failed:', xhr.status, xhr.statusText);
+            // Check if email is empty
+            if (phone === '') {
+                return;
             }
-        }
-    };
-    xhr.send();
-});
 
+            // Perform AJAX request to check if email already exists
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/check-phone?phone=' + encodeURIComponent(phone), true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        if (response.exists) {
+                            phoneError.textContent = 'Phone number already exists';
+                        }
+                    } else {
+                        console.error('Request failed:', xhr.status, xhr.statusText);
+                    }
+                }
+            };
+            xhr.send();
+        });
     </script>
 @endpush

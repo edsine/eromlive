@@ -41,6 +41,8 @@ class Employer extends Authenticatable
         'ecs_number',
         'paid_registration',
         'inspection_status',
+        'user_type',
+        'personal_address'
     ];
 
     /**
