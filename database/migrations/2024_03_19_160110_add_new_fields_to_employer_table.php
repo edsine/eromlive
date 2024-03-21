@@ -15,6 +15,9 @@ return new class extends Migration
             $table->string('user_type');
             $table->text('personal_address')->nullable();
             $table->string('contact_number')->nullable()->change();
+            $table->string('company_name')->nullable()->change();
+            $table->string('company_address')->nullable()->change();
+            $table->string('company_email')->nullable()->change();
             $table->string('company_rcnumber')->nullable()->change();
         });
     }
@@ -28,6 +31,9 @@ return new class extends Migration
             $table->dropColumn('user_type');
             $table->dropColumn('personal_address');
             $table->string('contact_number')->change();
+            $table->string('company_name')->change();
+            $table->string('company_address')->change();
+            $table->string('company_email')->change();
             $table->string('company_rcnumber')->change();
         });
     }
