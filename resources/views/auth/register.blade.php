@@ -2967,8 +2967,8 @@
                     document.getElementById('contact_number-hide').style.display = 'block';
                     document.getElementById('company_hide').style.display = 'none';
 
-                    companyContent.classList.remove('nk-stepper-step');
-                    companyContent.style.display = 'none';
+                    // companyContent.classList.remove('nk-stepper-step');
+                    // companyContent.style.display = 'none';
         }
 
         hideCompanyFields();
@@ -2986,11 +2986,11 @@
                     document.getElementById('contact_number-hide').style.display = 'none';
                     document.getElementById('personal_address-hide').style.display = 'none';
                     document.getElementById('company_hide').style.display = 'block';
-                    companyContent.classList.add('nk-stepper-step');
-                    companyContent.style.display = 'block';
+                    // companyContent.classList.add('nk-stepper-step');
+                    // companyContent.style.display = 'block';
                 }
                 // Update UserType column value based on selected radio button
-                document.getElementById('UserType').value = userType;
+                // document.getElementById('UserType').value = userType;
             });
         });
     </script>
@@ -2998,7 +2998,7 @@
 
     <script>
         // Add click event listener to each radio button
-        document.querySelectorAll('input[name="userType"]').forEach(function(radio) {
+        document.querySelectorAll('input[name="user_type"]').forEach(function(radio) {
             radio.addEventListener('click', function() {
                 // Remove border from all cards
                 document.querySelectorAll('.card').forEach(function(card) {

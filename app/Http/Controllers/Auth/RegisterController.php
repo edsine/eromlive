@@ -68,23 +68,23 @@ class RegisterController extends Controller
             'contact_firstname' => ['required', 'string', 'max:255'],
             'contact_middlename' => ['required', 'string', 'max:255'],
             'contact_position' => ['required', 'string', 'max:255'],
-            'company_phone' => ['required', 'string', 'max:255', 'unique:employers'],
-            'contact_number' => ['required', 'string', 'max:255'],
+            'company_phone' => ['nullable', 'string', 'max:255', 'unique:employers'],
+            'contact_number' => ['nullable', 'string', 'max:255'],
 
-            'company_state' => ['required', 'string', 'max:255'],
-            'company_localgovt' => ['required', 'string', 'max:255'],
-            'company_name' => ['required', 'string', 'max:255'],
+            'company_state' => ['nullable', 'string', 'max:255'],
+            'company_localgovt' => ['nullable', 'string', 'max:255'],
+            'company_name' => ['nullable', 'string', 'max:255'],
 
             //'company_name' => ['required', 'string', 'max:255'],
 
             //'business_area' => ['required', 'string', 'max:255'],
 
-            'company_rcnumber' => ['required', 'string', 'max:255'],
-            'cac_reg_year' => ['required', 'date', 'max:255'],
+            'company_rcnumber' => ['nullable', 'string', 'max:255'],
+            'cac_reg_year' => ['nullable', 'date', 'max:255'],
 
-            'company_address' => ['required', 'string'],
+            'company_address' => ['nullable', 'string'],
 
-            'company_email' => ['required', 'string', 'email', 'max:255', 'unique:employers'], // 'unique:employers'],
+            'company_email' => ['nullable', 'string', 'email', 'max:255', 'unique:employers'], // 'unique:employers'],
 
             'password' => ['required', 'string', 'min:8', 'confirmed'],
 
