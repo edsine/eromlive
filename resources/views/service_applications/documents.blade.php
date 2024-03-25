@@ -68,7 +68,7 @@
                                                                 <input type="hidden" name="title_document"
                                                                     value="Title Document" />
                                                                 <input type="file" class="form-file-input" id="document"
-                                                                    name="title_document_file" required>
+                                                                    name="title_document_file" required accept="application/pdf">
                                                                 <label class="form-file-label" for="customFile">Choose
                                                                     file</label>
                                                             </div>
@@ -82,7 +82,7 @@
                                                                 <input type="hidden" name="survey_document"
                                                                     value="Survey document" />
                                                                 <input type="file" class="form-file-input" id="document"
-                                                                    name="survey_document_file" required>
+                                                                    name="survey_document_file" required accept="application/pdf">
                                                                 <label class="form-file-label" for="customFile">Choose
                                                                     file</label>
                                                             </div>
@@ -96,7 +96,7 @@
                                                                 <input type="hidden" name="sand_search_report"
                                                                     value="Sand search report" />
                                                                 <input type="file" class="form-file-input" id="document"
-                                                                    name="sand_search_report_file" required>
+                                                                    name="sand_search_report_file" required accept="application/pdf">
                                                                 <label class="form-file-label" for="customFile">Choose
                                                                     file</label>
                                                             </div>
@@ -110,7 +110,7 @@
                                                                 <input type="hidden" name="cac_certificate"
                                                                     value="CAC certificate" />
                                                                 <input type="file" class="form-file-input" id="document"
-                                                                    name="cac_certificate_file" required>
+                                                                    name="cac_certificate_file" required accept="application/pdf">
                                                                 <label class="form-file-label" for="customFile">Choose
                                                                     file</label>
                                                             </div>
@@ -125,7 +125,7 @@
                                                                 <input type="hidden" name="pre_post_dredge_survey_drawings"
                                                                     value="Pre & Post Dredge survey drawings" />
                                                                 <input type="file" class="form-file-input" id="document"
-                                                                    name="pre_post_dredge_survey_drawings_file" required>
+                                                                    name="pre_post_dredge_survey_drawings_file" required accept="application/pdf">
                                                                 <label class="form-file-label" for="customFile">Choose
                                                                     file</label>
                                                             </div>
@@ -139,7 +139,7 @@
                                                                 <input type="hidden" name="eia_report"
                                                                     value="E.I.A Report" />
                                                                 <input type="file" class="form-file-input"
-                                                                    id="document" name="eia_report_file" required>
+                                                                    id="document" name="eia_report_file" required accept="application/pdf">
                                                                 <label class="form-file-label" for="customFile">Choose
                                                                     file</label>
                                                             </div>
