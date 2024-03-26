@@ -68,7 +68,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark px-5 py-3 py-lg-0">
             <a href="{{ url('/') }}" class="navbar-brand p-0">
                 <h1 class="m-0">
-                    <img style="height: 8vh;" src="{{ asset('assets/images/logo.png') }}" alt="">NIWA
+                    <img style="height: 8vh;" src="{{ asset('assets/images/logo.png') }}" alt="">
                 </h1>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -357,7 +357,7 @@
             <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.6s">
                 <div class="testimonial-item bg-light my-4">
                     <div class="d-flex align-items-center border-bottom pt-5 pb-4 px-5">
-                        <img class="img-fluid rounded" src="./img/testimonial-1.jpg" style="width: 60px; height: 60px;" >
+                        <img class="img-fluid rounded" src="{{ asset('assets/images/download.png') }}" style="width: 60px; height: 60px;" >
                         <div class="ps-4">
                             <h4 class="text-primary mb-1">Joseph Yobo</h4>
                             <small class="text-uppercase">Engineer</small>
@@ -369,7 +369,7 @@
                 </div>
                 <div class="testimonial-item bg-light my-4">
                     <div class="d-flex align-items-center border-bottom pt-5 pb-4 px-5">
-                        <img class="img-fluid rounded" src="./img/testimonial-2.jpg" style="width: 60px; height: 60px;" >
+                        <img class="img-fluid rounded" src="{{ asset('assets/images/download.png') }}" style="width: 60px; height: 60px;" >
                         <div class="ps-4">
                             <h4 class="text-primary mb-1">Mary Jabob</h4>
                             <small class="text-uppercase">Engineer</small>
@@ -381,9 +381,9 @@
                 </div>
                 <div class="testimonial-item bg-light my-4">
                     <div class="d-flex align-items-center border-bottom pt-5 pb-4 px-5">
-                        <img class="img-fluid rounded" src="./img/testimonial-3.jpg" style="width: 60px; height: 60px;" >
+                        <img class="img-fluid rounded" src="{{ asset('assets/images/download.png') }}" style="width: 60px; height: 60px;" >
                         <div class="ps-4">
-                            <h4 class="text-primary mb-1">Client Name</h4>
+                            <h4 class="text-primary mb-1">Sarah Logan</h4>
                             <small class="text-uppercase">Profession</small>
                         </div>
                     </div>
@@ -393,7 +393,7 @@
                 </div>
                 <div class="testimonial-item bg-light my-4">
                     <div class="d-flex align-items-center border-bottom pt-5 pb-4 px-5">
-                        <img class="img-fluid rounded" src="./img/testimonial-4.jpg" style="width: 60px; height: 60px;" >
+                        <img class="img-fluid rounded" src="{{ asset('assets/images/download.png') }}" style="width: 60px; height: 60px;" >
                         <div class="ps-4">
                             <h4 class="text-primary mb-1">Ngozi Edwin</h4>
                             <small class="text-uppercase">Engineer</small>
@@ -415,7 +415,7 @@
             <div class="row gx-5">
                 <div class="col-lg-4 col-md-6 footer-about">
                     <div class="d-flex flex-column align-items-center justify-content-center text-center h-100 bg-primary p-4">
-                        <a href="index.html" class="navbar-brand">
+                        <a href="#" class="navbar-brand">
                             <h1 class="m-0 text-white"><i class="fa fa-user-tie me-2"></i>NIWA</h1>
                         </a>
                         <p class="mt-3 mb-4">Experience the transformational power of NIWA. We are committed to continuously enhancing your journey</p>
