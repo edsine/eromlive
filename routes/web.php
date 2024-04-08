@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Route;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Support\Facades\Auth;
@@ -147,6 +148,7 @@ Route::get('/notification', function () {
     //$employer->notify(new EmployerRegistrationNotification($employer));
 });
 
+
 Route::get('/pdf', function () {
     $payment = App\Models\Payment::get()->last();
 
@@ -179,3 +181,6 @@ Route::get('/pdf', function () {
     $pdf->render();
     return $pdf->stream('invoice.pdf');
 });
+
+Route::resource('booking',BookingController::class)->middleware('auth');
+Route::post('showbooking',[BookingController::class,'showbooking'])->name('showbooking')->middleware('auth');
