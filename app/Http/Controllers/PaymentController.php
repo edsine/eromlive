@@ -157,6 +157,7 @@ class PaymentController extends Controller
 
     public function generateRemita(Request $request)
     {
+       
         //validation only for ECS payments
         $request->validate([
             'year' => 'required_with:contribution_period',
@@ -398,9 +399,9 @@ class PaymentController extends Controller
                 $employer = Employer::findOrFail($payment->employer_id);
                 $employer->update(['inspection_status' => 0]);
             }
-            
+
             return redirect()->route('service-applications.index')->with('success', $payment->payment_type == 1 ? 'Registration Payment successful!' : 'Payment successful!');
-            
+
             } else { //if payment was not successful
             //get and update transaction
             $payment = Payment::where('rrr', $request->ref)->first();

@@ -43,7 +43,7 @@ class RegisterController extends Controller
         // Customize the redirect logic here
         return route('payment.steps');
     }
-    
+
     /**
      * Create a new controller instance.
      *
@@ -172,6 +172,7 @@ class RegisterController extends Controller
         //$region = Region::all();
         $branches = Branch::all();
         $states = State::all();
+      
         return view('auth.register', compact('branches', 'states'));
     }
 }
