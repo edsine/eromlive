@@ -232,7 +232,10 @@
                                 <div class="data">
                                     <div class="data-group">
                                         <div class="form-group">
-                                            <label for="">Complete &#8358;5,000 registration fee payment</label>
+                                            @php
+                                                $reg_setup = App\Models\RegistrationFee::where('branch_id', auth()->user()->branch->id)->first();
+                                            @endphp
+                                            <label for="">Complete &#8358;{{ number_format($reg_setup->amount, 2) }} registration fee payment</label>
 
                                             {{-- WHEN RRR HAS BEEN GENERATED --}}
                                             <div class="form-group">
@@ -244,7 +247,7 @@
                                                         <input type="hidden" name="payment_type" id="payment_type"
                                                         value="0">
 
-                                                    <input type="hidden" name="amount" id="amount" value="5000">
+                                                    <input type="hidden" name="amount" id="amount" value="{{ $reg_setup->amount }}">
                                                     <button type="submit" class="btn btn-secondary btn-lg mt-2"><em
                                                             class="icon ni ni-save me-2"></em> Generate Invoice (Remita
                                                         RR)</button>

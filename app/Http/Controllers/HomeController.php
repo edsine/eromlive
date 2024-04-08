@@ -42,15 +42,12 @@ class HomeController extends Controller
         if(isset($reg_setup) && $reg_setup->amount != null){
             if (Auth::user()->paid_registration != 1){
                 return view('payments.steps');
+            }else{
+                return view('home', compact(['metrics']));
             }
-    }else{
-        return view('home', compact(['metrics']));
-    }
-        /* if (Auth::user()->paid_registration != 1){
-            return view('payments.steps');
         }else{
-            return view('home', compact(['metrics']));
+               return view('payments.steps');
         }
-         */
+        
     }
 }

@@ -88,6 +88,7 @@
                                                     </div>
                                                     <div class="col-6">
                                                         @php $user = Auth::user();
+                                                        $service_app = \App\Models\ServiceApplication::findOrFail($service_application_id);
                                                         if ($service_app) {
     $app_form_fee_type = \App\Models\ProcessingFee::where('branch_id', $user->branch->id)->where("processing_type_id", $service_app->service_type_id)->first();
     if ($app_form_fee_type && $app_form_fee_type->processing_type_id != 0) {
