@@ -15,6 +15,7 @@
             </ul>
         </li> --}}
         <?php
+        $reg_setup = \App\Models\RegistrationFee::where('branch_id', auth()->user()->branch->id)->first();
         $userPayment = \App\Models\Payment::where('payment_type',0)->where('employer_id', auth()->user()->id)->where('amount', '5000.00')->latest()->first();
         if(!empty($userPayment) && $userPayment->payment_status == 1){
         ?>
@@ -30,6 +31,22 @@
         </li>
         <?php
         }
+        
+        if(empty($reg_setup)){
+        ?>
+        {{-- <li>
+            <a href="{{ route('payment.index') }}"><i class="fa fa-bank"></i> <span>Apply For A Service</span></a>
+        </li> --}}
+
+        <li class="{{ Request::is('service-applications*') ? 'active' : '' }}">
+            <a href="{{ route('service-applications.index') }}"><i class="fa fa-user-md"></i> <span>Application Management</span></a>
+        </li>
+        <li>
+            <a href="{{ route('download.niwa.act') }}"><i class="fa fa-download"></i> <span>Download NIWA Act</span></a>
+        </li>
+        <?php
+        }
+
         if(auth()->user()->inspection_status == 1){
         ?>
         <li>

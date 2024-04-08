@@ -60,92 +60,22 @@
                                                         <label class="form-label" for="default-06">Upload Documents
                                                         </label>
                                                     </div>
+                                                    <?php $n = 1; ?>
+                                                    @foreach($doc_uploads as $doc_upload)
+    <div class="col-sm-6">
+        <label for="title_document">{{ $doc_upload->name }}:</label>
+        <div class="form-control-wrap">
+            <div class="form-file">
+                <input type="hidden" name="title_document[]" value="{{ $doc_upload->name }}" /> <!-- Notice the [] here -->
+                <input type="file" class="form-file-input" id="document_{{ $n++ }}" name="title_document_file[]" required accept="application/pdf">
+                <label class="form-file-label" for="document_{{ $n++ }}">Choose file</label> <!-- Use loop index for unique IDs -->
+            </div>
+        </div>
+    </div>
+@endforeach
 
-                                                    <div class="col-sm-6">
-                                                        <label for="title_document">Title Document:</label>
-                                                        <div class="form-control-wrap">
-                                                            <div class="form-file">
-                                                                <input type="hidden" name="title_document"
-                                                                    value="Title Document" />
-                                                                <input type="file" class="form-file-input" id="document"
-                                                                    name="title_document_file" required accept="application/pdf">
-                                                                <label class="form-file-label" for="customFile">Choose
-                                                                    file</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
 
-                                                    <div class="col-sm-6">
-                                                        <label for="survey_document">Survey Document:</label>
-                                                        <div class="form-control-wrap">
-                                                            <div class="form-file">
-                                                                <input type="hidden" name="survey_document"
-                                                                    value="Survey document" />
-                                                                <input type="file" class="form-file-input" id="document"
-                                                                    name="survey_document_file" required accept="application/pdf">
-                                                                <label class="form-file-label" for="customFile">Choose
-                                                                    file</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6">
-                                                        <label for="sand_search_report">Sand Search Report:</label>
-                                                        <div class="form-control-wrap">
-                                                            <div class="form-file">
-                                                                <input type="hidden" name="sand_search_report"
-                                                                    value="Sand search report" />
-                                                                <input type="file" class="form-file-input" id="document"
-                                                                    name="sand_search_report_file" required accept="application/pdf">
-                                                                <label class="form-file-label" for="customFile">Choose
-                                                                    file</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6">
-                                                        <label for="cac_certificate">CAC Certificate:</label>
-                                                        <div class="form-control-wrap">
-                                                            <div class="form-file">
-                                                                <input type="hidden" name="cac_certificate"
-                                                                    value="CAC certificate" />
-                                                                <input type="file" class="form-file-input" id="document"
-                                                                    name="cac_certificate_file" required accept="application/pdf">
-                                                                <label class="form-file-label" for="customFile">Choose
-                                                                    file</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6">
-                                                        <label for="pre_post_dredge_survey_drawings">Pre & Post Dredge
-                                                            Survey Drawings:</label>
-                                                        <div class="form-control-wrap">
-                                                            <div class="form-file">
-                                                                <input type="hidden" name="pre_post_dredge_survey_drawings"
-                                                                    value="Pre & Post Dredge survey drawings" />
-                                                                <input type="file" class="form-file-input" id="document"
-                                                                    name="pre_post_dredge_survey_drawings_file" required accept="application/pdf">
-                                                                <label class="form-file-label" for="customFile">Choose
-                                                                    file</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6">
-                                                        <label for="eia_report">E.I.A Report:</label>
-                                                        <div class="form-control-wrap">
-                                                            <div class="form-file">
-                                                                <input type="hidden" name="eia_report"
-                                                                    value="E.I.A Report" />
-                                                                <input type="file" class="form-file-input"
-                                                                    id="document" name="eia_report_file" required accept="application/pdf">
-                                                                <label class="form-file-label" for="customFile">Choose
-                                                                    file</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
+                                                   
 
                                                     <div class="col-sm-3">
                                                         <button type="submit"

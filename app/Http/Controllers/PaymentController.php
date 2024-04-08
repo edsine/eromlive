@@ -349,7 +349,7 @@ class PaymentController extends Controller
             $service_application = ServiceApplication::where('id', $payment->service_application_id)->first();
             if (!empty($service_application)) {
                 $service_application->application_form_payment_status = 1;
-                $new_current_step = $service_application->current_step + 1;
+                $new_current_step = $service_application->current_step + 3;
                 $service_application->current_step = $new_current_step;
                 if ($new_current_step) {
                     $service_application->status_summary = 'Waiting for document and payment verification';
