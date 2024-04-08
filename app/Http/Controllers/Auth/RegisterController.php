@@ -41,7 +41,8 @@ class RegisterController extends Controller
     public function redirectTo()
     {
         // Customize the redirect logic here
-        return route('payment.steps');
+        //return route('payment.steps');
+        return route('home');
     }
     
     /**
