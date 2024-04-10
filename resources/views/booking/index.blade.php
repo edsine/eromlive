@@ -15,7 +15,6 @@
             <div class="nk-block-head-content">
                 <h3 class="nk-block-title page-title">NIWA BOOKING FURRY</h3>
                 <div class="nk-block-des text-soft">
-                    {{-- <a href="{{route('booking.index')}}" class="btn btn-secondary">Search Again <i class="ni ni-search"></i></a> --}}
                     <p>List of all Bookings</p>
                 </div>
             </div><!-- .nk-block-head-content -->
