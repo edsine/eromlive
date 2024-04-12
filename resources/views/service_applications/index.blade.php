@@ -59,21 +59,18 @@
 
                                                     <div class="col-sm-6 mb-3">
                                                         <label for="service_id">Select Service:</label>
-                                                        <select class="form-select js-select2" data-ui="xl"
-                                                            id="service_id" name="service_id" data-search="on" required>
+                                                        <select class="form-select js-select2" data-ui="xl" id="service_id1" name="service_id" data-search="on" required>
                                                             <option>Select A Service</option>
                                                             @foreach ($services as $service)
                                                             <option value="{{ $service->id }}">{{ ucfirst($service->name) }}</option>
-                                                        @endforeach
+                                                            @endforeach
                                                         </select>
                                                     </div>
+                                                    
                                                     <div class="col-sm-6 mb-3">
                                                         <label for="service_type_id">Service Type:</label>
-                                                        <select class="form-select js-select2" data-ui="xl"
-                                                            id="service_type_id" name="service_type_id" required>
+                                                        <select class="form-select js-select2" data-ui="xl" id="service_type_id1" name="service_type_id" required>
                                                             <option>Select Service Type</option>
-                                                            <option value="mechanical">Mechanical</option>
-                                                            <option value="manual">Manual</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-sm-12 mb-1">Coordinate 1:</div>
@@ -142,21 +139,18 @@
 
                                                     <div class="col-sm-6 mb-3">
                                                         <label for="service_id">Select Service:</label>
-                                                        <select class="form-select js-select2" data-ui="xl"
-                                                            id="service_id" name="service_id" data-search="on" required>
+                                                        <select class="form-select js-select2" data-ui="xl" id="service_id2" name="service_id" data-search="on" required>
                                                             <option>Select A Service</option>
                                                             @foreach ($services as $service)
                                                             <option value="{{ $service->id }}">{{ ucfirst($service->name) }}</option>
-                                                        @endforeach
+                                                            @endforeach
                                                         </select>
                                                     </div>
+                                                    
                                                     <div class="col-sm-6 mb-3">
                                                         <label for="service_type_id">Service Type:</label>
-                                                        <select class="form-select js-select2" data-ui="xl"
-                                                            id="service_type_id" name="service_type_id" required>
+                                                        <select class="form-select js-select2" data-ui="xl" id="service_type_id2" name="service_type_id" required>
                                                             <option>Select Service Type</option>
-                                                            <option value="mechanical">Mechanical</option>
-                                                            <option value="manual">Manual</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-sm-12 mb-1">Coordinate 1:</div>
@@ -227,6 +221,57 @@
         @include('service_applications.table')
 
     </div> <!-- nk-block -->
-
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+        $('#service_id1').change(function () {
+            var serviceId = $(this).val();
+             if (serviceId) {
+                $.ajax({
+                    type: "GET",
+                    url: "/services/" + serviceId + "/processing-types",
+                    success: function (data) {
+                        $('#service_type_id1').empty();
+                        if (data.length > 0) {
+                            $.each(data, function (key, value) {
+                                $('#service_type_id1').append('<option value="' + value.name + '">' + value.name + '</option>');
+                            });
+                        } else {
+                            $('#service_type_id1').append('<option value="none">No result</option>');
+                        }
+                    }
+                });
+            } else {
+                $('#service_type_id1').empty();
+            }
+        });
+    });
+    </script>
+    <script>
+         $(document).ready(function () {
+        $('#service_id2').change(function () {
+            var serviceId = $(this).val();
+             if (serviceId) {
+                $.ajax({
+                    type: "GET",
+                    url: "/services/" + serviceId + "/processing-types",
+                    success: function (data) {
+                        $('#service_type_id2').empty();
+                        if (data.length > 0) {
+                            $.each(data, function (key, value) {
+                                $('#service_type_id2').append('<option value="' + value.name + '">' + value.name + '</option>');
+                            });
+                        } else {
+                            $('#service_type_id2').append('<option value="0">No result</option>');
+                        }
+                    }
+                });
+            } else {
+                $('#service_type_id2').empty();
+            }
+        });
+    });
+        
+    </script>
     {{-- </div><!-- .components-preview --> --}}
 @endsection

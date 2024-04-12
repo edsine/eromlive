@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Route;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Support\Facades\Auth;
@@ -116,6 +117,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('inspection-fee-payment/{id}', [App\Http\Controllers\ServiceApplicationController::class, 'inspectionFeePayment'])->name('inspection_fee_payment');
     Route::get('equipment-fee-payment/{id}', [App\Http\Controllers\ServiceApplicationController::class, 'equipmentFeePayment'])->name('equipment_fee_payment');
     Route::get('permit-document/{id}', [App\Http\Controllers\ServiceApplicationController::class, 'downloadPermit'])->name('download_permit');
+
+    Route::get('/services/{service}/processing-types', 'App\Http\Controllers\ServiceApplicationController@getProcessingTypes');
+
 });
 
 Route::get('/notification', function () {
@@ -146,6 +150,7 @@ Route::get('/notification', function () {
     ($employer))->toMail($employer); */
     //$employer->notify(new EmployerRegistrationNotification($employer));
 });
+
 
 Route::get('/pdf', function () {
     $payment = App\Models\Payment::get()->last();
@@ -179,3 +184,6 @@ Route::get('/pdf', function () {
     $pdf->render();
     return $pdf->stream('invoice.pdf');
 });
+
+Route::resource('booking',BookingController::class)->middleware('auth');
+Route::post('showbooking',[BookingController::class,'showbooking'])->name('showbooking')->middleware('auth');

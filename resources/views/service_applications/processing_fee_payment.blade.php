@@ -87,25 +87,44 @@
                                                             RR)</button>
                                                     </div>
                                                     <div class="col-6">
+                                                        @php $user = Auth::user();
+                                                        $service_app = \App\Models\ServiceApplication::findOrFail($service_application_id);
+                                                        if ($service_app) {
+    $app_form_fee_type = \App\Models\ProcessingFee::where('branch_id', $user->branch->id)->where("processing_type_id", $service_app->service_type_id)->first();
+    if ($app_form_fee_type && $app_form_fee_type->processing_type_id != 0) {
+        $app_form_fee = $app_form_fee_type;
+    } else {
+        $app_form_fee = \App\Models\ProcessingFee::where('branch_id', $user->branch->id)->where("service_id", $service_app->service_id)->first();
+    }
+} else {
+    // Handle the case when the ServiceApplication is not found
+    $app_form_fee = null;
+}
+                                                         
+                                                        @endphp
                                                         <label for="">Payment due is:</label><br />
                                                         <p>Processing Fee:
-                                                            @if ($service_application->service_type_id == 'mechanical')
+                                                            <strong class="fs-3"
+                                                                    id="processing_fee">&#8358;{{ number_format($app_form_fee ? $app_form_fee->amount : '0', 2) }}</strong>
+                                                            {{-- @if ($service_application->service_type_id == 'mechanical')
                                                                 <strong class="fs-3"
-                                                                    id="processing_fee">&#8358;{{ number_format(150000.0, 2) }}</strong>
+                                                                    id="processing_fee">&#8358;{{ number_format($app_form_fee ? $app_form_fee->amount : '0', 2) }}</strong>
                                                             @else
                                                                 <strong class="fs-3"
                                                                     id="processing_fee">&#8358;{{ number_format(7500.0, 2) }}</strong>
-                                                            @endif
+                                                            @endif --}}
                                                         </p>
                                                         <input type="hidden" name="payment_type" id="payment_type"
                                                             value="2">
-                                                        @if ($service_application->service_type_id == 'mechanical')
+                                                        <input type="hidden" name="amount" id="amount"
+                                                            value="{{ $app_form_fee ? $app_form_fee->amount : '0' }}">
+                                                        {{-- @if ($service_application->service_type_id == 'mechanical')
                                                             <input type="hidden" name="amount" id="amount"
                                                                 value="150000">
                                                         @else
                                                             <input type="hidden" name="amount" id="amount"
                                                                 value="7500">
-                                                        @endif
+                                                        @endif --}}
                                                         <input type="hidden" name="service_application_id"
                                                             value="{{ $service_application->id }}">
                                                     </div>

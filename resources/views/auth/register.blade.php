@@ -2960,15 +2960,16 @@
 
 @push('scripts')
     <script>
-                    const companyContent = document.getElementById('company_hide-content');
+        const companyContent = document.getElementById('company_hide-content');
+
         function hideCompanyFields() {
 
-                                document.getElementById('personal_address-hide').style.display = 'block';
-                    document.getElementById('contact_number-hide').style.display = 'block';
-                    document.getElementById('company_hide').style.display = 'none';
+            document.getElementById('personal_address-hide').style.display = 'block';
+            document.getElementById('contact_number-hide').style.display = 'block';
+            document.getElementById('company_hide').style.display = 'none';
 
-                    // companyContent.classList.remove('nk-stepper-step');
-                    // companyContent.style.display = 'none';
+            // companyContent.classList.remove('nk-stepper-step');
+            // companyContent.style.display = 'none';
         }
 
         hideCompanyFields();
@@ -2976,8 +2977,8 @@
         document.querySelectorAll('input[name="user_type"]').forEach(function(radio) {
             radio.addEventListener('change', function() {
                 var userType = this.value;
-                
-        
+
+
                 if (userType === 'private') {
 
                     hideCompanyFields();

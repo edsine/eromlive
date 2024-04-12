@@ -87,14 +87,19 @@
                                                             RR)</button>
                                                     </div>
                                                     <div class="col-6">
+                                                        @php $user = Auth::user();
+                                                            $service_app = \App\Models\ServiceApplication::findOrFail($service_application_id);
+                                                            $app_form_fee = \App\Models\ApplicationFormFee::where('branch_id', $user->branch->id)->where("service_id",$service_app->service_id)->first();
+                                                            @endphp
                                                         <label for="">Payment due is:</label><br />
                                                         <p>Application Form Fee:
                                                             <strong class="fs-3"
-                                                                id="application_form_fee">&#8358;{{ number_format(25000.0, 2) }}</strong>
+                                                                id="application_form_fee">&#8358;{{ number_format($app_form_fee ? $app_form_fee->amount : '0', 2) }}</strong>
                                                         </p>
                                                         <input type="hidden" name="payment_type" id="payment_type"
                                                             value="1">
-                                                        <input type="hidden" name="amount" id="amount" value="25000">
+                                                            
+                                                        <input type="hidden" name="amount" id="amount" value="{{ $app_form_fee ? $app_form_fee->amount : '0' }}">
                                                         <input type="hidden" name="service_application_id"
                                                             value="{{ $service_application_id }}">
                                                     </div>

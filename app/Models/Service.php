@@ -28,4 +28,12 @@ class Service extends Model
     {
         return $this->hasMany(Payment::class, 'service_id', 'id');
     }
+
+    /**
+     * Get the processing types associated with the service.
+     */
+    public function processingTypes()
+{
+    return $this->hasMany(ProcessingType::class, 'service_id', 'id');
+}
 }

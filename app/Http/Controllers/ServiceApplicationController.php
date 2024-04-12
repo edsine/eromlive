@@ -10,6 +10,9 @@ use App\Models\ServiceApplicationDocument;
 use App\Http\Requests\StoreServiceApplicationRequest;
 use App\Http\Requests\UpdateServiceApplicationRequest;
 use App\Http\Requests\StoreServiceApplicationDocumentRequest;
+use App\Models\ApplicationFormFee;
+use App\Models\DocumentUpload;
+use App\Models\ProcessingType;
 
 class ServiceApplicationController extends Controller
 {
@@ -19,14 +22,23 @@ class ServiceApplicationController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $services = Service::all();
+        $services = Service::where('branch_id', $user->branch->id)->get();
 
         $service_applications = ServiceApplication::where('user_id', $user->id)->paginate(10);
 
         $service_app = ServiceApplication::where('user_id', $user->id)->first();
+        /* if($service_app){
+        $pro_type = ProcessingType::where('service_id', $service_app->service_id)->get();
+        } */
 
         return view('service_applications.index', compact('services', 'service_applications', 'service_app'));
     }
+
+    public function getProcessingTypes(Service $service)
+{
+    $processingTypes = $service->processingTypes()->get();
+    return response()->json($processingTypes);
+}
 
     public function documentIndex($id)
     {
@@ -36,7 +48,11 @@ class ServiceApplicationController extends Controller
 
         $documents = ServiceApplicationDocument::where('service_application_id', $service_application->id)->paginate(10);
 
-        return view('service_applications.documents', compact('documents', 'service_application'));
+        if($service_application){
+        $doc_uploads = DocumentUpload::where('branch_id', $user->branch->id)->where("service_id",$service_application->service_id)->get();
+        }
+
+        return view('service_applications.documents', compact('documents', 'service_application', 'doc_uploads'));
     }
 
     public function resubmitDocuments($id)
@@ -53,52 +69,76 @@ class ServiceApplicationController extends Controller
 
     public function documentStore(StoreServiceApplicationDocumentRequest $request, $service_application_id)
     {
+        // Retrieve all input data from the request
         $input = $request->all();
-
+        
+        // Define the documents array mapping input names to file input names
         $documents = [
             'title_document' => 'title_document_file',
-            'survey_document' => 'survey_document_file',
-            'sand_search_report' => 'sand_search_report_file',
-            'cac_certificate' => 'cac_certificate_file',
-            'pre_post_dredge_survey_drawings' => 'pre_post_dredge_survey_drawings_file',
-            'eia_report' => 'eia_report_file',
         ];
-
+    
+        // Find the service application by ID
         $service_application = ServiceApplication::findOrFail($service_application_id);
-
+    
+        // Define the storage path and get the user ID
         $path = 'documents/';
-        $userID = Auth::user()->id;
+        $userID = Auth::id(); // Use Auth::id() to get the authenticated user's ID
+    
+        // Array to store file paths
+        $filePaths = [];
+    
+        // Iterate through the documents array and process each file
+        //foreach ($documents as $titleInput => $fileInput) {
+        foreach ($request->file('title_document_file') as $index => $file) {
+            // Generate a unique file name
+            $name = $this->generateFileName($file);
 
-        $file_paths = [];
+            // Move the file to the storage directory
+            $file->move(public_path('storage/' . $path), $name);
 
-        foreach ($documents as $titleInput => $fileInput) {
-            $title = $request->input($titleInput);
-            $file = $request->file($fileInput);
+            // Construct the file path
+            $filePath = $path . $name;
 
-            if ($file) {
-                $name = $userID . '_documents.' . $file->getClientOriginalExtension();
-                $file->move(public_path('storage/' . $path), $name);
-                $filePath = $path . $name;
+            // Store the file path in the array
+            $filePaths[$request->title_document[$index]] = $filePath;
 
-                $file_paths[$title] = $filePath;
-            }
+            ServiceApplicationDocument::create([
+                'service_application_id' => $service_application->id,
+                'name' => $request->title_document[$index],
+                'path' => $filePath,
+            ]);
+           
         }
-
-
+    
+        // Save the user ID to the input data
         $input['user_id'] = $userID;
-
-        foreach ($file_paths as $title => $file_path) {
-            $documents =  ServiceApplicationDocument::create([
+    
+        // Iterate through the file paths and create ServiceApplicationDocument records
+       /*  foreach ($filePaths as $title => $filePath) {
+            ServiceApplicationDocument::create([
                 'service_application_id' => $service_application->id,
                 'name' => $title,
-                'path' => $file_path,
+                'path' => $filePath,
             ]);
-        }
-
-        $service_application->current_step = 4;
+        } */
+    
+        // Update the current step of the service application
+        $service_application->current_step = 5;
         $service_application->save();
-
-        return redirect(route('service-applications.documents.index', $service_application->id))->with('success', 'Documents saved successfully.');
+    
+        // Redirect back with success message
+        return redirect(route('service-applications.documents.index', $service_application->id))
+            ->with('success', 'Documents saved successfully.');
+    }
+    
+    // Function to generate a unique file name
+    private function generateFileName($file)
+    {
+        $userID = auth()->id();
+        $timestamp = time();
+        $originalName = $file->getClientOriginalName();
+        $extension = $file->getClientOriginalExtension();
+        return "{$userID}_{$timestamp}_{$originalName}";
     }
 
     public function applicationFormPayment($service_application_id)
@@ -124,7 +164,7 @@ class ServiceApplicationController extends Controller
 
         $service_application = ServiceApplication::findOrFail($service_application_id);
 
-        return view('service_applications.processing_fee_payment', compact('payments', 'pending_payment', 'service_application'));
+        return view('service_applications.processing_fee_payment', compact('payments', 'pending_payment', 'service_application', 'service_application_id'));
     }
 
     public function inspectionFeePayment($service_application_id)
@@ -138,7 +178,7 @@ class ServiceApplicationController extends Controller
 
         $service_application = ServiceApplication::findOrFail($service_application_id);
 
-        return view('service_applications.inspection_fee_payment', compact('payments', 'pending_payment', 'service_application'));
+        return view('service_applications.inspection_fee_payment', compact('payments', 'pending_payment', 'service_application', 'service_application_id'));
     }
 
     public function equipmentFeePayment($service_application_id)

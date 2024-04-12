@@ -157,6 +157,7 @@ class PaymentController extends Controller
 
     public function generateRemita(Request $request)
     {
+
         //validation only for ECS payments
         $request->validate([
             'year' => 'required_with:contribution_period',
@@ -233,6 +234,7 @@ class PaymentController extends Controller
         $result = curl_exec($curl);
         $err = curl_error($curl);
 
+
         curl_close($curl);
 
         if ($err) {
@@ -240,12 +242,17 @@ class PaymentController extends Controller
         }
 
         $result = substr($result, 7);
+        
+
         $newLength = strlen($result);
         $result = substr($result, 0, $newLength - 1);
         $data = json_decode($result, true);
         //dd($orderId);
         // dd($fields);
         // exit();
+
+
+
         if ($data['statuscode'] == "025" && $data['RRR']) {
             //add record to transactions table
 
@@ -295,6 +302,7 @@ class PaymentController extends Controller
                 return redirect()->back()->with('success', 'Payment Reference Generated! RRR = ' . $data['RRR']);
             return redirect()->back()->with('success', 'Payment Reference Generated! RRR = ' . $data['RRR']);
         } else {
+
             return redirect()->back()->with('error', 'Problems encountered in generating RRR');
         }
     }
@@ -349,7 +357,7 @@ class PaymentController extends Controller
             $service_application = ServiceApplication::where('id', $payment->service_application_id)->first();
             if (!empty($service_application)) {
                 $service_application->application_form_payment_status = 1;
-                $new_current_step = $service_application->current_step + 1;
+                $new_current_step = $service_application->current_step + 3;
                 $service_application->current_step = $new_current_step;
                 if ($new_current_step) {
                     $service_application->status_summary = 'Waiting for document and payment verification';
@@ -398,10 +406,9 @@ class PaymentController extends Controller
                 $employer = Employer::findOrFail($payment->employer_id);
                 $employer->update(['inspection_status' => 0]);
             }
-            
+
             return redirect()->route('service-applications.index')->with('success', $payment->payment_type == 1 ? 'Registration Payment successful!' : 'Payment successful!');
-            
-            } else { //if payment was not successful
+        } else { //if payment was not successful
             //get and update transaction
             $payment = Payment::where('rrr', $request->ref)->first();
 
