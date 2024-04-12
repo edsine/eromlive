@@ -6,6 +6,7 @@
                     <th>Service</th>
                     <th>Application Form Payment Status</th>
                     <th>Date of Inspection</th>
+                    <th>Inspection Message</th>
                     <th>Service Type</th>
                     <th>Status Summary</th>
                     <th>Created</th>
@@ -19,7 +20,9 @@
                         <td>{{ $application->application_form_payment_status ? 'Paid' : 'Not Paid' }}
                         </td>
                         <td>{{ $application->date_of_inspection }}</td>
-                        <td>{{ $application->service_type_id == 'mechanical' ? 'Mechanical' : 'NILL' }}</td>
+                        <td>{{ $application->comments_on_inspection }}</td>
+                        {{-- <td>{{ $application->service_type_id == 'mechanical' ? 'Mechanical' : 'NILL' }}</td> --}}
+                        <td>{{ ucwords($application->service_type_id) }}</td>
                         <td>{{ $application->status_summary }}</td>
                         <td>{{ $application->created_at }}</td>
                         <td>
