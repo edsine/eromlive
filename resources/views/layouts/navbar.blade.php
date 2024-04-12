@@ -1,7 +1,7 @@
 <div class="header">
     <div class="header-left">
         <a href="{{url('/')}}" class="logo">
-            <img  style="background: #f8f8f8;" src="{{ asset('assets/images/logo.png') }}" height="35" alt=""> {{-- <span>NIWA</span> --}}
+            <img  style="background: #f8f8f8;" src="{{ asset('assets/images/logo.png') }}" height="35" alt=""> <span>NIWA</span>
         </a>
     </div>
     <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
