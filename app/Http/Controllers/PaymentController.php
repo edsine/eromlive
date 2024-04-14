@@ -369,7 +369,7 @@ class PaymentController extends Controller
 
 
             if ($payment->payment_type == 1) {
-                $service_application->current_step = 5;
+                $service_application->current_step = 4;
                 $service_application->status_summary = 'Waiting for application fee verification and approval';
                 $service_application->save();
                 //update employer

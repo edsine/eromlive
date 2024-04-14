@@ -13,6 +13,7 @@ use App\Http\Requests\StoreServiceApplicationDocumentRequest;
 use App\Models\ApplicationFormFee;
 use App\Models\DocumentUpload;
 use App\Models\ProcessingType;
+use Illuminate\Support\Facades\DB;
 
 class ServiceApplicationController extends Controller
 {
@@ -24,7 +25,11 @@ class ServiceApplicationController extends Controller
         $user = Auth::user();
         $services = Service::where('branch_id', $user->branch->id)->get();
 
-        $service_applications = ServiceApplication::where('user_id', $user->id)->paginate(10);
+        //$service_applications = ServiceApplication::where('user_id', $user->id)->paginate(10);
+        $service_applications = ServiceApplication::with('processingType')
+            ->select('service_applications.*', 'processing_types.name as pname')
+            ->join('processing_types', 'service_applications.service_type_id', '=', 'processing_types.id')
+            ->paginate(10);
 
         $service_app = ServiceApplication::where('user_id', $user->id)->first();
         /* if($service_app){
@@ -34,9 +39,11 @@ class ServiceApplicationController extends Controller
         return view('service_applications.index', compact('services', 'service_applications', 'service_app'));
     }
 
-    public function getProcessingTypes(Service $service)
+    public function getProcessingTypes(ProcessingType $processingType, $id)
 {
-    $processingTypes = $service->processingTypes()->get();
+    $service = Service::find($id);
+    $processingTypes = $processingType->where('branch_id', $service->branch_id)->get();
+    //$processingTypes = $service->processingTypes()->get();
     return response()->json($processingTypes);
 }
 
@@ -127,7 +134,9 @@ class ServiceApplicationController extends Controller
         $service_application->save();
     
         // Redirect back with success message
-        return redirect(route('service-applications.documents.index', $service_application->id))
+        /* return redirect(route('service-applications.documents.index', $service_application->id))
+            ->with('success', 'Documents saved successfully.'); */
+            return redirect(route('service-applications.index'))
             ->with('success', 'Documents saved successfully.');
     }
     
