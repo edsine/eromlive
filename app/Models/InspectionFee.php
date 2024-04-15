@@ -22,6 +22,6 @@ class InspectionFee extends Model
 
     public function processingType()
     {
-        return $this->belongsTo(processingType::class);
+        return $this->belongsTo(ProcessingType::class);
     }
 }
