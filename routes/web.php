@@ -187,3 +187,8 @@ Route::get('/pdf', function () {
 
 Route::resource('booking',BookingController::class)->middleware('auth');
 Route::post('showbooking',[BookingController::class,'showbooking'])->name('showbooking')->middleware('auth');
+
+//atp you can remove tne tv if you encounter issues later
+Route::get('bookpage/{id}/tv/{amount}',[BookingController::class,'bookpage'])->name('bookingpage')->middleware('auth');
+
+Route::post('paybook',[BookingController::class,'create'])->name('paybook');

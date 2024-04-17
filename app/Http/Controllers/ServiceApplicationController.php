@@ -21,8 +21,12 @@ class ServiceApplicationController extends Controller
      */
     public function index()
     {
+
         $user = Auth::user();
         $services = Service::where('branch_id', $user->branch->id)->get();
+
+       
+        // dd(\DB::table('services')->get());
 
         $service_applications = ServiceApplication::where('user_id', $user->id)->paginate(10);
 
@@ -71,22 +75,22 @@ class ServiceApplicationController extends Controller
     {
         // Retrieve all input data from the request
         $input = $request->all();
-        
+
         // Define the documents array mapping input names to file input names
         $documents = [
             'title_document' => 'title_document_file',
         ];
-    
+
         // Find the service application by ID
         $service_application = ServiceApplication::findOrFail($service_application_id);
-    
+
         // Define the storage path and get the user ID
         $path = 'documents/';
         $userID = Auth::id(); // Use Auth::id() to get the authenticated user's ID
-    
+
         // Array to store file paths
         $filePaths = [];
-    
+
         // Iterate through the documents array and process each file
         //foreach ($documents as $titleInput => $fileInput) {
         foreach ($request->file('title_document_file') as $index => $file) {
@@ -107,12 +111,12 @@ class ServiceApplicationController extends Controller
                 'name' => $request->title_document[$index],
                 'path' => $filePath,
             ]);
-           
+
         }
-    
+
         // Save the user ID to the input data
         $input['user_id'] = $userID;
-    
+
         // Iterate through the file paths and create ServiceApplicationDocument records
        /*  foreach ($filePaths as $title => $filePath) {
             ServiceApplicationDocument::create([
@@ -121,16 +125,16 @@ class ServiceApplicationController extends Controller
                 'path' => $filePath,
             ]);
         } */
-    
+
         // Update the current step of the service application
         $service_application->current_step = 5;
         $service_application->save();
-    
+
         // Redirect back with success message
         return redirect(route('service-applications.documents.index', $service_application->id))
             ->with('success', 'Documents saved successfully.');
     }
-    
+
     // Function to generate a unique file name
     private function generateFileName($file)
     {
