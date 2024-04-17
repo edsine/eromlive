@@ -371,10 +371,31 @@ class PaymentController extends Controller
 
 
             if ($payment->payment_type == 1) {
+                $service_application->current_step = 4;
+                $service_application->status_summary = 'Waiting for application fee verification and approval';
+                $service_application->save();
                 //update employer
                 //$employer = Employer::where('id', $payment->employer_id)->first();
                 $payment->employer->paid_registration = 1;
                 $payment->employer->save();
+            }
+
+            if ($payment->payment_type == 2) {
+                $service_application->current_step = 6;
+                $service_application->status_summary = 'Waiting for processing fee verification and approval';
+                $service_application->save();
+            }
+
+            if ($payment->payment_type == 3) {
+                $service_application->current_step = 8;
+                $service_application->status_summary = 'Waiting for inspection fee verification and approval';
+                $service_application->save();
+            }
+
+            if ($payment->payment_type == 5) {
+                $service_application->current_step = 12;
+                $service_application->status_summary = 'Waiting for equipment and monitoring fee verification and approval';
+                $service_application->save();
             }
 
             if ($payment->payment_type == 2) {

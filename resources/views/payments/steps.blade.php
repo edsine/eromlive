@@ -238,7 +238,10 @@
                                 </div>
                             </li>
                             <?php }else{ ?>
-                            <h3>Kindly pay the &#8358;5,000 registration fee by clicking on the button below</h3>
+                                @php
+                                                $reg_setup = App\Models\RegistrationFee::where('branch_id', auth()->user()->branch->id)->first();
+                                            @endphp
+                            <h3>Kindly pay the &#8358;{{ number_format($reg_setup->amount, 2) }} registration fee by clicking on the button below</h3>
                             <div class="col-md-2">
 
                                 <a href="{{ route('payment.reg') }}" class="btn btn-secondary btn-lg mt-2"><em

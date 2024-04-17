@@ -42,7 +42,7 @@
                                     <small class="text-danger">{{ $error }}</small>
                                 @endforeach
                             @endif
-                            @if(empty($service_app))
+                           {{--  @if(empty($service_app))
                             <div class="card-title-group">
                                 <div class="card-title">
                                     <h6 class="title">New Application</h6>
@@ -120,9 +120,9 @@
                                         </form>
                                     </div>
                                 </div>
-                            </div>
-                            @endif
-                            @if(!empty($service_app) && $service_app->current_step == 15)
+                            </div> --}}
+                            {{-- @endif
+                            @if(!empty($service_app) && $service_app->current_step == 15) --}}
                             <div class="card-title-group">
                                 <div class="card-title">
                                     <h6 class="title">New Application</h6>
@@ -202,7 +202,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @endif
+                           {{--  @endif --}}
 
 
 
@@ -234,7 +234,7 @@
                         $('#service_type_id1').empty();
                         if (data.length > 0) {
                             $.each(data, function (key, value) {
-                                $('#service_type_id1').append('<option value="' + value.name + '">' + value.name + '</option>');
+                                $('#service_type_id1').append('<option value="' + value.id + '">' + value.name + '</option>');
                             });
                         } else {
                             $('#service_type_id1').append('<option value="none">No result</option>');
@@ -259,7 +259,7 @@
                         $('#service_type_id2').empty();
                         if (data.length > 0) {
                             $.each(data, function (key, value) {
-                                $('#service_type_id2').append('<option value="' + value.name + '">' + value.name + '</option>');
+                                $('#service_type_id2').append('<option value="' + value.id + '">' + value.name + '</option>');
                             });
                         } else {
                             $('#service_type_id2').append('<option value="0">No result</option>');

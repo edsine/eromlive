@@ -16,7 +16,7 @@
         </li> --}}
         <?php
         $reg_setup = \App\Models\RegistrationFee::where('branch_id', auth()->user()->branch->id)->first();
-        $userPayment = \App\Models\Payment::where('payment_type',0)->where('employer_id', auth()->user()->id)->where('amount', '5000.00')->latest()->first();
+        $userPayment = \App\Models\Payment::where('payment_type',0)->where('employer_id', auth()->user()->id)->latest()->first();
         if(!empty($userPayment) && $userPayment->payment_status == 1){
         ?>
         {{-- <li>
