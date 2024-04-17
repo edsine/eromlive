@@ -259,7 +259,7 @@
                         $('#service_type_id2').empty();
                         if (data.length > 0) {
                             $.each(data, function (key, value) {
-                                $('#service_type_id2').append('<option value="' + value.name + '">' + value.name + '</option>');
+                                $('#service_type_id2').append('<option value="' + value.id + '">' + value.name + '</option>');
                             });
                         } else {
                             $('#service_type_id2').append('<option value="0">No result</option>');
