@@ -46,7 +46,7 @@ class HomeController extends Controller
                 return view('home', compact(['metrics']));
             }
         }else{
-               return view('payments.steps');
+            return view('home', compact(['metrics']));
         }
         
     }

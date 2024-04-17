@@ -26,7 +26,7 @@ class ServiceApplicationController extends Controller
         $services = Service::where('branch_id', $user->branch->id)->get();
 
         //$service_applications = ServiceApplication::where('user_id', $user->id)->paginate(10);
-        $service_applications = ServiceApplication::with('processingType')
+        $service_applications = ServiceApplication::with('processingType')->where('user_id', $user->id)
             ->select('service_applications.*', 'processing_types.name as pname')
             ->join('processing_types', 'service_applications.service_type_id', '=', 'processing_types.id')
             ->paginate(10);
