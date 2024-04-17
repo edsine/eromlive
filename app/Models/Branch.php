@@ -9,5 +9,13 @@ class Branch extends Model
 {
     use HasFactory;
 
-    //protected $table = "all_branch";
+    protected $table = "branches";
+
+    // public function arrival(){
+    //     return $this->hasMany(Booking::class,'arrival_state');
+    // }
+    // public function departure(){
+    //     return $this->hasMany(Booking::class,'departure_state');
+    // }
+
 }

@@ -213,6 +213,7 @@ class PaymentController extends Controller
             ],
         ];
 
+        
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -247,12 +248,13 @@ class PaymentController extends Controller
         $newLength = strlen($result);
         $result = substr($result, 0, $newLength - 1);
         $data = json_decode($result, true);
-        //dd($orderId);
+        //dd($data);
         // dd($fields);
-        // exit();
+       // exit();
 
 
 
+        
         if ($data['statuscode'] == "025" && $data['RRR']) {
             //add record to transactions table
 

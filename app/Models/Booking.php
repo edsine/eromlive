@@ -29,10 +29,10 @@ class Booking extends Model
         'total'
     ];
 
-    // public function arrival(){
-    //     return $this->belongsTo(Branch::class,'arrival_state','id');
-    // }
-    // public function departure(){
-    //     return $this->belongsTo(Branch::class,'departure_state','id');
-    // }
+    public function arrivalbranch(){
+        return $this->belongsTo(Branch::class,'arrival_state','id');
+    }
+    public function departurebranch(){
+        return $this->belongsTo(Branch::class,'departure_state','id');
+    }
 }

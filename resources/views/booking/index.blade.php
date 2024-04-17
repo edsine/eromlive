@@ -18,17 +18,23 @@
                     <p>List of all Bookings</p>
                 </div>
             </div><!-- .nk-block-head-content -->
+
+
             <div class="nk-block-head-content">
                 <div class="toggle-wrap nk-block-tools-toggle">
                     <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em
                             class="icon ni ni-more-v"></em></a>
 
-
+                            @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                     <div class="toggle-expand-content" data-content="pageMenu">
                         <ul class="nk-block-tools g-3">
                             <li class="nk-block-tools-opt"><a href="{{ route('booking.index') }}"
                                     class="btn btn-primary"><em class="icon ni  ni-search"></em><span>Search Again
-                                        </span></a>
+                                    </span></a>
                             </li>
                         </ul>
                     </div>
@@ -56,15 +62,22 @@
                         @foreach ($data as $item)
                             <tr>
 
-                                <td>{{$item->departure_time}}</td>
-                                <td>{{$item->departure_day}}</td>
-                                <td>{{$item->departure_state}}</td>
-                                <td>{{$item->arrival_time}}</td>
-                                <td>{{$item->arrival_day}}</td>
-                                <td>{{$item->arrival_state}}</td>
-                                <td>{{$item->price}}</td>
+                                {{-- @php
+                                    dd( );
+                                @endphp --}}
+
+                                <td>{{ $item->departure_time }}</td>
+                                <td>{{ $item->departure_day }}</td>
+                                <td>{{ $item->departurebranch->branch_name }}</td>
+                                <td>{{ $item->arrival_time }}</td>
+                                <td>{{ $item->arrival_day }}</td>
+                                <td>{{ $item->arrivalbranch->branch_name }}</td>
+                                <td id="theamount">{{ (intval($item->price) * intval($amount) )}}</td>
+
+
                                 <td>
-                                    <a class="btn btn-success" href="">Book Ticket</a>
+                                    <a class="btn btn-success BookTicket" id="BookTicket" href="{{route('bookingpage',[$item->id, $amount])}}">Book Ticket</a>
+                               {{-- <button type="button" class="btn btn-success BookTicket ">Book Ticket</button> --}}
                                 </td>
 
                             </tr>
@@ -75,6 +88,19 @@
         </div><!-- .card-preview -->
     </div> <!-- nk-block -->
 
+    {{-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        var sumbitbtn= $('.BookTicket');
+        var amount= $('#theamount');
+        $(document).ready(function () {
+            alert(sumbitbtn)
+
+            sumbitbtn.submit(function(){
+                alert('hello Atp');
+            })
+        });
+
+    </script> --}}
 
 @endsection
 
