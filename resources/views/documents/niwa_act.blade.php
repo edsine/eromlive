@@ -9,7 +9,7 @@
 
 @section('content')
 <?php 
-$userPayment = \App\Models\Payment::where('payment_type',0)->where('employer_id', auth()->user()->id)->where('amount', '5000.00')->first();
+$userPayment = \App\Models\Payment::where('payment_type',0)->where('employer_id', auth()->user()->id)->first();
         if(!empty($userPayment) && $userPayment->payment_status == 1 && $userPayment->approval_status == 1){
 ?>
     {{-- <div class="components-preview wide-md mx-auto"> --}}
@@ -35,7 +35,10 @@ $userPayment = \App\Models\Payment::where('payment_type',0)->where('employer_id'
     
 <?php }else{ ?>
 <div class="row">
-    <h3>Kindly pay the &#8358;5,000 registration fee by clicking on the button below</h3>
+    @php
+                                                $reg_setup = App\Models\RegistrationFee::where('branch_id', auth()->user()->branch->id)->first();
+                                            @endphp
+    <h3>Kindly pay the &#8358;{{ number_format($reg_setup->amount, 2) }} registration fee by clicking on the button below</h3>
     <div class="col-md-2">
         
         <a href="{{ route('payment.reg') }}"  class="btn btn-secondary btn-lg mt-2"><em
