@@ -311,7 +311,7 @@
                                                                 <div class="form-control-wrap">
                                                                     <input type="text" class="form-control"
                                                                         id="contact_middlename" name="contact_middlename"
-                                                                        placeholder="Enter Middle name" required>
+                                                                        placeholder="Enter Middle name">
                                                                 </div>
                                                             </div>
                                                         </div>
