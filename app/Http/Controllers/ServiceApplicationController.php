@@ -41,6 +41,28 @@ class ServiceApplicationController extends Controller
         return view('service_applications.index', compact('services', 'service_applications', 'service_app'));
     }
 
+     /* 
+     A client can apply for a service here
+     */
+    public function ServiceApplication()
+    {
+        $user = Auth::user();
+        $services = Service::where('branch_id', $user->branch->id)->get();
+
+        //$service_applications = ServiceApplication::where('user_id', $user->id)->paginate(10);
+        $service_applications = ServiceApplication::with('processingType')->where('user_id', $user->id)
+            ->select('service_applications.*', 'processing_types.name as pname')
+            ->join('processing_types', 'service_applications.service_type_id', '=', 'processing_types.id')
+            ->paginate(10);
+
+        $service_app = ServiceApplication::where('user_id', $user->id)->first();
+        /* if($service_app){
+        $pro_type = ProcessingType::where('service_id', $service_app->service_id)->get();
+        } */
+
+        return view('service_applications.service_application', compact('services', 'service_applications', 'service_app'));
+    }
+
     public function getProcessingTypes(ProcessingType $processingType, $id)
 {
     $service = Service::find($id);

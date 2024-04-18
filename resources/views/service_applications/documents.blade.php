@@ -64,15 +64,17 @@
                                                     @foreach($doc_uploads as $doc_upload)
     <div class="col-sm-6">
         <label for="title_document">{{ $doc_upload->name }}:</label>
+        <p style="color: red">Allowed file upload format are images,.pdf,.doc,.docx and maximum size of 2MB respectively</p>
         <div class="form-control-wrap">
             <div class="form-file">
                 <input type="hidden" name="title_document[]" value="{{ $doc_upload->name }}" /> <!-- Notice the [] here -->
-                <input type="file" class="form-file-input" id="document_{{ $n++ }}" name="title_document_file[]" required accept="application/pdf">
+                <input type="file" class="form-file-input" id="document_{{ $n++ }}" name="title_document_file[]" required accept="image/*,.pdf,.doc,.docx" maxlength="2097152">
                 <label class="form-file-label" for="document_{{ $n++ }}">Choose file</label> <!-- Use loop index for unique IDs -->
             </div>
         </div>
     </div>
 @endforeach
+
 
 
                                                    

@@ -117,6 +117,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('inspection-fee-payment/{id}', [App\Http\Controllers\ServiceApplicationController::class, 'inspectionFeePayment'])->name('inspection_fee_payment');
     Route::get('equipment-fee-payment/{id}', [App\Http\Controllers\ServiceApplicationController::class, 'equipmentFeePayment'])->name('equipment_fee_payment');
     Route::get('permit-document/{id}', [App\Http\Controllers\ServiceApplicationController::class, 'downloadPermit'])->name('download_permit');
+    Route::get('apply/for/a/service', [App\Http\Controllers\ServiceApplicationController::class, 'ServiceApplication'])->name('apply_for_a_service');
 
     Route::get('/services/{service}/processing-types', 'App\Http\Controllers\ServiceApplicationController@getProcessingTypes');
 
