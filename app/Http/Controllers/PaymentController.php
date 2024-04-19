@@ -158,6 +158,7 @@ class PaymentController extends Controller
     public function generateRemita(Request $request)
     {
 
+        // dd($request->all());
         //validation only for ECS payments
         $request->validate([
             'year' => 'required_with:contribution_period',
@@ -213,7 +214,7 @@ class PaymentController extends Controller
             ],
         ];
 
-        
+
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -233,8 +234,11 @@ class PaymentController extends Controller
         ));
 
         $result = curl_exec($curl);
-        $err = curl_error($curl);
+        // dd($result);
+        // dd($fields);
 
+        $err = curl_error($curl);
+// dd($err);
 
         curl_close($curl);
 
@@ -243,18 +247,16 @@ class PaymentController extends Controller
         }
 
         $result = substr($result, 7);
-        
 
+// dd($result);
         $newLength = strlen($result);
         $result = substr($result, 0, $newLength - 1);
         $data = json_decode($result, true);
-        //dd($data);
-        // dd($fields);
-       // exit();
 
 
 
-        
+
+
         if ($data['statuscode'] == "025" && $data['RRR']) {
             //add record to transactions table
 

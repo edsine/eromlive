@@ -23,8 +23,8 @@
 
         <div class="card-body ">
             <form action="{{route('paybook')}}" class=" form my-4" method="post">
-                <div class="form">
-                    @csrf
+                @csrf
+                {{-- <div class="form">
                     <div class="form-group">
                         <label for="">NAME:</label>
                         <input type="text" placeholder="Full Name" class=" form-control" name="name" id="">
@@ -40,7 +40,7 @@
                         <input type="tel" class=" form-control" placeholder="Phone Number" name="phone"
                             id="">
                     </div>
-                </div>
+                </div> --}}
                 <div class="row  12">
 
                     <div class="col-6">No Of Passenger</div>
