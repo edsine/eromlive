@@ -186,10 +186,11 @@ Route::get('/pdf', function () {
     return $pdf->stream('invoice.pdf');
 });
 
-Route::resource('booking',BookingController::class)->middleware('auth');
-Route::post('showbooking',[BookingController::class,'showbooking'])->name('showbooking')->middleware('auth');
+Route::resource('booking',BookingController::class);
+Route::post('showbooking',[BookingController::class,'showbooking'])->name('showbooking');
 
 //atp you can remove tne tv if you encounter issues later
-Route::get('bookpage/{id}/tv/{amount}',[BookingController::class,'bookpage'])->name('bookingpage')->middleware('auth');
+Route::get('bookpage/{id}/tv/{amount}',[BookingController::class,'bookpage'])->name('bookingpage');
 
 Route::post('paybook',[BookingController::class,'create'])->name('paybook');
+Route::post('storepayment',[BookingController::class,'store'])->name('storepayment');

@@ -1,86 +1,95 @@
 @extends('layouts.app')
 @section('content')
-    <form onsubmit="makePayment()" id="payment-form">
-        <ul class=" form">
-            <li>
-                <label>Full Name <span class="required">*</span></label>
-                <input type="text" id="name" name="name" value="{{ $name }}" class="field-divided"
-                    placeholder="First" />&nbsp;
+    <div class=" container mx-5">
 
-                {{-- <input type="text" id="js-lastName" name="lastName" class="field-divided" placeholder="Last" /> --}}
-            </li>
-            <li>
-                <label>Email <span class="required">*</span></label>
-                <input type="email" id="js-email" value="{{ $email }}" name="email" class="field-long" />
-            </li>
-            <li>
-                <label>Narration <span class="required">*</span></label>
-                <input type="text" id="js-narration" name="narration" class="field-long" />
-            </li>
-            <li>
-                <label>Amount <span class="required">*</span></label>
-                <input type="number" id="js-amount" name="amount" value="{{ $amount }}" class="field-long" />
-            </li>
-            <li>
-                <input type="button" onclick="makePayment()" value="Pay" />
-            </li>
-        </ul>
-    </form>
+        <form class="form" onsubmit="makePayment()" method="POST" action="{{ route('storepayment') }}" id="payment-form">
+            @csrf
+            <div class="form-group">
+
+                <label class=" form-label">Full Name <span class="required">*</span></label>
+                <input type="text" id="name" name="name" required value="" class=" form-control"
+                    placeholder="NAME" />&nbsp;
+
+            </div>
+            <div class="form-group">
+
+                <label class=" form-label">Email Address <span class="required">*</span></label>
+                <input type="email" id="email" value="" required name="email" class=" form-control" />
+
+            </div>
+            <input type="hidden" id="narration" name="narration" class=" form-control" />
+            <div class="form-group">
+
+                <label class=" form-label">PHONE NUMBER: <span class="required">*</span></label>
+
+                <input type="tel" name="phone_number" required class=" form-control" id="">
+            </div>
+
+            <div class="form-group">
+
+                <label class=" form-label">AMOUNT <span class="required">*</span></label>
+                <input type="text" value="{{ $amount }}" id="amount" name="amount" readonly
+                    class=" form-control" />
+            </div>
+
+
+            <button class=" btn btn-success" type="submit">Pay For Trip</button>
+
+
+
+            {{-- <li>
+            <input type="button" onclick="makePayment()" value="Pay" />
+            </li> --}}
+
+        </form>
+
+    </div>
+
     <script type="text/javascript" src="https://login.remita.net/payment/v1/remita-pay-inline.bundle.js"></script>
 
 
 
 
-
+    {{-- YOU ACTUALLY DON'T NEED  THIS SCRIPT BECAUSE IT WILL BE DONE FROM THE BACKEND --}}
     <script>
         function makePayment() {
-            var form = document.querySelector("#payment-form");
-
-            var cUrl = "{{ route('payment.callbackdata') }}?";
             var pubKey = "{{ env('REMITA_PUBLIC_KEY') }}";
+            var cUrl = "{{ route('payment.callbackdata') }}?";
 
+            var form = document.querySelector("#payment-form");
             var handler = RmPaymentEngine.init({
-                key: pubKey,
+                    key: pubKey,
+                    processRrr: true,
+                    transactionId: Math.floor(Math.random() * 1101233),
 
-                // Replace with public key
-                customerId: "jefferson@ighalo.com", // Replace with customer id
+                    extendedData: {
+                        customFields: [{
+                            name: "rrr",
+                            value: form.querySelector('input[name="rrr"]').value
+                        }, {
+                            name: "payment_type",
+                            value: 1
+                        }, {
+                            name: "approval_status",
+                            value: 1
+                        }]
+                    },
 
-                transactionId: "67897006679100998378", // Replace with transaction id
 
-                // firstName: form.querySelector('input[name="firstName"]').value,
-                // lastName: form.querySelector('input[name="lastName"]').value,
-                // email: form.querySelector('input[name="email"]').value,
-                // amount: form.querySelector('input[name="amount"]').value,
-                // narration: form.querySelector('input[name="narration"]').value,
 
-                extendedData: { // Optional field. Details are available in the table
-                    customFields: [{
-                        name: "rrr",
-                        value: "340007777362"
-                    }],
-                    recurring: [{
-                        "endDate": 1561935600000,
-                        "frequency": "MON",
-                        "maxUploadLimit": 0,
-                        "numberOfTimes": 0,
-                        "startDate": 1561478053677
-                    }]
                 },
-                onSuccess: function(
-                    response) { // Function call for use after the transaction has processed successfully
+                onSuccess: function(response) {
                     console.log('callback Successful Response', response);
-                },
-                onError: function(response) {
-                    Function call
-                    for use
-                    if the transaction fails
+                    window.location.href = cUrl + 'ref=' + form.querySelector('input[name="rrr"]').value +
+                        '&tid=' + response.transactionId;
+                },onError: function(response) {
                     console.log('callback Error Response', response);
                 },
-                onClose: function() { // Function call for use if the customer closes the transaction without completion
+                onClose: function() {
                     console.log("closed");
                 }
             });
-            handler.openIframe();
+            paymentEngine.showPaymentWidget();
         }
 
         // window.onload =
