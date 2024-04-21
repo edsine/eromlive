@@ -24,7 +24,7 @@ class StoreServiceApplicationDocumentRequest extends FormRequest
     {
         return [
             'title_document.*' => 'required|string|max:255',
-            'title_document_file.*' => 'required|file|max:2048', // Use 'title_document_file.*' for array validation
+            'title_document_file.*' => 'required|mimes:jpeg,jpg,png,pdf,doc,docx', // Use 'title_document_file.*' for array validation
         ];
     }
 }

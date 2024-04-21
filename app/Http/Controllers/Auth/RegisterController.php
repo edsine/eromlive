@@ -123,14 +123,14 @@ class RegisterController extends Controller
         }
 
         //record ECS registration payment for OLD Employers
-        if($data['employer_status'] != "new") {
+        //if($data['employer_status'] != "new") {
             $data['paid_registration'] = 1;
-        }
+        //}
         // Randomly select a user_id from the staff table in the same branch
-        $randomUserId = DB::table('staff')
+        /* $randomUserId = DB::table('staff')
         ->where('branch_id', $data['branch_id'])
         ->inRandomOrder()
-        ->value('user_id');
+        ->value('user_id'); */
 
        /*  if ($randomUserId) {
             // Do something with the $randomUserId
@@ -148,7 +148,11 @@ class RegisterController extends Controller
 
          $data['certificate_of_incorporation'] =  "0";//$documentUrl;
 
-        $data['account_officer_id'] = $randomUserId;
+        $data['account_officer_id'] = "0";
+        $data['company_rcnumber'] = "0";
+        $data['company_name'] = $data['company_name'] ? $data['company_name'] : $data['contact_firstname'] .' '.$data['contact_surname'];
+        $data['company_address'] = $data['company_address'] ? $data['company_address'] : $data['personal_address'];
+        $data['contact_number'] = $data['contact_number'] ? $data['contact_number'] : $data['company_phone'];
 
         $employer = Employer::updateOrCreate(['ecs_number' => $data['ecs_number']], $data); //new employer
 

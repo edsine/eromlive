@@ -24,8 +24,8 @@
             <div class="dash-widget">
                 <span class="dash-widget-bg1"><i class="fa fa-cube" aria-hidden="true"></i></span>
                 <div class="dash-widget-info text-right">
-                    <h3>{{ number_format($metrics['services']) }}</h3>
-                    <span class="widget-title1">Services <i class="fa fa-cube" aria-hidden="true"></i></span>
+                    <h3>{{ number_format($metrics['app_fee'], 2) }}</h3>
+                    <span class="widget-title1">Application Fee <i class="fa fa-cube" aria-hidden="true"></i></span>
                 </div>
             </div>
         </div>
@@ -33,8 +33,8 @@
             <div class="dash-widget">
                 <span class="dash-widget-bg2"><i class="fa fa-check"></i></span>
                 <div class="dash-widget-info text-right">
-                    <h3>{{ number_format($metrics['reg'], 2) }}</h3>
-                    <span class="widget-title2">Registration Fee <i class="fa fa-check" aria-hidden="true"></i></span>
+                    <h3>{{ number_format($metrics['pro_fee'], 2) }}</h3>
+                    <span class="widget-title2">Processing Fee <i class="fa fa-check" aria-hidden="true"></i></span>
                 </div>
             </div>
         </div>
@@ -42,8 +42,8 @@
             <div class="dash-widget">
                 <span class="dash-widget-bg3"><i class="fa fa-check-square-o" aria-hidden="true"></i></span>
                 <div class="dash-widget-info text-right">
-                    <h3>{{ number_format($metrics['app'], 2) }}</h3>
-                    <span class="widget-title3">Application/Processing Fee <i class="fa fa-check-square-o" aria-hidden="true"></i></span>
+                    <h3>{{ number_format($metrics['inspect'], 2) }}</h3>
+                    <span class="widget-title3">Inspection Fee <i class="fa fa-check-square-o" aria-hidden="true"></i></span>
                 </div>
             </div>
         </div>
@@ -51,8 +51,8 @@
             <div class="dash-widget">
                 <span class="dash-widget-bg4"><i class="fa fa-flag-o" aria-hidden="true"></i></span>
                 <div class="dash-widget-info text-right">
-                    <h3>{{ number_format($metrics['inspect'], 2) }}</h3>
-                    <span class="widget-title4">Inspection Fee <i class="fa fa-flag-o" aria-hidden="true"></i></span>
+                    <h3>{{ number_format($metrics['demand'], 2) }}</h3>
+                    <span class="widget-title4">Demand Notice Fee <i class="fa fa-flag-o" aria-hidden="true"></i></span>
                 </div>
             </div>
         </div>

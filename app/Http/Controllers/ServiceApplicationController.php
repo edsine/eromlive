@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Request;
 use App\Models\Service;
+use App\Models\Branch;
 use App\Models\ServiceApplication;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ServiceApplicationDocument;
+use App\Http\Requests\StoreSwitchAreaOfficeRequest;
 use App\Http\Requests\StoreServiceApplicationRequest;
 use App\Http\Requests\UpdateServiceApplicationRequest;
 use App\Http\Requests\StoreServiceApplicationDocumentRequest;
@@ -14,6 +16,9 @@ use App\Models\ApplicationFormFee;
 use App\Models\DocumentUpload;
 use App\Models\ProcessingType;
 use Illuminate\Support\Facades\DB;
+use App\Models\Employer;
+use App\Models\Signature;
+
 
 class ServiceApplicationController extends Controller
 {
@@ -47,7 +52,9 @@ class ServiceApplicationController extends Controller
     public function ServiceApplication()
     {
         $user = Auth::user();
-        $services = Service::where('branch_id', $user->branch->id)->get();
+        //$services = Service::where('branch_id', $user->branch->id)->get();
+
+        $branches = Branch::all();
 
         //$service_applications = ServiceApplication::where('user_id', $user->id)->paginate(10);
         $service_applications = ServiceApplication::with('processingType')->where('user_id', $user->id)
@@ -60,15 +67,52 @@ class ServiceApplicationController extends Controller
         $pro_type = ProcessingType::where('service_id', $service_app->service_id)->get();
         } */
 
-        return view('service_applications.service_application', compact('services', 'service_applications', 'service_app'));
+        return view('service_applications.service_application', compact('service_applications', 'service_app', 'branches'));
     }
 
-    public function getProcessingTypes(ProcessingType $processingType, $id)
+    public function switchAreaOffice()
+    {
+        
+        $branches = Branch::all();
+
+        return view('service_applications.switch_area_office', compact('branches'));
+    }
+
+    public function switchAreaOfficeSave(StoreSwitchAreaOfficeRequest $request)
 {
+    $userID = Auth::user()->id;
+    $input = $request->all();
+    $branch_id = $input['branch_id'];
+
+    if($branch_id != null) {
+        $employer = Employer::findOrFail($userID);
+        $employer->branch_id = $branch_id;
+        $save = $employer->save();
+        if($save) {
+            return redirect()->back()->with('success', 'Your area office has been switched successfully');
+        } else {
+            return redirect()->back()->with('error', 'Your area office has not been switched. Contact the administrator for assistance');
+        }
+    } else {
+        return redirect()->back()->with('error', 'Please select an Area Office');
+    }
+}
+
+
+    public function getProcessingTypes($id)
+    {
     $service = Service::find($id);
-    $processingTypes = $processingType->where('branch_id', $service->branch_id)->get();
-    //$processingTypes = $service->processingTypes()->get();
+    //$processingTypes = $processingType->where('branch_id', $service->branch_id)->get();
+    $processingTypes = ProcessingType::where('service_id', $id)->where('branch_id', $service->branch_id)->get();
     return response()->json($processingTypes);
+    }
+
+public function getServicesByBranch($id)
+{
+    $services = Service::where('branch_id', $id)->get();
+    //$processingTypes = $processingType->where('branch_id', $service->branch_id)->get();
+    //$processingTypes = $service->processingTypes()->get();
+    return response()->json($services);
 }
 
     public function documentIndex($id)
@@ -231,8 +275,9 @@ class ServiceApplicationController extends Controller
     public function downloadPermit($service_application_id)
     {
         $service_application = ServiceApplication::findOrFail($service_application_id);
+        $signature = Signature::find(1);
 
-        return view('service_applications.permit', compact('service_application'));
+        return view('service_applications.permit', compact('service_application', 'signature'));
     }
 
     /**
@@ -255,6 +300,10 @@ class ServiceApplicationController extends Controller
         $input['user_id'] = $userID;
 
         $serviceApplication = ServiceApplication::create($input);
+
+        $employer = Employer::findOrFail($userID);
+        $employer->branch_id = $input['branch_id'];
+        $employer->save();
 
         return redirect(route('service-applications.index'))->with('success', 'Application created successfully.');
     }
