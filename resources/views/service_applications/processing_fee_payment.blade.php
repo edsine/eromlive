@@ -102,7 +102,7 @@
 }
                                                          
                                                         @endphp
-                                                        <label for="">Payment due is:</label><br />
+                                                        <label for="">Payment due for <b>{{ $service_app->service ? $service_app->service->name : 'NILL' }}</b> is:</label><br />
                                                         <p>Processing Fee:
                                                             <strong class="fs-3"
                                                                     id="processing_fee">&#8358;{{ number_format($app_form_fee ? $app_form_fee->amount : '0', 2) }}</strong>

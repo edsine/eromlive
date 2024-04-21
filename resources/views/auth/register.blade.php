@@ -66,16 +66,16 @@
                                 <li id="company_hide">
                                     <div class="step-item">
                                         <div class="step-text">
-                                            <div class="lead-text">Company Details</div>
-                                            <div class="sub-text">Provide Companys' data</div>
+                                            <div class="lead-text" id="c1">NIN / Addresses</div>
+                                            <div class="sub-text" id="c2">Provide NIN / Addresses</div>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="step-item">
                                         <div class="step-text">
-                                            <div class="lead-text">Documents & Login</div>
-                                            <div class="sub-text">Upload documents, set password</div>
+                                            <div class="lead-text">Password</div>
+                                            <div class="sub-text">Set login password</div>
                                         </div>
                                     </div>
                                 </li>
@@ -275,6 +275,19 @@
                                                                     </select>
                                                                 </div>
                                                             </div>
+                                                            {{-- <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label class="form-label" for="company_email">Email
+                                                                        Address <span class="text-danger">*</span></label>
+                                                                    <div class="form-control-wrap">
+                                                                        <input type="email" class="form-control"
+                                                                            id="company_email" name="company_email"
+                                                                            placeholder="Email Address" required>
+                                                                        <span id="email-error" class="text-danger"></span>
+                                                                        <!-- Display error message here -->
+                                                                    </div>
+                                                                </div>
+                                                            </div> --}}
                                                         </div>
 
                                                     </div>
@@ -307,7 +320,7 @@
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="contact_name">Middle
-                                                                    Name <span class="text-danger">*</span></label>
+                                                                    Name</label>
                                                                 <div class="form-control-wrap">
                                                                     <input type="text" class="form-control"
                                                                         id="contact_middlename" name="contact_middlename"
@@ -315,17 +328,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-sm-6" id="personal_address-hide">
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="personal_address">Personal
-                                                                    Address <span class="text-danger">*</span></label>
-                                                                <div class="form-control-wrap">
-                                                                    <input type="text" class="form-control"
-                                                                        id="personal_address" name="personal_address"
-                                                                        placeholder="Personal Address" required>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="contact_position">Position
@@ -352,46 +355,68 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-sm-6" id="contact_number-hide">
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="contact_number">NIN <span
-                                                                        class="text-danger">*</span></label>
-                                                                <div class="form-control-wrap">
-                                                                    <input type="text" class="form-control"
-                                                                        id="contact_number" name="contact_number"
-                                                                        placeholder="Enter Contact NIN" required
-                                                                        pattern="\d+">
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
+                                                
                                                 <div class="nk-stepper-step" id="company_hide-content">
-                                                    <h5 class="title mb-3">Company Details</h5>
+                                                    <div class="" id="company_hide-content1">
+                                                        <h5 class="title mb-3" id="comp">NIN / Personal Address</h5>
+                                                        <div class="row g-3">
+                                                            <div class="col-sm-6" id="contact_number-hide">
+                                                                <div class="form-group">
+                                                                    <label class="form-label" for="contact_number">NIN <span
+                                                                            class="text-danger">*</span></label>
+                                                                    <div class="form-control-wrap">
+                                                                        <input type="text" class="form-control"
+                                                                            id="contact_number" name="contact_number"
+                                                                            placeholder="Enter Contact NIN" required
+                                                                            pattern="\d+">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6" id="personal_address-hide">
+                                                                <div class="form-group">
+                                                                    <label class="form-label" for="personal_address">Personal
+                                                                        Address <span class="text-danger">*</span></label>
+                                                                    <div class="form-control-wrap">
+                                                                        <input type="text" class="form-control"
+                                                                            id="personal_address" name="personal_address"
+                                                                            placeholder="Personal Address" required>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            
+                                                        </div>     
+                                                    </div>
+                                                 <div id="company_hide-content2" style="display: none;">
+                                                    <h5 class="title mb-3" id="comp">Company Details</h5>
                                                     <div class="row g-3">
-                                                        <div class="col-12">
+                                                        <div class="col-sm-6" id="company_name1">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="company_name">Company
                                                                     Name <span class="text-danger">*</span></label>
                                                                 <div class="form-control-wrap">
                                                                     <input type="text" class="form-control"
                                                                         id="company_name" name="company_name"
-                                                                        placeholder="Enter Company Name" required>
+                                                                        placeholder="Enter Company Name" >
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-sm-6">
+                                                        
+                                                        <div class="col-sm-6" id="company_rcnumber1">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="company_rcnumber">RC
-                                                                    Number <span class="text-danger">*</span></label>
+                                                                    Number </label>
                                                                 <div class="form-control-wrap">
                                                                     <input type="text" class="form-control"
                                                                         id="company_rcnumber" name="company_rcnumber"
-                                                                        placeholder="RC Number" required>
+                                                                        placeholder="RC Number" >
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-sm-6">
+                                                        <div class="col-sm-6" id="cac_reg_year1">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="cac_reg_year">CAC
                                                                     Registration
@@ -401,35 +426,23 @@
                                                                         class="form-control date-picker-alt"
                                                                         id="cac_reg_year" name="cac_reg_year"
                                                                         placeholder="yyyy-mm-dd"
-                                                                        data-date-format="yyyy-mm-dd" required>
+                                                                        data-date-format="yyyy-mm-dd" >
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-sm-6">
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="company_email">Company
-                                                                    Email <span class="text-danger">*</span></label>
-                                                                <div class="form-control-wrap">
-                                                                    <input type="email" class="form-control"
-                                                                        id="company_email" name="company_email"
-                                                                        placeholder="Company Email" required>
-                                                                    <span id="email-error" class="text-danger"></span>
-                                                                    <!-- Display error message here -->
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-6">
+                                                        
+                                                        <div class="col-sm-6" id="company_address1">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="company_address">Company
                                                                     Address <span class="text-danger">*</span></label>
                                                                 <div class="form-control-wrap">
                                                                     <input type="text" class="form-control"
                                                                         id="company_address" name="company_address"
-                                                                        placeholder="Company Address" required>
+                                                                        placeholder="Company Address" >
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-6">
+                                                        <div class="col-6" id="company_state1">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="company_state">Company
                                                                     State <span class="text-danger">*</span></label>
@@ -437,7 +450,7 @@
                                                                     <select class="form-select js-select2"
                                                                         id="company_state" name="company_state"
                                                                         data-placeholder="Select Company State"
-                                                                        data-search="on" required>
+                                                                        data-search="on" >
                                                                         <option value=""></option>
                                                                         @foreach ($states as $state)
                                                                             <option value="{{ $state->id }}">
@@ -448,7 +461,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-6">
+                                                        <div class="col-6" id="company_localgovt1">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="company_localgovt">Company
                                                                     LGA <span class="text-danger">*</span></label>
@@ -456,14 +469,16 @@
                                                                     <select class="form-select js-select2"
                                                                         id="company_localgovt" name="company_localgovt"
                                                                         data-placeholder="Select Company LGA"
-                                                                        data-search="on" required>
+                                                                        data-search="on" >
                                                                         <option value=""></option>
                                                                     </select>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                 </div>
                                                 </div>
+                                                    </div>
+                                                
                                                 <div class="nk-stepper-step">
                                                     <h5 class="title mb-3">Passwords</h5>
                                                     <p>Set account access.</p>
@@ -502,6 +517,21 @@
                                                         </div>
                                                     </div>  --}}
                                                     <hr>
+                                                    <div class="row g-3">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="company_email">Email
+                                                                    Address <span class="text-danger">*</span></label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="email" class="form-control"
+                                                                        id="company_email" name="company_email"
+                                                                        placeholder="Email Address" required>
+                                                                    <span id="email-error" class="text-danger"></span>
+                                                                    <!-- Display error message here -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                </div>
                                                     <div class="row g-3">
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
@@ -2954,48 +2984,69 @@
             Already have an account? <a href="{{ route('login') }}"><strong>Sign in instead</strong></a>
         </div>
     </div>
+    {{-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> --}}
+    
 
 @endsection
 
 
 @push('scripts')
-    <script>
-                    const companyContent = document.getElementById('company_hide-content');
-        function hideCompanyFields() {
+    
+<script>
+    const companyContent = document.getElementById('company_hide-content');
+    const companyContent1 = document.getElementById('company_hide-content1');
+    const companyContent2 = document.getElementById('company_hide-content2');
+function hideCompanyFields() {
 
-                                document.getElementById('personal_address-hide').style.display = 'block';
-                    document.getElementById('contact_number-hide').style.display = 'block';
-                    document.getElementById('company_hide').style.display = 'none';
+                document.getElementById('personal_address-hide').style.display = 'block';
+    document.getElementById('contact_number-hide').style.display = 'block';
+    //document.getElementById('company_hide').style.display = 'none';
+    document.getElementById('company_name1').style.display = 'none';
+    document.getElementById('company_rcnumber1').style.display = 'none';
+    document.getElementById('cac_reg_year1').style.display = 'none';
+    document.getElementById('company_address1').style.display = 'none';
+    document.getElementById('company_state1').style.display = 'none';
+    document.getElementById('company_localgovt1').style.display = 'none';
+    $('#c1').html('NIN / Personal Address');
+    $('#c2').html('Provide NIN / Personal Address');
 
-                    // companyContent.classList.remove('nk-stepper-step');
-                    // companyContent.style.display = 'none';
-        }
+    // companyContent.classList.remove('nk-stepper-step');
+    companyContent2.style.display = 'none';
+     companyContent1.style.display = 'block';
+}
 
-        hideCompanyFields();
+hideCompanyFields();
 
-        document.querySelectorAll('input[name="user_type"]').forEach(function(radio) {
-            radio.addEventListener('change', function() {
-                var userType = this.value;
-                
-        
-                if (userType === 'private') {
-
-                    hideCompanyFields();
-
-                } else {
-                    document.getElementById('contact_number-hide').style.display = 'none';
-                    document.getElementById('personal_address-hide').style.display = 'none';
-                    document.getElementById('company_hide').style.display = 'block';
-                    // companyContent.classList.add('nk-stepper-step');
-                    // companyContent.style.display = 'block';
-                }
-                // Update UserType column value based on selected radio button
-                // document.getElementById('UserType').value = userType;
-            });
-        });
-    </script>
+document.querySelectorAll('input[name="user_type"]').forEach(function(radio) {
+radio.addEventListener('change', function() {
+var userType = this.value;
 
 
+if (userType === 'private') {
+
+    hideCompanyFields();
+
+} else {
+    document.getElementById('contact_number-hide').style.display = 'none';
+    document.getElementById('personal_address-hide').style.display = 'none';
+    document.getElementById('company_hide').style.display = 'block';
+    document.getElementById('company_name1').style.display = 'block';
+    document.getElementById('company_rcnumber1').style.display = 'block';
+    document.getElementById('cac_reg_year1').style.display = 'block';
+    document.getElementById('company_address1').style.display = 'block';
+    document.getElementById('company_state1').style.display = 'block';
+    document.getElementById('company_localgovt1').style.display = 'block';
+    $('#c1').html('Company Details');
+    $('#c2').html('Provide Company Details');
+    // companyContent.classList.add('nk-stepper-step');
+    companyContent2.style.display = 'block';
+     companyContent1.style.display = 'none';
+}
+// Update UserType column value based on selected radio button
+// document.getElementById('UserType').value = userType;
+});
+});
+</script>
     <script>
         // Add click event listener to each radio button
         document.querySelectorAll('input[name="user_type"]').forEach(function(radio) {
@@ -3127,8 +3178,8 @@
                         $('.otp-div').removeClass('d-none');
 
                         // Pre-fill the form fields with the retrieved data
-                        $('#branch_id').val(data.branch_id);
-                        $('#branch_id').trigger('change');
+                        //$('#branch_id').val(data.branch_id);
+                        //$('#branch_id').trigger('change');
                         $('#contact_surname').val(data.contact_surname)
                             .focus() //.prop('readonly',false);
                         $('#contact_firstname').val(data.contact_firstname)

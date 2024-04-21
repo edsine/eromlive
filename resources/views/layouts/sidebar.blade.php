@@ -15,14 +15,14 @@
             </ul>
         </li> --}}
         <?php
-        $reg_setup = \App\Models\RegistrationFee::where('branch_id', auth()->user()->branch->id)->first();
-        $userPayment = \App\Models\Payment::where('payment_type',0)->where('employer_id', auth()->user()->id)->latest()->first();
-        if(!empty($userPayment) && $userPayment->payment_status == 1){
+       // $reg_setup = \App\Models\RegistrationFee::where('branch_id', auth()->user()->branch->id)->first();
+       // $userPayment = \App\Models\Payment::where('payment_type',0)->where('employer_id', auth()->user()->id)->latest()->first();
+       // if(!empty($userPayment) && $userPayment->payment_status == 1){
         ?>
         {{-- <li>
             <a href="{{ route('payment.index') }}"><i class="fa fa-bank"></i> <span>Apply For A Service</span></a>
         </li> --}}
-        <li class="{{ Request::is('apply_for_a_service*') ? 'active' : '' }}">
+        {{-- <li class="{{ Request::is('apply_for_a_service*') ? 'active' : '' }}">
             <a href="{{ route('apply_for_a_service') }}"><i class="fa fa-user-md"></i> <span>Apply For A Service</span></a>
         </li>
         <li class="{{ Request::is('service-applications*') ? 'active' : '' }}">
@@ -30,11 +30,11 @@
         </li>
         <li>
             <a href="{{ route('download.niwa.act') }}"><i class="fa fa-download"></i> <span>Download NIWA Act</span></a>
-        </li>
+        </li> --}}
         <?php
-        }
+        //}
         
-        if(empty($reg_setup)){
+        //if(empty($reg_setup)){
         ?>
         {{-- <li>
             <a href="{{ route('payment.index') }}"><i class="fa fa-bank"></i> <span>Apply For A Service</span></a>
@@ -48,8 +48,11 @@
         <li>
             <a href="{{ route('download.niwa.act') }}"><i class="fa fa-download"></i> <span>Download NIWA Act</span></a>
         </li>
+        <li>
+            <a href="{{ route('switch.area.office') }}"><i class="fa fa-globe"></i> <span>Switch Area Office</span></a>
+        </li>
         <?php
-        }
+       // }
 
         if(auth()->user()->inspection_status == 1){
         ?>

@@ -91,7 +91,7 @@
                                                             $service_app = \App\Models\ServiceApplication::findOrFail($service_application_id);
                                                             $app_form_fee = \App\Models\ApplicationFormFee::where('branch_id', $user->branch->id)->where("service_id",$service_app->service_id)->first();
                                                             @endphp
-                                                        <label for="">Payment due is:</label><br />
+                                                        <label for="">Payment due for <b>{{ $service_app->service ? $service_app->service->name : 'NILL' }}</b> is:</label><br />
                                                         <p>Application Form Fee:
                                                             <strong class="fs-3"
                                                                 id="application_form_fee">&#8358;{{ number_format($app_form_fee ? $app_form_fee->amount : '0', 2) }}</strong>

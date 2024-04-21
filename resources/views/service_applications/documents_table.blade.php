@@ -30,7 +30,7 @@
                         <td>{{ $document->name }}</td>
                         <td>
                             <a href="{{ 'storage/' . $document->path }}" target="_blank">
-                                View PDF
+                                View File
                             </a>
                         </td>
                     </tr>

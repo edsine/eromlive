@@ -125,7 +125,7 @@
                             @if(!empty($service_app) && $service_app->current_step == 15) --}}
                             <div class="card-title-group">
                                 <div class="card-title">
-                                    <h6 class="title">New Application</h6>
+                                    <h3 class="title">New Application</h3>
                                 </div>
                             </div>
                             <div class="data">
@@ -136,14 +136,28 @@
                                             @csrf
                                             <div class="row">
                                                 <div class="row col-12">
-
+                                                    
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                        <label class="form-label" for="cp1-team-size">Select Area
+                                                            Office <span class="text-danger">*</span></label>
+                                                        <div class="form-control-wrap">
+                                                            <select class="form-select js-select2" id="branch_id"
+                                                                name="branch_id" data-placeholder="Select Area Office"
+                                                                data-search="on" required>
+                                                                <option value=""></option>
+                                                                @foreach ($branches as $branch)
+                                                                    <option
+                                                                        value="{{ $branch->id ?? $branch->branch_id }}">
+                                                                        {{ $branch->branch_name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div></div>
+                                                    </div>
                                                     <div class="col-sm-6 mb-3">
                                                         <label for="service_id">Select Service:</label>
-                                                        <select class="form-select js-select2" data-ui="xl" id="service_id2" name="service_id" data-search="on" required>
-                                                            <option>Select A Service</option>
-                                                            @foreach ($services as $service)
-                                                            <option value="{{ $service->id }}">{{ ucfirst($service->name) }}</option>
-                                                            @endforeach
+                                                        <select class="form-select js-select2"data-placeholder="Select A Service"  data-ui="xl" id="service_id2" name="service_id" data-search="on" required>
+                                                            <option value="">Select A Service</option>
                                                         </select>
                                                     </div>
                                                     
@@ -156,7 +170,7 @@
                                                     <div class="col-sm-12 mb-1">Coordinate 1:</div>
                                                     <div class="col-sm-6">
                                                         <div class="form-group mb-3">
-                                                            <label for="latitude">Latitude:</label>
+                                                            <label for="latitude">Latitude (Optional):</label>
                                                             <div class="form-control-wrap">
                                                                 <input type="text" class="form-control" name="latitude1" id="latitude1" />
                                                             </div>
@@ -164,7 +178,7 @@
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <div class="form-group">
-                                                            <label for="longitude">Longitude:</label>
+                                                            <label for="longitude">Longitude (Optional):</label>
                                                             <div class="form-control-wrap">
                                                                 <input type="text" class="form-control" name="longitude1" id="longitude1" />
                                                             </div>
@@ -173,7 +187,7 @@
                                                     <div class="col-sm-12 mb-1">Coordinate 2:</div>
                                                     <div class="col-sm-6">
                                                         <div class="form-group">
-                                                            <label for="latitude">Latitude:</label>
+                                                            <label for="latitude">Latitude (Optional):</label>
                                                             <div class="form-control-wrap">
                                                                 <input type="text" class="form-control" name="latitude2" id="latitude2" />
                                                             </div>
@@ -181,7 +195,7 @@
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <div class="form-group">
-                                                            <label for="longitude">Longitude:</label>
+                                                            <label for="longitude">Longitude (Optional):</label>
                                                             <div class="form-control-wrap">
                                                                 <input type="text" class="form-control" name="longitude2" id="longitude2" />
                                                             </div>
@@ -193,7 +207,7 @@
                                                     <div class="col-sm-3">
                                                         <button type="submit"
                                                             class="mt-5 btn btn-secondary btn-lg mt-2"><em
-                                                                class="icon ni ni-save me-2"></em>Submit</button>
+                                                                class="icon ni ni-save me-2"></em>SUBMIT</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -242,6 +256,29 @@
     </script>
     <script>
          $(document).ready(function () {
+            $('#branch_id').change(function () {
+            var serviceId = $(this).val();
+             if (serviceId) {
+                $.ajax({
+                    type: "GET",
+                    url: "/services/" + serviceId + "/services-types",
+                    success: function (data) {
+                        $('#service_id2').empty();
+                        if (data.length > 0) {
+                            $('#service_id2').append('<option value="">Select A Service</option>');
+                            $.each(data, function (key, value) {
+                                $('#service_id2').append('<option value="' + value.id + '">' + value.name + '</option>');
+                            });
+                        } else {
+                            $('#service_id2').append('<option value="0">No result</option>');
+                        }
+                    }
+                });
+            } else {
+                $('#service_id2').empty();
+            }
+        });
+
         $('#service_id2').change(function () {
             var serviceId = $(this).val();
              if (serviceId) {

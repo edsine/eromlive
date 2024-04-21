@@ -16,6 +16,14 @@
             </thead>
             <tbody>
                 @foreach ($service_applications as $application)
+                @php $user = Auth::user();
+                            $app_form_fee = \App\Models\ApplicationFormFee::where('branch_id', $user->branch->id)->where("service_id",$application->service_id)->first();
+                            $doc_upload = \App\Models\DocumentUpload::where('branch_id', $user->branch->id)->where("service_id",$application->service_id)->first();
+                            $pro_fee = \App\Models\ProcessingFee::where('branch_id', $user->branch->id)->where("service_id",$application->service_id)->where("processing_type_id",$application->service_type_id)->first();
+                            $ins_fee = \App\Models\InspectionFee::where('branch_id', $user->branch->id)->where("service_id", $application->service_id)->first();
+                            $app_fee = \App\Models\Payment::where('payment_status', 1)->where('approval_status', 1)->where('payment_type', 1)->where("employer_id", $user->id)->latest()->first();
+                           @endphp
+
                     <tr>
                         <td>{{ $application->service ? $application->service->name : '' }}</td>
                         <td>{{ $application->application_form_payment_status ? 'Paid' : 'Not Paid' }}
@@ -25,18 +33,15 @@
                         {{-- <td>{{ $application->service_type_id == 'mechanical' ? 'Mechanical' : 'NILL' }}</td> --}}
                         <td>{{ ucwords($application->pname) }}</td>
                         <td>{{ $application->status_summary }}</td>
-                        <td><a href="{{ route('service-applications.documents.index', $application->id) }}"
+                        <td> @if($application->current_step > 5)
+                            <a href="{{ route('service-applications.documents.index', $application->id) }}"
                             title="Documents"><span class="nk-menu-icon text-secondary">View
-                               Documents</span></a></td>
+                               Documents</span></a>
+                            @endif
+                            </td>
                         <td>{{ $application->created_at }}</td>
                         <td>
-                            @php $user = Auth::user();
-                            $app_form_fee = \App\Models\ApplicationFormFee::where('branch_id', $user->branch->id)->where("service_id",$application->service_id)->first();
-                            $doc_upload = \App\Models\DocumentUpload::where('branch_id', $user->branch->id)->where("service_id",$application->service_id)->first();
-                            $pro_fee = \App\Models\ProcessingFee::where('branch_id', $user->branch->id)->where("service_id",$application->service_id)->where("processing_type_id",$application->service_type_id)->first();
-                            $ins_fee = \App\Models\InspectionFee::where('branch_id', $user->branch->id)->where("service_id", $application->service_id)->first();
-                            $app_fee = \App\Models\Payment::where('payment_status', 1)->where('approval_status', 1)->where('payment_type', 1)->where("employer_id", $user->id)->latest()->first();
-                           @endphp
+                            
                             @if($app_form_fee)
                             @if ($application->current_step == 2 || !$application->application_form_payment_status)
                                 <a href="{{ route('application_form_payment', $application->id) }}" 
