@@ -15,11 +15,7 @@
     </div><!-- .nk-block-head -->
     @php
         //Check if there is a registration payment
-        $pending = auth()
-            ->user()
-            ->payments()
-            ->latest()
-            ->first();
+        $pending = auth()->user()->payments()->latest()->first();
     @endphp
 
     @if ($pending && $pending->payment_status == 0)
@@ -233,9 +229,14 @@
                                     <div class="data-group">
                                         <div class="form-group">
                                             @php
-                                                $reg_setup = App\Models\RegistrationFee::where('branch_id', auth()->user()->branch->id)->first();
+                                                $reg_setup = App\Models\RegistrationFee::where(
+                                                    'branch_id',
+                                                    auth()->user()->branch->id,
+                                                )->first();
                                             @endphp
-                                            <label for="">Complete &#8358;{{ number_format($reg_setup->amount, 2) }} registration fee payment</label>
+                                            <label for="">Complete
+                                                &#8358;{{ number_format($reg_setup->amount, 2) }} registration fee
+                                                payment</label>
 
                                             {{-- WHEN RRR HAS BEEN GENERATED --}}
                                             <div class="form-group">
@@ -244,10 +245,11 @@
 
                                                     {{-- <input type="hidden" name="payment_type" id="payment_type"
                                                         value="1"> --}}
-                                                        <input type="hidden" name="payment_type" id="payment_type"
+                                                    <input type="hidden" name="payment_type" id="payment_type"
                                                         value="0">
 
-                                                    <input type="hidden" name="amount" id="amount" value="{{ $reg_setup->amount }}">
+                                                    <input type="hidden" name="amount" id="amount"
+                                                        value="{{ $reg_setup->amount }}">
                                                     <button type="submit" class="btn btn-secondary btn-lg mt-2"><em
                                                             class="icon ni ni-save me-2"></em> Generate Invoice (Remita
                                                         RR)</button>
@@ -265,10 +267,7 @@
         </div><!-- .row -->
     @endif
     @php
-        $payments = auth()
-            ->user()
-            ->payments()
-            ->get();
+        $payments = auth()->user()->payments()->get();
     @endphp
 
     @include('partials.payments-table')
