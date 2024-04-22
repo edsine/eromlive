@@ -27,6 +27,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+       
         $metrics = [
             'app_fee' => Payment::where('payment_type',1)->where('employer_id', auth()->user()->id)->sum('amount'),
             'services' => Payment::where('payment_type',4)->where('employer_id', auth()->user()->id)->where('service_id','!=', null)->count(),

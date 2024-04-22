@@ -44,7 +44,7 @@ class RegisterController extends Controller
         //return route('payment.steps');
         return route('home');
     }
-    
+
     /**
      * Create a new controller instance.
      *
@@ -177,6 +177,7 @@ class RegisterController extends Controller
         //$region = Region::all();
         $branches = Branch::all();
         $states = State::all();
+      
         return view('auth.register', compact('branches', 'states'));
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Route;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Support\Facades\Auth;
@@ -157,6 +158,7 @@ Route::get('/notification', function () {
     //$employer->notify(new EmployerRegistrationNotification($employer));
 });
 
+
 Route::get('/pdf', function () {
     $payment = App\Models\Payment::get()->last();
 
@@ -189,3 +191,12 @@ Route::get('/pdf', function () {
     $pdf->render();
     return $pdf->stream('invoice.pdf');
 });
+
+Route::resource('booking',BookingController::class);
+Route::post('showbooking',[BookingController::class,'showbooking'])->name('showbooking');
+
+//atp you can remove tne tv if you encounter issues later
+Route::get('bookpage/{id}/tv/{amount}',[BookingController::class,'bookpage'])->name('bookingpage');
+
+Route::post('paybook',[BookingController::class,'create'])->name('paybook');
+Route::post('storepayment',[BookingController::class,'store'])->name('storepayment');

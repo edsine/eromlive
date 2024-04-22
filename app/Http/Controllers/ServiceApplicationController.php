@@ -27,6 +27,7 @@ class ServiceApplicationController extends Controller
      */
     public function index()
     {
+
         $user = Auth::user();
         $services = Service::where('branch_id', $user->branch->id)->get();
 
@@ -35,6 +36,7 @@ class ServiceApplicationController extends Controller
             ->select('service_applications.*', 'processing_types.name as pname')
             ->join('processing_types', 'service_applications.service_type_id', '=', 'processing_types.id')
             ->paginate(10);
+
 
         $service_app = ServiceApplication::where('user_id', $user->id)->first();
         /* if($service_app){
@@ -144,22 +146,22 @@ public function getServicesByBranch($id)
     {
         // Retrieve all input data from the request
         $input = $request->all();
-        
+
         // Define the documents array mapping input names to file input names
         $documents = [
             'title_document' => 'title_document_file',
         ];
-    
+
         // Find the service application by ID
         $service_application = ServiceApplication::findOrFail($service_application_id);
-    
+
         // Define the storage path and get the user ID
         $path = 'documents/';
         $userID = Auth::id(); // Use Auth::id() to get the authenticated user's ID
-    
+
         // Array to store file paths
         $filePaths = [];
-    
+
         // Iterate through the documents array and process each file
         //foreach ($documents as $titleInput => $fileInput) {
         foreach ($request->file('title_document_file') as $index => $file) {
@@ -180,12 +182,12 @@ public function getServicesByBranch($id)
                 'name' => $request->title_document[$index],
                 'path' => $filePath,
             ]);
-           
+
         }
-    
+
         // Save the user ID to the input data
         $input['user_id'] = $userID;
-    
+
         // Iterate through the file paths and create ServiceApplicationDocument records
        /*  foreach ($filePaths as $title => $filePath) {
             ServiceApplicationDocument::create([
@@ -194,18 +196,18 @@ public function getServicesByBranch($id)
                 'path' => $filePath,
             ]);
         } */
-    
+
         // Update the current step of the service application
         $service_application->current_step = 5;
         $service_application->save();
-    
+
         // Redirect back with success message
         /* return redirect(route('service-applications.documents.index', $service_application->id))
             ->with('success', 'Documents saved successfully.'); */
             return redirect(route('service-applications.index'))
             ->with('success', 'Documents saved successfully.');
     }
-    
+
     // Function to generate a unique file name
     private function generateFileName($file)
     {

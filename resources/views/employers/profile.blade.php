@@ -81,7 +81,7 @@
                             <div class="col-lg-4 col-sm-6">
                                 <div class="form-group">
                                     <div class="form-control-wrap">
-                                        <label class="form-label">ECS Number</label>
+                                        <label class="form-label">Client Code</label>
                                         <span class="form-control">{{ auth()->user()->ecs_number }}</span>
                                     </div>
                                 </div>
@@ -105,7 +105,7 @@
                             <div class="col-lg-4 col-sm-6">
                                 <div class="form-group">
                                     <div class="form-control-wrap">
-                                        <label class="form-label">Area Office Name</label>
+<label class="form-label">Area Office Name</label>
                                         <span class="form-control">{{ auth()->user()->branch->branch_name ?? 'NILL' }}</span>
                                     </div>
                                 </div>
