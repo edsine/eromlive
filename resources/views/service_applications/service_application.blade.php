@@ -139,8 +139,8 @@
                                                     
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                        <label class="form-label" for="cp1-team-size">Select Area
-                                                            Office <span class="text-danger">*</span></label>
+                                                        <label class="form-label" for="cp1-team-size">Select 
+                                                            Location <span class="text-danger">*</span></label>
                                                         <div class="form-control-wrap">
                                                             <select class="form-select js-select2" id="branch_id"
                                                                 name="branch_id" data-placeholder="Select Area Office"
