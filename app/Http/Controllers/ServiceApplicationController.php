@@ -198,6 +198,7 @@ public function getServicesByBranch($id)
         } */
 
         // Update the current step of the service application
+        $service_application->status_summary = 'Waiting for document and payment verification';
         $service_application->current_step = 5;
         $service_application->save();
 
