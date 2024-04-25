@@ -51,8 +51,8 @@
                         alt="">
                 @else
                     <img style="width: 125px !important;height: 125px !important;max-height: 125px !important;"
-                        src="{{ asset('assets/images/logo.png') }}"
-                        srcset="{{ asset('assets/images/logo.png 2x') }}" alt="">
+                        src="{{ asset('assets/images/logo.png') }}" srcset="{{ asset('assets/images/logo.png 2x') }}"
+                        alt="">
                 @endif
             </div>
             <div class="nk-block-head mb-3">
@@ -69,15 +69,17 @@
                     <td class="invoice-contact">
                         <span class="overline-title">{{ $text }} To</span>
                         <div class="invoice-contact-info">
-                            <h4 class="title">{{ $payment->employer->company_name }}</h4>
-                            <ul class="list-plain">
-                                <li><em class="icon ni ni-map-pin-fill fs-18px"></em><span>{{ $payment->employer->company_address }}<br>{{ isset($payment->employer->lga->name) && !empty($payment->employer->lga->name) ? $payment->employer->lga->name : 'Name Not Available' }}
-                                    ,
-                                        {{ $payment->employer->state->name }} </span></li>
-                                <li><em
-                                        class="icon ni ni-call-fill fs-14px"></em><span>{{ $payment->employer->company_phone }}</span>
-                                </li>
-                            </ul>
+                            @if (isset($payment->employer))
+                                <h4 class="title">{{ $payment->employer->company_name }}</h4>
+                                <ul class="list-plain">
+                                    <li><em class="icon ni ni-map-pin-fill fs-18px"></em><span>{{ $payment->employer->company_address }}<br>{{ isset($payment->employer->lga->name) && !empty($payment->employer->lga->name) ? $payment->employer->lga->name : 'Name Not Available' }}
+                                            ,
+                                            {{ $payment->employer->state->name }} </span></li>
+                                    <li><em
+                                            class="icon ni ni-call-fill fs-14px"></em><span>{{ $payment->employer->company_phone }}</span>
+                                    </li>
+                                </ul>
+                            @endif
                         </div>
                     </td>
                     <td class="invoice-desc" align="right">
