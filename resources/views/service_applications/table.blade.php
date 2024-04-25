@@ -31,7 +31,7 @@
                         <td>{{ $application->date_of_inspection }}</td>
                         <td>{{ $application->comments_on_inspection }}</td>
                         {{-- <td>{{ $application->service_type_id == 'mechanical' ? 'Mechanical' : 'NILL' }}</td> --}}
-                        <td>{{ ucwords($application->pname) }}</td>
+                        <td>{{ $application->processingType ? ucwords($application->processingType->name) : '' }}</td>
                         <td>{{ $application->status_summary }}</td>
                         <td> @if($application->current_step > 5)
                             <a href="{{ route('service-applications.documents.index', $application->id) }}"
