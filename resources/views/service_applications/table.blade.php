@@ -43,7 +43,7 @@
                     </div>
                     <div class="col-sm-6 col-md-4 col-lg-12 mb-3">
                         <span class="sub-text">Service Type:</span>
-                        <span>{{ ucwords($application->pname) }}</span>
+                        <span>{{ $application->processingType ? ucwords($application->processingType->name) : '' }}</span>
                     </div>
                 </div>
                 <div class="row col-6">
@@ -58,6 +58,7 @@
                                 <a href="{{ route('service-applications.documents.index', $application->id) }}"
                                     title="Documents"><span class="nk-menu-icon text-secondary">View
                                         Documents</span></a>
+
                             @endif
                         </span>
                     </div>
