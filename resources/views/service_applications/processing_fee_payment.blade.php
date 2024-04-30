@@ -117,7 +117,7 @@
                                                         <input type="hidden" name="payment_type" id="payment_type"
                                                             value="2">
                                                         <input type="hidden" name="amount" id="amount"
-                                                            value="{{ $app_form_fee ? $app_form_fee->amount : '0' }}">
+                                                            value="{{ $app_form_fee->amount }}">
                                                         {{-- @if ($service_application->service_type_id == 'mechanical')
                                                             <input type="hidden" name="amount" id="amount"
                                                                 value="150000">

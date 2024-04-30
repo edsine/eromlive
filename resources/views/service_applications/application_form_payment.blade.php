@@ -99,7 +99,7 @@
                                                         <input type="hidden" name="payment_type" id="payment_type"
                                                             value="1">
                                                             
-                                                        <input type="hidden" name="amount" id="amount" value="{{ $app_form_fee ? $app_form_fee->amount : '0' }}">
+                                                        <input type="hidden" name="amount" id="amount" value="{{ $app_form_fee->amount }}">
                                                         <input type="hidden" name="service_application_id"
                                                             value="{{ $service_application_id }}">
                                                     </div>
