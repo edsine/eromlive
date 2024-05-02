@@ -331,12 +331,12 @@
                                                         
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
-                                                                <label class="form-label" for="contact_position">Position
+                                                                <label class="form-label" for="contact_position">Designation
                                                                     <span class="text-danger">*</span></label>
                                                                 <div class="form-control-wrap">
                                                                     <input type="text" class="form-control"
                                                                         id="contact_position" name="contact_position"
-                                                                        placeholder="Contact Company Position" required>
+                                                                        placeholder="Designation" required>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -532,32 +532,32 @@
                                                             </div>
                                                         </div>
                                                 </div>
-                                                    <div class="row g-3">
-                                                        <div class="col-sm-6">
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="cp1-card-number">New
-                                                                    Password <span class="text-danger">*</span></label>
-                                                                <div class="form-control-wrap">
-                                                                    <input type="password" minlength="8" maxlength="12"
-                                                                        class="form-control" id="password"
-                                                                        name="password" placeholder="********" required>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <div class="form-group">
-                                                                <label class="form-label"
-                                                                    for="password_confirmation">Confirm
-                                                                    Password <span class="text-danger">*</span></label>
-                                                                <div class="form-control-wrap">
-                                                                    <input type="password" minlength="8" maxlength="12"
-                                                                        class="form-control" id="password_confirmation"
-                                                                        name="password_confirmation"
-                                                                        placeholder="********" required>
+                                                <div class="row g-3">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label class="form-label" for="cp1-card-number">New Password <span class="text-danger">*</span></label>
+                                                            <div class="form-control-wrap">
+                                                                <div class="input-group">
+                                                                    <input type="password" minlength="8" maxlength="12" class="form-control" id="password" name="password" placeholder="********" required>
+                                                                    <button type="button" class="toggle-password btn btn-outline-secondary"><i class="fa fa-eye-slash"></i></button>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label class="form-label" for="password_confirmation">Confirm Password <span class="text-danger">*</span></label>
+                                                            <div class="form-control-wrap">
+                                                                <div class="input-group">
+                                                                    <input type="password" minlength="8" maxlength="12" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="********" required>
+                                                                    <button type="button" class="toggle-password btn btn-outline-secondary"><i class="fa fa-eye-slash"></i></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                
                                                 </div>
                                                 <div class="nk-stepper-step text-center">
                                                     <h5 class="title mb-2">You Are Almost Done!</h5>
@@ -2991,7 +2991,21 @@
 
 
 @push('scripts')
-    
+<script>
+    document.querySelectorAll('.toggle-password').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var input = this.previousElementSibling;
+            if (input.type === "password") {
+                input.type = "text";
+                this.innerHTML = '<i class="fa fa-eye"></i>';
+            } else {
+                input.type = "password";
+                this.innerHTML = '<i class="fa fa-eye-slash"></i>';
+            }
+        });
+    });
+</script>
+
 <script>
     const companyContent = document.getElementById('company_hide-content');
     const companyContent1 = document.getElementById('company_hide-content1');
