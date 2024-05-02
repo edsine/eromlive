@@ -100,6 +100,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('certificate', App\Http\Controllers\CertificateController::class);
 
+    Route::get('/new/incoming', 'App\Http\Controllers\ServiceApplicationController@area_office_document')->name('add.new.incoming.document');
+    Route::post('/add/new/incoming/store/', 'App\Http\Controllers\ServiceApplicationController@storeIncoming')->name('incoming_store');
+
 
     /**
      * CLAIMS

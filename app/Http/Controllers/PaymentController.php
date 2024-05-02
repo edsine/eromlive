@@ -171,14 +171,28 @@ class PaymentController extends Controller
         ]);
 
         //generate invoice number
-        $lastInvoice = Payment::get()->last();
+        /* $lastInvoice = Payment::get()->last();
         if ($lastInvoice) {
             $idd = str_replace("NIWA-", "", $lastInvoice['invoice_number']);
             $id = str_pad($idd + 1, 7, 0, STR_PAD_LEFT);
             $lastInvoice = 'NIWA-' . $id;
         } else {
             $lastInvoice = "NIWA-0000001";
-        }
+        } */
+        $lastInvoice = Payment::get()->last();
+if ($lastInvoice) {
+    if (preg_match('/NIWA-(\d+)/', $lastInvoice['invoice_number'], $matches)) {
+        $idd = intval($matches[1]);
+        $id = str_pad($idd + 1, 7, 0, STR_PAD_LEFT);
+        $lastInvoice = 'NIWA-' . $id;
+    } else {
+        // Handle unexpected invoice number format
+        $randomNumber = str_pad(rand(0, 9999999), 7, '0', STR_PAD_LEFT);
+        $lastInvoice = "NIWA-" . $randomNumber; // Call a function to generate a new invoice number
+    }
+} else {
+    $lastInvoice = "NIWA-0000001";
+}
 
         //$serviceTypeId = $request->payment_type ==  1 ? env('ECS_REGISTRATION') : ($request->payment_type == 4 ? env('ECS_CONTRIBUTION') : env('ECS_CERTIFICATE'));
         $serviceTypeId = "4430731";
@@ -272,6 +286,12 @@ class PaymentController extends Controller
                 $path1 = $path . $name;
             }
 
+            /* $getInvoice = Payment::where('payment_type', $request->payment_type)->where('payment_status', '0')->first();
+            if($getInvoice) {
+                return redirect()->back()->with('error', 'You cannot generate more than one invoice for a particular service fee. Contact the administrator for assistance.');
+            } else { */
+
+           
             $payment = auth()->user()->payments()->create([
                 'payment_type' => $request->payment_type,
                 'payment_employee' => $request->employees,
@@ -294,6 +314,7 @@ class PaymentController extends Controller
                 'employees' => $request->employees,
                 'service_application_id' => $request->service_application_id
             ]);
+       // }
 
             //for certificate request, link payment to certificates
             if ($request->payment_type == 2) {

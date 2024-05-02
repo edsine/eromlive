@@ -30,6 +30,10 @@
             <div class="row">
                 <div class="row col-6">
                     <div class="col-sm-6 col-md-4 col-lg-12 mb-3">
+                        <span class="sub-text">Area Office:</span>
+                        <span>{{ $application->branch ? $application->branch->branch_name : '' }}</span>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-12 mb-3">
                         <span class="sub-text">Application Form Payment Status:</span>
                         <span>{{ $application->application_form_payment_status ? 'Paid' : 'Not Paid' }}</span>
                     </div>
