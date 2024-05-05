@@ -271,7 +271,8 @@ if ($lastInvoice) {
 
 
 
-        if ($data['statuscode'] == "025" && $data['RRR']) {
+        if (isset($data['statuscode']) && $data['statuscode'] == "025" && isset($data['RRR'])) {
+
             //add record to transactions table
 
             if ($request->hasFile('letter_of_intent')) {
