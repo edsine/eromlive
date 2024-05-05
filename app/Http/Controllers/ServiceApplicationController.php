@@ -369,9 +369,9 @@ public function getServicesByBranch($id)
         $input = $request->all();
         $userID = Auth::user()->id;
 
-        $find = IncomingDocuments::where('email', Auth::user()->company_email)->where('branch_id', $input['branch_id'])->first();
+       /*  $find = IncomingDocuments::where('email', Auth::user()->company_email)->where('branch_id', $input['branch_id'])->first();
         
-        if($find) {
+        if($find) { */
         $path = 'documents/';
         
 
@@ -385,11 +385,11 @@ public function getServicesByBranch($id)
 
         return redirect(route('service-applications.index'))->with('success', 'Application created successfully.');
 
-        }else{
+       /*  }else{
 
         return redirect(route('add.new.incoming.document'))->with('error', 'You have not uploaded your letter of intent in this area office.');
 
-        }
+        } */
 
     }
 
