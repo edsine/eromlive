@@ -129,12 +129,13 @@
     <!-- JavaScript -->
     <script src="./assets/js/libs/datatable-btns.js?ver=3.1.3"></script>
 
-    <script type="text/javascript" src="https://remitademo.net/payment/v1/remita-pay-inline.bundle.js"></script>
+    <script type="text/javascript" src="https://demo.remita.net/payment/v1/remita-pay-inline.bundle.js"></script>
     <script>
         var cUrl = "{{ route('payment.callback') }}?";
         var pubKey = "{{ env('REMITA_PUBLIC_KEY') }}";
 
-        function makePayment() {
+        
+         function makePayment() {
             var form = document.querySelector("#payment-form");
             var paymentEngine = RmPaymentEngine.init({
                 key: pubKey,
@@ -163,7 +164,7 @@
                 }
             });
             paymentEngine.showPaymentWidget();
-        }
+        } 
         /* window.onload = function() {
             //setDemoData();
         }; */
