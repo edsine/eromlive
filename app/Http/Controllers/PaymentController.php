@@ -262,75 +262,73 @@ if ($lastInvoice) {
 
         $result = substr($result, 7);
 
-// dd($result);
+ 
         $newLength = strlen($result);
         $result = substr($result, 0, $newLength - 1);
         $data = json_decode($result, true);
 
-
-
-
-
         if (isset($data['statuscode']) && $data['statuscode'] == "025" && isset($data['RRR'])) {
-
-            //add record to transactions table
-
-            if ($request->hasFile('letter_of_intent')) {
-                $letter_of_intent = $request->file('letter_of_intent');
-                $path = 'documents/';
-                $name = \Auth::user()->id . '_documents.' . $letter_of_intent->getClientOriginalExtension();
-
-                // Move the uploaded file to the desired location
-                $letter_of_intent->move(public_path('storage/' . $path), $name);
-
-                // Build the full path to the saved file
-                $path1 = $path . $name;
-            }
-
-            /* $getInvoice = Payment::where('payment_type', $request->payment_type)->where('payment_status', '0')->first();
-            if($getInvoice) {
-                return redirect()->back()->with('error', 'You cannot generate more than one invoice for a particular service fee. Contact the administrator for assistance.');
-            } else { */
-
-           
-            $payment = auth()->user()->payments()->create([
-                'payment_type' => $request->payment_type,
-                'payment_employee' => $request->employees,
-                'rrr' => $data['RRR'],
-                'invoice_number' => $lastInvoice,
-                'invoice_generated_at' => date('Y-m-d H:i:s'),
-                'invoice_duration' => date('Y-m-d', strtotime('+1 year')),
-                'payment_status' => 0,
-                'amount' => $amount,
-                'service_id' => $request->service_id ?? null,
-                'letter_of_intent' => $path1 ?? null,
-                'branch_id' => auth()->user()->branch_id ?? null,
-                'applicant_type' => $request->applicant_type ?? null,
-                'applicant_name' => $request->applicant_name ?? null,
-                //below for ECS payments
-                'service_type_id' => $request->service_type_id ?? null,
-                'contribution_year' => $request->year ?? null,
-                'contribution_period' => $request->contribution_period ?? null,
-                'contribution_months' => $request->number_of_months ?? null,
-                'employees' => $request->employees,
-                'service_application_id' => $request->service_application_id
-            ]);
-       // }
-
-            //for certificate request, link payment to certificates
-            if ($request->payment_type == 2) {
-                auth()->user()->certificates()->where('id', $request->certificate_id)->update(['payment_id' => $payment->id]);
-            }
-
-            //redirect to home
-
-            if ($request->payment_type == 1)
-                return redirect()->back()->with('success', 'Payment Reference Generated! RRR = ' . $data['RRR']);
-            return redirect()->back()->with('success', 'Payment Reference Generated! RRR = ' . $data['RRR']);
-        } else {
-
-            return redirect()->back()->with('error', 'Problems encountered in generating RRR');
-        }
+            // if ($data['statuscode'] == "025" && $data['RRR']) {
+ 
+             //add record to transactions table
+ 
+             if ($request->hasFile('letter_of_intent')) {
+                 $letter_of_intent = $request->file('letter_of_intent');
+                 $path = 'documents/';
+                 $name = \Auth::user()->id . '_documents.' . $letter_of_intent->getClientOriginalExtension();
+ 
+                 // Move the uploaded file to the desired location
+                 $letter_of_intent->move(public_path('storage/' . $path), $name);
+ 
+                 // Build the full path to the saved file
+                 $path1 = $path . $name;
+             }
+ 
+             /* $getInvoice = Payment::where('payment_type', $request->payment_type)->where('payment_status', '0')->first();
+             if($getInvoice) {
+                 return redirect()->back()->with('error', 'You cannot generate more than one invoice for a particular service fee. Contact the administrator for assistance.');
+             } else { */
+ 
+            
+             $payment = auth()->user()->payments()->create([
+                 'payment_type' => $request->payment_type,
+                 'payment_employee' => $request->employees,
+                 'rrr' => $data['RRR'],
+                 'invoice_number' => $lastInvoice,
+                 'invoice_generated_at' => date('Y-m-d H:i:s'),
+                 'invoice_duration' => date('Y-m-d', strtotime('+1 year')),
+                 'payment_status' => 0,
+                 'amount' => $amount,
+                 'service_id' => $request->service_id ?? null,
+                 'letter_of_intent' => $path1 ?? null,
+                 'branch_id' => auth()->user()->branch_id ?? null,
+                 'applicant_type' => $request->applicant_type ?? null,
+                 'applicant_name' => $request->applicant_name ?? null,
+                 //below for ECS payments
+                 'service_type_id' => $request->service_type_id ?? null,
+                 'contribution_year' => $request->year ?? null,
+                 'contribution_period' => $request->contribution_period ?? null,
+                 'contribution_months' => $request->number_of_months ?? null,
+                 'employees' => $request->employees,
+                 'service_application_id' => $request->service_application_id
+             ]);
+        // }
+ 
+             //for certificate request, link payment to certificates
+             if ($request->payment_type == 2) {
+                 auth()->user()->certificates()->where('id', $request->certificate_id)->update(['payment_id' => $payment->id]);
+             }
+ 
+             //redirect to home
+ 
+             if ($request->payment_type == 1)
+                 return redirect()->back()->with('success', 'Payment Reference Generated! RRR = ' . $data['RRR']);
+             return redirect()->back()->with('success', 'Payment Reference Generated! RRR = ' . $data['RRR']);
+         } else {
+ 
+             return redirect()->back()->with('error', 'Problems encountered in generating RRR');
+         }
+         
     }
 
     public function callbackRemita(Request $request)
@@ -338,7 +336,7 @@ if ($lastInvoice) {
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://remitademo.net/payment/v1/payment/query/' . $request->tid,
+            CURLOPT_URL => 'https://demo.remita.net/payment/v1/payment/query/' . $request->tid,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
