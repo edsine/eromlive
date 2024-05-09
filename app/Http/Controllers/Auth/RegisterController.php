@@ -101,6 +101,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // dd($data);
         unset($data['password_confirmation']);
         $data['user_id'] = 1;
         $password = $data['password'];

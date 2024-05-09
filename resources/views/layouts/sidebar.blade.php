@@ -33,7 +33,7 @@
         </li> --}}
         <?php
         //}
-        
+
         //if(empty($reg_setup)){
         ?>
         {{-- <li>
@@ -49,7 +49,7 @@
             <a href="{{ route('download.niwa.act') }}"><i class="fa fa-download"></i> <span>Download NIWA Act</span></a>
         </li>
         <li>
-            <a href="{{ route('switch.area.office') }}"><i class="fa fa-globe"></i> <span>Switch Area Office</span></a>
+            <a href="{{ route('goareaoffice') }}"><i class="fa fa-globe"></i> <span>Switch Area Office</span></a>
         </li>
         <?php
        // }
@@ -67,7 +67,7 @@
         {{-- <li>
             <a href="{{ route('payment.steps') }}"><i class="fa fa-user-circle"></i> <span>Service Registration Status</span></a>
         </li> --}}
-        
+
             </ul>
         </div>
     </div>

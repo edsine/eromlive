@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('employer_id');
+            $table->foreignId('employer_id')->nullable();
             $table->tinyInteger('payment_type');
             $table->integer('employees')->nullable();
             $table->string('rrr');

@@ -124,7 +124,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/services/{service}/processing-types', 'App\Http\Controllers\ServiceApplicationController@getProcessingTypes');
     Route::get('/services/{service}/services-types', 'App\Http\Controllers\ServiceApplicationController@getServicesByBranch');
+
     Route::get('/switch/area/office', 'App\Http\Controllers\ServiceApplicationController@switchAreaOffice')->name('switch.area.office');
+    Route::get('/switch/area/office', 'App\Http\Controllers\ServiceApplicationController@switchAreaOffice')->name('goareaoffice');
     Route::post('/switch/area/office/save', 'App\Http\Controllers\ServiceApplicationController@switchAreaOfficeSave')->name('switch.area.office.save');
 
 
