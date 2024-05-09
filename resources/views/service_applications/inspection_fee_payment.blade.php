@@ -100,7 +100,7 @@
                                                             RR)</button>
                                                     </div>
                                                     <div class="col-6">
-                                                        <label for="">Payment due is:</label><br />
+                                                        <label for="">Payment due for <b>{{ $service_app->service ? $service_app->service->name : 'NILL' }}</b> is:</label><br />
                                                         <p>Inspection Fee:
                                                             <strong class="fs-3"
                                                                     id="inspection_fee">&#8358;{{ number_format($app_form_fee ? $app_form_fee->amount : '0', 2) }}</strong>
@@ -115,7 +115,7 @@
                                                         <input type="hidden" name="payment_type" id="payment_type"
                                                             value="3">
                                                             <input type="hidden" name="amount" id="amount"
-                                                                value="{{ $app_form_fee ? $app_form_fee->amount : '0' }}">
+                                                                value="{{ $app_form_fee->amount }}">
                                                         {{-- @if ($service_application->service_type_id == 'mechanical')
                                                             <input type="hidden" name="amount" id="amount"
                                                                 value="150000">
@@ -152,7 +152,7 @@
     <!-- JavaScript -->
     <script src="./assets/js/libs/datatable-btns.js?ver=3.1.3"></script>
 
-    <script type="text/javascript" src="https://remitademo.net/payment/v1/remita-pay-inline.bundle.js"></script>
+    <script type="text/javascript" src="https://demo.remita.net/payment/v1/remita-pay-inline.bundle.js"></script>
     <script>
         var cUrl = "{{ route('payment.callback') }}?";
         var pubKey = "{{ env('REMITA_PUBLIC_KEY') }}";

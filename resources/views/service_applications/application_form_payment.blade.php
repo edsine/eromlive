@@ -91,7 +91,7 @@
                                                             $service_app = \App\Models\ServiceApplication::findOrFail($service_application_id);
                                                             $app_form_fee = \App\Models\ApplicationFormFee::where('branch_id', $user->branch->id)->where("service_id",$service_app->service_id)->first();
                                                             @endphp
-                                                        <label for="">Payment due is:</label><br />
+                                                        <label for="">Payment due for <b>{{ $service_app->service ? $service_app->service->name : 'NILL' }}</b> is:</label><br />
                                                         <p>Application Form Fee:
                                                             <strong class="fs-3"
                                                                 id="application_form_fee">&#8358;{{ number_format($app_form_fee ? $app_form_fee->amount : '0', 2) }}</strong>
@@ -99,7 +99,7 @@
                                                         <input type="hidden" name="payment_type" id="payment_type"
                                                             value="1">
                                                             
-                                                        <input type="hidden" name="amount" id="amount" value="{{ $app_form_fee ? $app_form_fee->amount : '0' }}">
+                                                        <input type="hidden" name="amount" id="amount" value="{{ $app_form_fee->amount }}">
                                                         <input type="hidden" name="service_application_id"
                                                             value="{{ $service_application_id }}">
                                                     </div>
@@ -129,12 +129,13 @@
     <!-- JavaScript -->
     <script src="./assets/js/libs/datatable-btns.js?ver=3.1.3"></script>
 
-    <script type="text/javascript" src="https://remitademo.net/payment/v1/remita-pay-inline.bundle.js"></script>
+    <script type="text/javascript" src="https://demo.remita.net/payment/v1/remita-pay-inline.bundle.js"></script>
     <script>
         var cUrl = "{{ route('payment.callback') }}?";
         var pubKey = "{{ env('REMITA_PUBLIC_KEY') }}";
 
-        function makePayment() {
+        
+         function makePayment() {
             var form = document.querySelector("#payment-form");
             var paymentEngine = RmPaymentEngine.init({
                 key: pubKey,
@@ -163,7 +164,7 @@
                 }
             });
             paymentEngine.showPaymentWidget();
-        }
+        } 
         /* window.onload = function() {
             //setDemoData();
         }; */

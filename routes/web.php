@@ -100,6 +100,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('certificate', App\Http\Controllers\CertificateController::class);
 
+    Route::get('/new/incoming', 'App\Http\Controllers\ServiceApplicationController@area_office_document')->name('add.new.incoming.document');
+    Route::post('/add/new/incoming/store/', 'App\Http\Controllers\ServiceApplicationController@storeIncoming')->name('incoming_store');
+
 
     /**
      * CLAIMS
@@ -120,6 +123,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('apply/for/a/service', [App\Http\Controllers\ServiceApplicationController::class, 'ServiceApplication'])->name('apply_for_a_service');
 
     Route::get('/services/{service}/processing-types', 'App\Http\Controllers\ServiceApplicationController@getProcessingTypes');
+    Route::get('/services/{service}/services-types', 'App\Http\Controllers\ServiceApplicationController@getServicesByBranch');
+
+    Route::get('/switch/area/office', 'App\Http\Controllers\ServiceApplicationController@switchAreaOffice')->name('switch.area.office');
+    Route::get('/switch/area/office', 'App\Http\Controllers\ServiceApplicationController@switchAreaOffice')->name('goareaoffice');
+    Route::post('/switch/area/office/save', 'App\Http\Controllers\ServiceApplicationController@switchAreaOfficeSave')->name('switch.area.office.save');
+
+
+
 
 });
 

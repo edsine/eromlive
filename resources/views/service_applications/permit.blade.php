@@ -35,15 +35,13 @@
                         <form action="">
                             <div class="part-1">
                                 <label for="" class="grey-color">This is to certify that</label><br>
-                                <input type="text" name="" id=""
-                                    value="{{ $service_application->employer()->company_name }}">
+                                <p>{{ $service_application->employer()->company_name ? $service_application->employer()->company_name : $service_application->employer()->contact_firstname.' '.$service_application->employer()->contact_surname }}</p>
                                 <p class="grey-color">of</p>
-                                <input type="text" name="name_of_holder"
-                                    value="{{ $service_application->employer()->contact_surname}}  {{$service_application->employer()->contact_firstname}} {{$service_application->employer()->contact_middlename}}"><br>
+                                <p>{{ $service_application->employer()->contact_surname}}  {{$service_application->employer()->contact_firstname}} {{$service_application->employer()->contact_middlename ?? ''}}</p><br>
                             </div>
                             <div class="part-2">
-                                <label for="" class="grey-color">With vessel number</label><br>
-                                <input type="text" name="vessel_num" id=""><br>
+                                <label for="" class="grey-color">For {{ $service_application->service ? $service_application->service->name : '' }} Service</label><br>
+                                {{-- <input type="text" name="vessel_num" id=""> --}}
                                 <div class="grey-container">
                                     <p class="grey-color">
                                         is duly authorized to operate within the navigable waterways as provided for by
@@ -58,17 +56,20 @@
                         <div class="row">
                             <div class="col sig">
                                 <label for="">Issued on:</label><br>
-                                <input type="text" name="" id="" value="{{$service_application->issued_on}}">
+                                <p> {{ date('M d, Y', strtotime($service_application->issued_on)) }}</p>
+                                <label for="">Expired on:</label><br>
+                                {{-- <input type="text" name="" id="" value=""> --}}
                             </div>
+                            
                             <div class="col sig2">
-                                <label for="">Signed:</label><br>
-                                <input type="text" name="" id="">
+                                <label for="">Signed:</label>
+                                <img src="{{ $signature->signature_data }}" style="width: 200px;height: auto;"/>
                             </div>
                         </div>
                     </div>
                     <div class="cert_no">
                         <label for="">Cert No.:</label>
-                        <input type="text" name="" id="" value="{{$service_application->employer()->ecs_number}}">
+                        <p>{{$service_application->employer()->ecs_number}} </p>
                     </div>
                 </div>
 

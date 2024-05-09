@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Request;
 use App\Models\Service;
+use App\Models\Branch;
 use App\Models\ServiceApplication;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ServiceApplicationDocument;
+use App\Http\Requests\StoreSwitchAreaOfficeRequest;
 use App\Http\Requests\StoreServiceApplicationRequest;
 use App\Http\Requests\UpdateServiceApplicationRequest;
 use App\Http\Requests\StoreServiceApplicationDocumentRequest;
@@ -14,6 +16,11 @@ use App\Models\ApplicationFormFee;
 use App\Models\DocumentUpload;
 use App\Models\ProcessingType;
 use Illuminate\Support\Facades\DB;
+use App\Models\Employer;
+use App\Models\Signature;
+use App\Models\IncomingDocuments;
+use Illuminate\Http\Request as Requests;
+
 
 class ServiceApplicationController extends Controller
 {
@@ -27,9 +34,12 @@ class ServiceApplicationController extends Controller
         $services = Service::where('branch_id', $user->branch->id)->get();
 
         //$service_applications = ServiceApplication::where('user_id', $user->id)->paginate(10);
-        $service_applications = ServiceApplication::with('processingType')->where('user_id', $user->id)
+        /* $service_applications = ServiceApplication::with('processingType')->where('user_id', $user->id)
             ->select('service_applications.*', 'processing_types.name as pname')
             ->join('processing_types', 'service_applications.service_type_id', '=', 'processing_types.id')
+            //->where('branch_id', Auth()->user()->branch->id)
+            ->paginate(10); */
+        $service_applications = ServiceApplication::orderBy('id', 'desc')->where('user_id', $user->id)
             ->paginate(10);
 
 
@@ -41,13 +51,82 @@ class ServiceApplicationController extends Controller
         return view('service_applications.index', compact('services', 'service_applications', 'service_app'));
     }
 
+    public function area_office_document()
+    {
+        
+         
+        // dd($dept);
+        $branches = Branch::get()->pluck('branch_name', 'id');
+        $branches = $branches->prepend('Select Area Office', '');
+
+
+        return view('service_applications.area_office_create', compact(['branches']));
+    }
+
+    public function storeIncoming(Requests $request)
+    {
+
+    // Validate the request
+$validatedData = $request->validate([
+    'title' => 'required',
+    'full_name' => 'required',
+    'email' => 'required|email',
+    'phone' => 'required|numeric',
+    'department_id' => 'required|numeric',
+    'branch_id' => 'required|numeric',
+    'description' => 'required',
+    'file' => 'required|mimes:pdf,doc,docx,jpeg,png,gif|max:1024',
+], [
+    'file.mimes' => 'Please select a valid file format (PDF, DOC, DOCX, JPEG, PNG, GIF).',
+    'file.max' => 'File size exceeds the maximum limit of 1MB.',
+]);
+
+// Prepare document input
+$document_input = [
+    'title' => $validatedData['title'],
+    'description' => $validatedData['description'],
+    'full_name' => $validatedData['full_name'],
+    'email' => $validatedData['email'],
+    'phone' => $validatedData['phone'],
+    'category_id' => 1,
+    'created_by' => 0,
+    //'status' => 0,
+    'department_id' => $validatedData['department_id'],
+    'branch_id' => $validatedData['branch_id']
+];
+
+// Save file
+$path = "documents";
+$file = $request->file('file');
+$fileExtension = $file->getClientOriginalExtension();
+$title = str_replace(' ', '', $validatedData['title']);
+$file_name = $title . '_v1_' . uniqid() . '.' . $fileExtension;
+$file->move(public_path($path), $file_name);
+$document_input['document_url'] = $path . "/" . $file_name;
+
+// Create IncomingDocument
+//IncomingDocuments::create($document_input);
+DB::table('incoming_documents_manager')->insert($document_input);
+
+
+       
+
+
+        return redirect()->back()->with('success', 'Document sent successfully. We will get back to you later. Thank you');
+
+    }
+
+
+
      /* 
      A client can apply for a service here
      */
     public function ServiceApplication()
     {
         $user = Auth::user();
-        $services = Service::where('branch_id', $user->branch->id)->get();
+        //$services = Service::where('branch_id', $user->branch->id)->get();
+
+        $branches = Branch::all();
 
         //$service_applications = ServiceApplication::where('user_id', $user->id)->paginate(10);
         $service_applications = ServiceApplication::with('processingType')->where('user_id', $user->id)
@@ -60,15 +139,52 @@ class ServiceApplicationController extends Controller
         $pro_type = ProcessingType::where('service_id', $service_app->service_id)->get();
         } */
 
-        return view('service_applications.service_application', compact('services', 'service_applications', 'service_app'));
+        return view('service_applications.service_application', compact('service_applications', 'service_app', 'branches'));
     }
 
-    public function getProcessingTypes(ProcessingType $processingType, $id)
+    public function switchAreaOffice()
+    {
+        
+        $branches = Branch::all();
+
+        return view('service_applications.switch_area_office', compact('branches'));
+    }
+
+    public function switchAreaOfficeSave(StoreSwitchAreaOfficeRequest $request)
 {
+    $userID = Auth::user()->id;
+    $input = $request->all();
+    $branch_id = $input['branch_id'];
+
+    if($branch_id != null) {
+        $employer = Employer::findOrFail($userID);
+        $employer->branch_id = $branch_id;
+        $save = $employer->save();
+        if($save) {
+            return redirect()->back()->with('success', 'Your area office has been switched successfully');
+        } else {
+            return redirect()->back()->with('error', 'Your area office has not been switched. Contact the administrator for assistance');
+        }
+    } else {
+        return redirect()->back()->with('error', 'Please select an Area Office');
+    }
+}
+
+
+    public function getProcessingTypes($id)
+    {
     $service = Service::find($id);
-    $processingTypes = $processingType->where('branch_id', $service->branch_id)->get();
-    //$processingTypes = $service->processingTypes()->get();
+    //$processingTypes = $processingType->where('branch_id', $service->branch_id)->get();
+    $processingTypes = ProcessingType::where('service_id', $id)->where('branch_id', $service->branch_id)->get();
     return response()->json($processingTypes);
+    }
+
+public function getServicesByBranch($id)
+{
+    $services = Service::where('branch_id', $id)->get();
+    //$processingTypes = $processingType->where('branch_id', $service->branch_id)->get();
+    //$processingTypes = $service->processingTypes()->get();
+    return response()->json($services);
 }
 
     public function documentIndex($id)
@@ -154,6 +270,7 @@ class ServiceApplicationController extends Controller
         } */
 
         // Update the current step of the service application
+        $service_application->status_summary = 'Waiting for document and payment verification';
         $service_application->current_step = 5;
         $service_application->save();
 
@@ -231,8 +348,9 @@ class ServiceApplicationController extends Controller
     public function downloadPermit($service_application_id)
     {
         $service_application = ServiceApplication::findOrFail($service_application_id);
+        $signature = Signature::find(1);
 
-        return view('service_applications.permit', compact('service_application'));
+        return view('service_applications.permit', compact('service_application', 'signature'));
     }
 
     /**
@@ -249,14 +367,30 @@ class ServiceApplicationController extends Controller
     public function store(StoreServiceApplicationRequest $request)
     {
         $input = $request->all();
-        $path = 'documents/';
         $userID = Auth::user()->id;
+
+       /*  $find = IncomingDocuments::where('email', Auth::user()->company_email)->where('branch_id', $input['branch_id'])->first();
+        
+        if($find) { */
+        $path = 'documents/';
+        
 
         $input['user_id'] = $userID;
 
         $serviceApplication = ServiceApplication::create($input);
 
+        $employer = Employer::findOrFail($userID);
+        $employer->branch_id = $input['branch_id'];
+        $employer->save();
+
         return redirect(route('service-applications.index'))->with('success', 'Application created successfully.');
+
+       /*  }else{
+
+        return redirect(route('add.new.incoming.document'))->with('error', 'You have not uploaded your letter of intent in this area office.');
+
+        } */
+
     }
 
     /**

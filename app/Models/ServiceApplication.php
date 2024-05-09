@@ -12,7 +12,7 @@ class ServiceApplication extends Model
     use Approval;
 
     protected $fillable = [
-        'user_id', 'service_id', 'application_form_payment_status', 'date_of_inspection', 'service_type_id', 'status_summary', 'current_step', 'approval_status', 'latitude1', 'longitude1', 'latitude2', 'longitude2'
+        'user_id', 'service_id', 'branch_id', 'application_form_payment_status', 'date_of_inspection', 'service_type_id', 'status_summary', 'current_step', 'approval_status', 'latitude1', 'longitude1', 'latitude2', 'longitude2'
     ];
 
     public function service()
@@ -35,5 +35,10 @@ class ServiceApplication extends Model
     {
         $payments = Payment::where('employer_id', $this->user_id)->get();
         return $payments;
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class, 'branch_id');
     }
 }
