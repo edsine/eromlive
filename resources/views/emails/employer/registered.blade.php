@@ -107,7 +107,7 @@
                         <tbody>
                             <tr>
                                 <td style="padding: 30px 30px 20px">
-                                    <p style="margin-bottom: 10px;">Hi {{ $employer->company_name }},</p>
+                                    <p style="margin-bottom: 10px;">Hi {{ $employer->contact_firstname }},</p>
                                     <p style="margin-bottom: 10px;">Welcome to the NIWA Self-Service Portal!
                                     </p>
                                     <p style="margin-bottom: 10px;">We are pleased to have you on board. Your account is

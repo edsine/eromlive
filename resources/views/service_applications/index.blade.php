@@ -109,9 +109,9 @@
                 </div><!-- .card -->
             </div><!-- .col -->
             <div class="nk-block-head-content">
-                <h3 class="nk-block-title page-title">Applications</h3>
+                <h3 class="nk-block-title page-title">Transactions</h3>
                 <div class="nk-block-des text-soft">
-                    <p>List of applications.</p>
+                    <p>List of Transactions.</p>
                     @if ($errors->any())
                     @foreach ($errors as $error)
                         <small class="text-danger">{{ $error }}</small>

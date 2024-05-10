@@ -43,7 +43,7 @@
             <a href="{{ route('apply_for_a_service') }}"><i class="fa fa-user-md"></i> <span>Apply For A Service</span></a>
         </li>
         <li class="{{ Request::is('service-applications*') ? 'active' : '' }}">
-            <a href="{{ route('service-applications.index') }}"><i class="fa fa-user-md"></i> <span>Application Management</span></a>
+            <a href="{{ route('service-applications.index') }}"><i class="fa fa-user-md"></i> <span>Transaction History</span></a>
         </li>
         <li>
             <a href="{{ route('download.niwa.act') }}"><i class="fa fa-download"></i> <span>Download NIWA Act</span></a>
