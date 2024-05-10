@@ -329,7 +329,7 @@
                                                             </div>
                                                         </div>
                                                         
-                                                        <div class="col-sm-6">
+                                                        {{-- <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="contact_position">Designation
                                                                     <span class="text-danger">*</span></label>
@@ -339,7 +339,7 @@
                                                                         placeholder="Designation" required>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </div> --}}
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <label class="form-label" for="company_phone">Contact
