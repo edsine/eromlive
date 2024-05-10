@@ -68,7 +68,7 @@ class RegisterController extends Controller
             'contact_surname' => ['required', 'string', 'max:255'],
             'contact_firstname' => ['required', 'string', 'max:255'],
             'contact_middlename' => ['nullable', 'string', 'max:255'],
-            'contact_position' => ['required', 'string', 'max:255'],
+           // 'contact_position' => ['required', 'string', 'max:255'],
             'company_phone' => ['nullable', 'string', 'max:255', 'unique:employers'],
             'contact_number' => ['nullable', 'string', 'max:255'],
 
