@@ -64,26 +64,27 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'branch_id' => ['required'],
+           // 'branch_id' => ['required'],
             'contact_surname' => ['required', 'string', 'max:255'],
             'contact_firstname' => ['required', 'string', 'max:255'],
-            'contact_middlename' => ['nullable', 'string', 'max:255'],
+            //'contact_middlename' => ['nullable', 'string', 'max:255'],
            // 'contact_position' => ['required', 'string', 'max:255'],
-            'company_phone' => ['nullable', 'string', 'max:255', 'unique:employers'],
-            'contact_number' => ['nullable', 'string', 'max:255'],
+            'company_phone' => ['required', 'string', 'max:255', 'unique:employers'],
+            'user_type' => ['required', 'string', 'max:255'],
+            //'contact_number' => ['nullable', 'string', 'max:255'],
 
-            'company_state' => ['nullable', 'string', 'max:255'],
-            'company_localgovt' => ['nullable', 'string', 'max:255'],
-            'company_name' => ['nullable', 'string', 'max:255'],
+           // 'company_state' => ['nullable', 'string', 'max:255'],
+            //'company_localgovt' => ['nullable', 'string', 'max:255'],
+            //'company_name' => ['nullable', 'string', 'max:255'],
 
             //'company_name' => ['required', 'string', 'max:255'],
 
             //'business_area' => ['required', 'string', 'max:255'],
 
-            'company_rcnumber' => ['nullable', 'string', 'max:255'],
-            'cac_reg_year' => ['nullable', 'date', 'max:255'],
+            //'company_rcnumber' => ['nullable', 'string', 'max:255'],
+            //'cac_reg_year' => ['nullable', 'date', 'max:255'],
 
-            'company_address' => ['nullable', 'string'],
+            //'company_address' => ['nullable', 'string'],
 
             'company_email' => ['nullable', 'string', 'email', 'max:255', 'unique:employers'], // 'unique:employers'],
 
@@ -107,7 +108,7 @@ class RegisterController extends Controller
         $password = $data['password'];
         $data['password'] = Hash::make($data['password']);
 
-        if ($data['employer_status'] == "new") {
+        //if ($data['employer_status'] == "new") {
             $last_ecs = Employer::get()->last();
 
             if ($last_ecs) {
@@ -121,7 +122,7 @@ class RegisterController extends Controller
             }
 
             $data['ecs_number'] = $ecs;
-        }
+        //}
 
         //record ECS registration payment for OLD Employers
         //if($data['employer_status'] != "new") {
@@ -151,23 +152,26 @@ class RegisterController extends Controller
 
         $data['account_officer_id'] = "0";
         $data['company_rcnumber'] = "0";
-        $data['company_name'] = $data['company_name'] ? $data['company_name'] : $data['contact_firstname'] .' '.$data['contact_surname'];
+       /*  $data['company_name'] = $data['company_name'] ? $data['company_name'] : $data['contact_firstname'] .' '.$data['contact_surname'];
         $data['company_address'] = $data['company_address'] ? $data['company_address'] : $data['personal_address'];
         $data['contact_number'] = $data['contact_number'] ? $data['contact_number'] : $data['company_phone'];
+ */
+$data['company_name'] = $data['contact_firstname'] .' '.$data['contact_surname'];
+$data['contact_number'] = $data['company_phone'];
 
         $employer = Employer::updateOrCreate(['ecs_number' => $data['ecs_number']], $data); //new employer
 
         //send notification
         //$employer->notify(new EmployerRegistrationNotification($employer));
         //send email
-      //  try {
-           // Mail::to($employer->company_email)->send(new EmployerRegisteredMail($employer, $password));
+        try {
+            Mail::to($employer->company_email)->send(new EmployerRegisteredMail($employer, $password));
             // Your success logic here
-      //  } catch (\Exception $e) {
+        } catch (\Exception $e) {
             // Handle the exception
             // For example, you can log the error, redirect the user, or display a friendly error message
             //return redirect()->back()->with('error', 'Failed to send registration email: ' . $e->getMessage());
-        //}
+        }
 
         return $employer;
     }
@@ -179,6 +183,6 @@ class RegisterController extends Controller
         $branches = Branch::all();
         $states = State::all();
       
-        return view('auth.register', compact('branches', 'states'));
+        return view('auth.sign_up', compact('branches', 'states'));
     }
 }
