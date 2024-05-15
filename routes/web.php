@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Route;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
@@ -27,6 +28,8 @@ Route::get('login', function () {
 });
 //LARAVEL DEFAULT
 Auth::routes();
+
+Route::post('savedapplicant',[RegisterController::class,'saveregidtrationform'])->name('saverecordofapplicant');
 
 /**
  * UNAUTHENTICATED ROUTES
